@@ -43,7 +43,7 @@ benchmark_output/
 .idea/tasks.xml
 .idea/usage.statistics.xml
 .idea/dictionaries
-
+.venv
 # Ignore VSCode if you use it alongside CLion
 .vscode/
 

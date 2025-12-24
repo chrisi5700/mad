@@ -1,6 +1,14 @@
 {
   "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
-  "name": "test-project",
+  "name": "mad",
   "version": "0.1.0",
-  "dependencies": ["catch2", "benchmark"]
+  "description": "C++ module-based OpenGL loader",
+  "license": "MIT",
+  "dependencies": [],
+  "features": {
+    "examples": {
+      "description": "Build example programs",
+      "dependencies": ["glfw3"]
+    }
+  }
 }

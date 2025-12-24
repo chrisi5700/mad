@@ -1,149 +1,106 @@
-# CMake Starter Template
+# mad
 
-This repository provides a structured C++ project template using **CMake** and **Nix flakes**.  
-It includes benchmarking, testing, and a dedicated playground for experimentation.
+A C++23 module-based OpenGL loader. Like [GLAD](https://glad.dav1d.de/), but as a module.
 
----
+```cpp
+import gl;
 
-## Features
+// After creating your OpenGL context
+gl::load([](const char* name) {
+    return reinterpret_cast<void*>(glfwGetProcAddress(name));
+});
 
-- **CMake-based project structure**
-- **Nix flake** for a reproducible development environment
-- **Google Benchmark** for performance analysis
-- **Catch2** for unit testing
-- **Playground** for isolated code testing
-- **libs/** for external or custom libraries
+// Use OpenGL - no GL_ prefixes, no gl prefixes
+gl::ClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+gl::Clear(gl::COLOR_BUFFER_BIT | gl::DEPTH_BUFFER_BIT);
 
----
-
-## Development with Nix
-
-A **Nix flake** provides a consistent development environment.
-
-```sh
-nix develop
+gl::Uint vao;
+gl::GenVertexArrays(1, &vao);
 ```
 
----
+## Requirements
 
-## Building the Project
+- CMake 3.28+
+- C++23 compiler with module support (GCC 14+, Clang 17+, MSVC 17.5+)
 
-```sh
-# Configure the build
-cmake -B build -DCMAKE_BUILD_TYPE=Release
+## Usage
 
-# Build all targets
-cmake --build build
-
-# Run tests
-ctest --test-dir build
-
-# Run benchmarks
-./build/bench/bench
-```
-
----
-
-## Project Structure & Extension Guide
-
-### `/src` - Source Libraries
-
-The `src/` directory is where you define CMake libraries for your project. Here are common patterns:
-
-#### Basic Library Definition
+Add as a subdirectory:
 
 ```cmake
-target_add_library(MyLib src/mylib.cpp src/mylib.hpp)
-
-target_include_directories(MyLib PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>  # During build
-    $<INSTALL_INTERFACE:include>                            # After installation
-)
-
-target_compile_features(MyLib PUBLIC cxx_std_23)
+add_subdirectory(mad)
+target_link_libraries(your_target PRIVATE mad::mad)
 ```
 
-**Key Concepts:**
-
-- **BUILD_INTERFACE**: Include paths used when building the project itself
-- **INSTALL_INTERFACE**: Include paths used by external projects after installation
-- **PRIVATE/PUBLIC/INTERFACE**: Controls visibility of properties to consuming targets
-
-#### Header-Only Library
-
-For libraries with only headers (templates, inline functions):
+Or with FetchContent:
 
 ```cmake
-target_add_library(HeaderOnlyLib INTERFACE)
-
-target_include_directories(HeaderOnlyLib INTERFACE
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-    $<INSTALL_INTERFACE:include>
+include(FetchContent)
+FetchContent_Declare(mad
+    GIT_REPOSITORY https://github.com/yourusername/mad.git
+    GIT_TAG main
 )
-
-target_compile_features(HeaderOnlyLib INTERFACE cxx_std_23)
+FetchContent_MakeAvailable(mad)
+target_link_libraries(your_target PRIVATE mad::mad)
 ```
 
-#### Setting C++ Standard
+## API
 
-Explicitly set the C++ for all presets you can change this line in ``CMakePresets.json`` for the `base` preset:
+Types, enums, and functions are in the `gl::` namespace with prefixes stripped:
 
-```json lines
-  "CMAKE_CXX_STANDARD": "23" -> "20" 
-```
+| OpenGL | mad |
+|--------|-----|
+| `GLuint` | `gl::Uint` |
+| `GL_COLOR_BUFFER_BIT` | `gl::COLOR_BUFFER_BIT` |
+| `glClear()` | `gl::Clear()` |
 
-
-### `/tests` - Unit Tests
-
-Write tests in the `tests/` directory using **Catch2**:
+### Loading
 
 ```cpp
-#include <catch2/catch_test_macros.hpp>
+// Returns number of functions loaded
+int count = gl::load(getProcAddressFunc);
 
-TEST_CASE("Addition works") {
-    REQUIRE(2 + 2 == 4);
-}
+// Check if everything loaded
+if (gl::isComplete()) { /* all good */ }
+
+// Total functions in this GL version
+int total = gl::FUNCTION_COUNT;  // 699 for GL 4.6 core
 ```
 
-Run tests:
+## Regenerating
 
-```sh
-ctest --test-dir build
+The module is pre-generated for OpenGL 4.6 Core. To regenerate for a different version:
+
+```bash
+# Clone with submodule
+git clone --recursive https://github.com/yourusername/mad.git
+
+# Or init submodule after cloning
+git submodule update --init
+
+# Regenerate
+python tools/generate.py external/OpenGL-Registry/xml/gl.xml src/gl.cppm \
+    --api gl --profile core --version 4.6
 ```
 
-See `tests/TestTypes.hpp` for advanced testing utilities for validating C++ semantics.
+Options:
+- `--api`: `gl`, `gles2`, `gles1`
+- `--profile`: `core`, `compatibility`
+- `--version`: e.g., `4.6`, `3.3`, `2.1`
 
-### `/bench` - Benchmarks
+## Building Examples
 
-Use **Google Benchmark** for performance analysis:
-
-```cpp
-#include <benchmark/benchmark.h>
-
-static void BM_MyFunction(benchmark::State& state) {
-    for (auto _ : state) {
-        benchmark::DoNotOptimize(MyFunction());
-    }
-}
-
-BENCHMARK(BM_MyFunction)->Range(8, 8<<10);
-```
-
-### `/playground` - Experimentation
-
-Use the `playground/` directory for quick testing and prototyping:
-
-```cpp
-#include <print>
-
-int main() {
-    std::println("Quick test here");
-}
-```
-
-Compile and run:
-
-```sh
+```bash
+cmake -B build -DMAD_BUILD_EXAMPLES=ON
 cmake --build build
-./build/playground/playground
 ```
+
+Requires GLFW. With vcpkg:
+
+```bash
+cmake -B build -DMAD_BUILD_EXAMPLES=ON -DCMAKE_TOOLCHAIN_FILE=$VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake
+```
+
+## License
+
+MIT
