@@ -37,7 +37,7 @@ Or with FetchContent:
 ```cmake
 include(FetchContent)
 FetchContent_Declare(mad
-    GIT_REPOSITORY https://github.com/yourusername/mad.git
+    GIT_REPOSITORY https://github.com/chrisi5700/mad.git
     GIT_TAG main
 )
 FetchContent_MakeAvailable(mad)
@@ -73,7 +73,7 @@ The module is pre-generated for OpenGL 4.6 Core. To regenerate for a different v
 
 ```bash
 # Clone with submodule
-git clone --recursive https://github.com/yourusername/mad.git
+git clone --recursive https://github.com/chrisi5700/mad.git
 
 # Or init submodule after cloning
 git submodule update --init
