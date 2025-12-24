@@ -1,47 +1,20 @@
-// OpenGL 4.6 Core Profile C++ Module
-// Auto-generated from gl.xml - Do not edit manually
-//
-// Usage:
-//   import gl;
-//   
-//   // Initialize (call after creating GL context)
-//   gl::load(getProcAddress);  // getProcAddress is platform-specific
-//   
-//   // Use OpenGL functions
-//   gl::ClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-//   gl::Clear(gl::COLOR_BUFFER_BIT);
-
+// Auto-generated OpenGL module - do not edit
+// OpenGL 4.6 Core Profile
 
 export module gl;
 
-
-// For C++23 standard library modules, use: import std;
-// For C++20/pre-module compilers, use standard includes instead:
-#if __cpp_lib_modules >= 202207L
-import std;
-#else
 #include <cstdint>
 #include <cstddef>
-#endif
 
-// Platform-specific definitions
 #if defined(_WIN32)
-    #define GL_APIENTRY __stdcall
+    #define GL_APIENTRYP __stdcall *
 #else
-    #define GL_APIENTRY
+    #define GL_APIENTRYP *
 #endif
 
-#define GL_APIENTRYP GL_APIENTRY *
-
-
-// =============================================================================
-// OpenGL Type Definitions
-// =============================================================================
 
 export namespace gl {
 
-
-// Basic integer types - using standard types for compatibility
 using Enum = unsigned int;
 using Boolean = unsigned char;
 using Bitfield = unsigned int;
@@ -51,7 +24,6 @@ using Short = short;
 using Ushort = unsigned short;
 using Int = int;
 using Uint = unsigned int;
-using Clampx = int;
 using Sizei = int;
 using Float = float;
 using Clampf = float;
@@ -60,36 +32,29 @@ using Clampd = double;
 using Char = char;
 using Half = unsigned short;
 using Fixed = int;
+using Int64 = std::int64_t;
+using Uint64 = std::uint64_t;
+using Clampx = int;
 
-// Platform-dependent pointer-sized types
-#if defined(_WIN64) || defined(__LP64__) || defined(__x86_64__) || defined(__aarch64__)
-using Intptr = long long;
-using Sizeiptr = long long;
-using Int64 = long long;
-using Uint64 = unsigned long long;
+#if defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && __ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 1070
+using Intptr = long;
+using Sizeiptr = long;
 #else
-using Intptr = int;
-using Sizeiptr = int;
-using Int64 = long long;
-using Uint64 = unsigned long long;
+using Intptr = std::intptr_t;
+using Sizeiptr = std::ptrdiff_t;
 #endif
 
-// Sync object (opaque pointer)
 using Sync = struct __GLsync*;
+using DebugProc = void (GL_APIENTRYP)(Enum, Enum, Uint, Enum, Sizei, const Char*, const void*);
+using EglImageOES = void*;
+using EglClientBufferEXT = void*;
+using HandleARB = unsigned int;
 
-// Callback types
-using DebugProc = void (GL_APIENTRY *)(Enum source, Enum type, Uint id, Enum severity, Sizei length, const Char* message, const void* userParam);
-
-// Boolean constants
 inline constexpr Boolean TRUE_VALUE = 1;
 inline constexpr Boolean FALSE_VALUE = 0;
 
 } // namespace gl
 
-
-// =============================================================================
-// OpenGL Enumerations
-// =============================================================================
 
 export namespace gl {
 
@@ -243,7 +208,6 @@ inline constexpr Enum COLOR_COMPONENTS = 0x8283;
 inline constexpr Enum COLOR_ENCODING = 0x8296;
 inline constexpr Enum COLOR_LOGIC_OP = 0x0BF2;
 inline constexpr Enum COLOR_RENDERABLE = 0x8286;
-inline constexpr Enum COLOR_TABLE = 0x80D0;
 inline constexpr Enum COLOR_WRITEMASK = 0x0C23;
 inline constexpr Enum COMMAND_BARRIER_BIT = 0x00000040;
 inline constexpr Enum COMPARE_REF_TO_TEXTURE = 0x884E;
@@ -295,8 +259,6 @@ inline constexpr Enum CONTEXT_LOST = 0x0507;
 inline constexpr Enum CONTEXT_PROFILE_MASK = 0x9126;
 inline constexpr Enum CONTEXT_RELEASE_BEHAVIOR = 0x82FB;
 inline constexpr Enum CONTEXT_RELEASE_BEHAVIOR_FLUSH = 0x82FC;
-inline constexpr Enum CONVOLUTION_1D = 0x8010;
-inline constexpr Enum CONVOLUTION_2D = 0x8011;
 inline constexpr Enum COPY = 0x1503;
 inline constexpr Enum COPY_INVERTED = 0x150C;
 inline constexpr Enum COPY_READ_BUFFER = 0x8F36;
@@ -361,7 +323,6 @@ inline constexpr Enum DEPTH_TEST = 0x0B71;
 inline constexpr Enum DEPTH_WRITEMASK = 0x0B72;
 inline constexpr Enum DISPATCH_INDIRECT_BUFFER = 0x90EE;
 inline constexpr Enum DISPATCH_INDIRECT_BUFFER_BINDING = 0x90EF;
-inline constexpr Enum DISPLAY_LIST = 0x82E7;
 inline constexpr Enum DITHER = 0x0BD0;
 inline constexpr Enum DONT_CARE = 0x1100;
 inline constexpr Enum DOUBLE = 0x140A;
@@ -507,7 +468,6 @@ inline constexpr Enum GUILTY_CONTEXT_RESET = 0x8253;
 inline constexpr Enum HALF_FLOAT = 0x140B;
 inline constexpr Enum HIGH_FLOAT = 0x8DF2;
 inline constexpr Enum HIGH_INT = 0x8DF5;
-inline constexpr Enum HISTOGRAM = 0x8024;
 inline constexpr Enum IMAGE_1D = 0x904C;
 inline constexpr Enum IMAGE_1D_ARRAY = 0x9052;
 inline constexpr Enum IMAGE_2D = 0x904D;
@@ -790,7 +750,6 @@ inline constexpr Enum MAX_WIDTH = 0x827E;
 inline constexpr Enum MEDIUM_FLOAT = 0x8DF1;
 inline constexpr Enum MEDIUM_INT = 0x8DF4;
 inline constexpr Enum MIN = 0x8007;
-inline constexpr Enum MINMAX = 0x802E;
 inline constexpr Enum MINOR_VERSION = 0x821C;
 inline constexpr Enum MIN_FRAGMENT_INTERPOLATION_OFFSET = 0x8E5B;
 inline constexpr Enum MIN_MAP_BUFFER_ALIGNMENT = 0x90BC;
@@ -878,8 +837,6 @@ inline constexpr Enum POLYGON_OFFSET_POINT = 0x2A01;
 inline constexpr Enum POLYGON_OFFSET_UNITS = 0x2A00;
 inline constexpr Enum POLYGON_SMOOTH = 0x0B41;
 inline constexpr Enum POLYGON_SMOOTH_HINT = 0x0C53;
-inline constexpr Enum POST_COLOR_MATRIX_COLOR_TABLE = 0x80D2;
-inline constexpr Enum POST_CONVOLUTION_COLOR_TABLE = 0x80D1;
 inline constexpr Enum PRIMITIVES_GENERATED = 0x8C87;
 inline constexpr Enum PRIMITIVES_SUBMITTED = 0x82EF;
 inline constexpr Enum PRIMITIVE_RESTART = 0x8F9D;
@@ -897,10 +854,6 @@ inline constexpr Enum PROGRAM_PIPELINE_BINDING = 0x825A;
 inline constexpr Enum PROGRAM_POINT_SIZE = 0x8642;
 inline constexpr Enum PROGRAM_SEPARABLE = 0x8258;
 inline constexpr Enum PROVOKING_VERTEX = 0x8E4F;
-inline constexpr Enum PROXY_COLOR_TABLE = 0x80D3;
-inline constexpr Enum PROXY_HISTOGRAM = 0x8025;
-inline constexpr Enum PROXY_POST_COLOR_MATRIX_COLOR_TABLE = 0x80D5;
-inline constexpr Enum PROXY_POST_CONVOLUTION_COLOR_TABLE = 0x80D4;
 inline constexpr Enum PROXY_TEXTURE_1D = 0x8063;
 inline constexpr Enum PROXY_TEXTURE_1D_ARRAY = 0x8C19;
 inline constexpr Enum PROXY_TEXTURE_2D = 0x8064;
@@ -911,7 +864,6 @@ inline constexpr Enum PROXY_TEXTURE_3D = 0x8070;
 inline constexpr Enum PROXY_TEXTURE_CUBE_MAP = 0x851B;
 inline constexpr Enum PROXY_TEXTURE_CUBE_MAP_ARRAY = 0x900B;
 inline constexpr Enum PROXY_TEXTURE_RECTANGLE = 0x84F7;
-inline constexpr Enum QUADS = 0x0007;
 inline constexpr Enum QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = 0x8E4C;
 inline constexpr Enum QUERY = 0x82E3;
 inline constexpr Enum QUERY_BUFFER = 0x9192;
@@ -1066,7 +1018,6 @@ inline constexpr Enum SAMPLE_POSITION = 0x8E50;
 inline constexpr Enum SAMPLE_SHADING = 0x8C36;
 inline constexpr Enum SCISSOR_BOX = 0x0C10;
 inline constexpr Enum SCISSOR_TEST = 0x0C11;
-inline constexpr Enum SEPARABLE_2D = 0x8012;
 inline constexpr Enum SEPARATE_ATTRIBS = 0x8C8D;
 inline constexpr Enum SET = 0x150F;
 inline constexpr Enum SHADER = 0x82E1;
@@ -1111,8 +1062,6 @@ inline constexpr Enum SRGB8_ALPHA8 = 0x8C43;
 inline constexpr Enum SRGB_ALPHA = 0x8C42;
 inline constexpr Enum SRGB_READ = 0x8297;
 inline constexpr Enum SRGB_WRITE = 0x8298;
-inline constexpr Enum STACK_OVERFLOW = 0x0503;
-inline constexpr Enum STACK_UNDERFLOW = 0x0504;
 inline constexpr Enum STATIC_COPY = 0x88E6;
 inline constexpr Enum STATIC_DRAW = 0x88E4;
 inline constexpr Enum STATIC_READ = 0x88E5;
@@ -1420,7 +1369,6 @@ inline constexpr Enum UPPER_LEFT = 0x8CA2;
 inline constexpr Enum VALIDATE_STATUS = 0x8B83;
 inline constexpr Enum VENDOR = 0x1F00;
 inline constexpr Enum VERSION = 0x1F02;
-inline constexpr Enum VERTEX_ARRAY = 0x8074;
 inline constexpr Enum VERTEX_ARRAY_BINDING = 0x85B5;
 inline constexpr Enum VERTEX_ATTRIB_ARRAY_BARRIER_BIT = 0x00000001;
 inline constexpr Enum VERTEX_ATTRIB_ARRAY_BUFFER_BINDING = 0x889F;
@@ -1477,12 +1425,7 @@ inline constexpr Enum ZERO_TO_ONE = 0x935F;
 } // namespace gl
 
 
-// =============================================================================
-// OpenGL Function Pointer Types
-// =============================================================================
-
 export namespace gl {
-
 namespace detail {
 
 using PFNACTIVESHADERPROGRAMPROC = void (GL_APIENTRYP)(Uint pipeline, Uint program);
@@ -1554,10 +1497,6 @@ using PFNCLIENTWAITSYNCPROC = Enum (GL_APIENTRYP)(Sync sync, Bitfield flags, Uin
 using PFNCLIPCONTROLPROC = void (GL_APIENTRYP)(Enum origin, Enum depth);
 using PFNCOLORMASKPROC = void (GL_APIENTRYP)(Boolean red, Boolean green, Boolean blue, Boolean alpha);
 using PFNCOLORMASKIPROC = void (GL_APIENTRYP)(Uint index, Boolean r, Boolean g, Boolean b, Boolean a);
-using PFNCOLORP3UIPROC = void (GL_APIENTRYP)(Enum type, Uint color);
-using PFNCOLORP3UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* color);
-using PFNCOLORP4UIPROC = void (GL_APIENTRYP)(Enum type, Uint color);
-using PFNCOLORP4UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* color);
 using PFNCOMPILESHADERPROC = void (GL_APIENTRYP)(Uint shader);
 using PFNCOMPRESSEDTEXIMAGE1DPROC = void (GL_APIENTRYP)(Enum target, Int level, Enum internalformat, Sizei width, Int border, Sizei imageSize, const void* data);
 using PFNCOMPRESSEDTEXIMAGE2DPROC = void (GL_APIENTRYP)(Enum target, Int level, Enum internalformat, Sizei width, Sizei height, Int border, Sizei imageSize, const void* data);
@@ -1719,7 +1658,6 @@ using PFNGETNAMEDFRAMEBUFFERPARAMETERIVPROC = void (GL_APIENTRYP)(Uint framebuff
 using PFNGETNAMEDRENDERBUFFERPARAMETERIVPROC = void (GL_APIENTRYP)(Uint renderbuffer, Enum pname, Int* params);
 using PFNGETOBJECTLABELPROC = void (GL_APIENTRYP)(Enum identifier, Uint name, Sizei bufSize, Sizei* length, Char* label);
 using PFNGETOBJECTPTRLABELPROC = void (GL_APIENTRYP)(const void* ptr, Sizei bufSize, Sizei* length, Char* label);
-using PFNGETPOINTERVPROC = void (GL_APIENTRYP)(Enum pname, void** params);
 using PFNGETPROGRAMBINARYPROC = void (GL_APIENTRYP)(Uint program, Sizei bufSize, Sizei* length, Enum* binaryFormat, void* binary);
 using PFNGETPROGRAMINFOLOGPROC = void (GL_APIENTRYP)(Uint program, Sizei bufSize, Sizei* length, Char* infoLog);
 using PFNGETPROGRAMINTERFACEIVPROC = void (GL_APIENTRYP)(Uint program, Enum programInterface, Enum pname, Int* params);
@@ -1793,19 +1731,7 @@ using PFNGETVERTEXATTRIBPOINTERVPROC = void (GL_APIENTRYP)(Uint index, Enum pnam
 using PFNGETVERTEXATTRIBDVPROC = void (GL_APIENTRYP)(Uint index, Enum pname, Double* params);
 using PFNGETVERTEXATTRIBFVPROC = void (GL_APIENTRYP)(Uint index, Enum pname, Float* params);
 using PFNGETVERTEXATTRIBIVPROC = void (GL_APIENTRYP)(Uint index, Enum pname, Int* params);
-using PFNGETNCOLORTABLEPROC = void (GL_APIENTRYP)(Enum target, Enum format, Enum type, Sizei bufSize, void* table);
 using PFNGETNCOMPRESSEDTEXIMAGEPROC = void (GL_APIENTRYP)(Enum target, Int lod, Sizei bufSize, void* pixels);
-using PFNGETNCONVOLUTIONFILTERPROC = void (GL_APIENTRYP)(Enum target, Enum format, Enum type, Sizei bufSize, void* image);
-using PFNGETNHISTOGRAMPROC = void (GL_APIENTRYP)(Enum target, Boolean reset, Enum format, Enum type, Sizei bufSize, void* values);
-using PFNGETNMAPDVPROC = void (GL_APIENTRYP)(Enum target, Enum query, Sizei bufSize, Double* v);
-using PFNGETNMAPFVPROC = void (GL_APIENTRYP)(Enum target, Enum query, Sizei bufSize, Float* v);
-using PFNGETNMAPIVPROC = void (GL_APIENTRYP)(Enum target, Enum query, Sizei bufSize, Int* v);
-using PFNGETNMINMAXPROC = void (GL_APIENTRYP)(Enum target, Boolean reset, Enum format, Enum type, Sizei bufSize, void* values);
-using PFNGETNPIXELMAPFVPROC = void (GL_APIENTRYP)(Enum map, Sizei bufSize, Float* values);
-using PFNGETNPIXELMAPUIVPROC = void (GL_APIENTRYP)(Enum map, Sizei bufSize, Uint* values);
-using PFNGETNPIXELMAPUSVPROC = void (GL_APIENTRYP)(Enum map, Sizei bufSize, Ushort* values);
-using PFNGETNPOLYGONSTIPPLEPROC = void (GL_APIENTRYP)(Sizei bufSize, Ubyte* pattern);
-using PFNGETNSEPARABLEFILTERPROC = void (GL_APIENTRYP)(Enum target, Enum format, Enum type, Sizei rowBufSize, void* row, Sizei columnBufSize, void* column, void* span);
 using PFNGETNTEXIMAGEPROC = void (GL_APIENTRYP)(Enum target, Int level, Enum format, Enum type, Sizei bufSize, void* pixels);
 using PFNGETNUNIFORMDVPROC = void (GL_APIENTRYP)(Uint program, Int location, Sizei bufSize, Double* params);
 using PFNGETNUNIFORMFVPROC = void (GL_APIENTRYP)(Uint program, Int location, Sizei bufSize, Float* params);
@@ -1851,14 +1777,6 @@ using PFNMULTIDRAWELEMENTSPROC = void (GL_APIENTRYP)(Enum mode, const Sizei* cou
 using PFNMULTIDRAWELEMENTSBASEVERTEXPROC = void (GL_APIENTRYP)(Enum mode, const Sizei* count, Enum type, const void** indices, Sizei drawcount, const Int* basevertex);
 using PFNMULTIDRAWELEMENTSINDIRECTPROC = void (GL_APIENTRYP)(Enum mode, Enum type, const void* indirect, Sizei drawcount, Sizei stride);
 using PFNMULTIDRAWELEMENTSINDIRECTCOUNTPROC = void (GL_APIENTRYP)(Enum mode, Enum type, const void* indirect, Intptr drawcount, Sizei maxdrawcount, Sizei stride);
-using PFNMULTITEXCOORDP1UIPROC = void (GL_APIENTRYP)(Enum texture, Enum type, Uint coords);
-using PFNMULTITEXCOORDP1UIVPROC = void (GL_APIENTRYP)(Enum texture, Enum type, const Uint* coords);
-using PFNMULTITEXCOORDP2UIPROC = void (GL_APIENTRYP)(Enum texture, Enum type, Uint coords);
-using PFNMULTITEXCOORDP2UIVPROC = void (GL_APIENTRYP)(Enum texture, Enum type, const Uint* coords);
-using PFNMULTITEXCOORDP3UIPROC = void (GL_APIENTRYP)(Enum texture, Enum type, Uint coords);
-using PFNMULTITEXCOORDP3UIVPROC = void (GL_APIENTRYP)(Enum texture, Enum type, const Uint* coords);
-using PFNMULTITEXCOORDP4UIPROC = void (GL_APIENTRYP)(Enum texture, Enum type, Uint coords);
-using PFNMULTITEXCOORDP4UIVPROC = void (GL_APIENTRYP)(Enum texture, Enum type, const Uint* coords);
 using PFNNAMEDBUFFERDATAPROC = void (GL_APIENTRYP)(Uint buffer, Sizeiptr size, const void* data, Enum usage);
 using PFNNAMEDBUFFERSTORAGEPROC = void (GL_APIENTRYP)(Uint buffer, Sizeiptr size, const void* data, Bitfield flags);
 using PFNNAMEDBUFFERSUBDATAPROC = void (GL_APIENTRYP)(Uint buffer, Intptr offset, Sizeiptr size, const void* data);
@@ -1871,8 +1789,6 @@ using PFNNAMEDFRAMEBUFFERTEXTUREPROC = void (GL_APIENTRYP)(Uint framebuffer, Enu
 using PFNNAMEDFRAMEBUFFERTEXTURELAYERPROC = void (GL_APIENTRYP)(Uint framebuffer, Enum attachment, Uint texture, Int level, Int layer);
 using PFNNAMEDRENDERBUFFERSTORAGEPROC = void (GL_APIENTRYP)(Uint renderbuffer, Enum internalformat, Sizei width, Sizei height);
 using PFNNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC = void (GL_APIENTRYP)(Uint renderbuffer, Sizei samples, Enum internalformat, Sizei width, Sizei height);
-using PFNNORMALP3UIPROC = void (GL_APIENTRYP)(Enum type, Uint coords);
-using PFNNORMALP3UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* coords);
 using PFNOBJECTLABELPROC = void (GL_APIENTRYP)(Enum identifier, Uint name, Sizei length, const Char* label);
 using PFNOBJECTPTRLABELPROC = void (GL_APIENTRYP)(const void* ptr, Sizei length, const Char* label);
 using PFNPATCHPARAMETERFVPROC = void (GL_APIENTRYP)(Enum pname, const Float* values);
@@ -1964,8 +1880,6 @@ using PFNSCISSORPROC = void (GL_APIENTRYP)(Int x, Int y, Sizei width, Sizei heig
 using PFNSCISSORARRAYVPROC = void (GL_APIENTRYP)(Uint first, Sizei count, const Int* v);
 using PFNSCISSORINDEXEDPROC = void (GL_APIENTRYP)(Uint index, Int left, Int bottom, Sizei width, Sizei height);
 using PFNSCISSORINDEXEDVPROC = void (GL_APIENTRYP)(Uint index, const Int* v);
-using PFNSECONDARYCOLORP3UIPROC = void (GL_APIENTRYP)(Enum type, Uint color);
-using PFNSECONDARYCOLORP3UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* color);
 using PFNSHADERBINARYPROC = void (GL_APIENTRYP)(Sizei count, const Uint* shaders, Enum binaryFormat, const void* binary, Sizei length);
 using PFNSHADERSOURCEPROC = void (GL_APIENTRYP)(Uint shader, Sizei count, const Char** string, const Int* length);
 using PFNSHADERSTORAGEBLOCKBINDINGPROC = void (GL_APIENTRYP)(Uint program, Uint storageBlockIndex, Uint storageBlockBinding);
@@ -1978,14 +1892,6 @@ using PFNSTENCILOPPROC = void (GL_APIENTRYP)(Enum fail, Enum zfail, Enum zpass);
 using PFNSTENCILOPSEPARATEPROC = void (GL_APIENTRYP)(Enum face, Enum sfail, Enum dpfail, Enum dppass);
 using PFNTEXBUFFERPROC = void (GL_APIENTRYP)(Enum target, Enum internalformat, Uint buffer);
 using PFNTEXBUFFERRANGEPROC = void (GL_APIENTRYP)(Enum target, Enum internalformat, Uint buffer, Intptr offset, Sizeiptr size);
-using PFNTEXCOORDP1UIPROC = void (GL_APIENTRYP)(Enum type, Uint coords);
-using PFNTEXCOORDP1UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* coords);
-using PFNTEXCOORDP2UIPROC = void (GL_APIENTRYP)(Enum type, Uint coords);
-using PFNTEXCOORDP2UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* coords);
-using PFNTEXCOORDP3UIPROC = void (GL_APIENTRYP)(Enum type, Uint coords);
-using PFNTEXCOORDP3UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* coords);
-using PFNTEXCOORDP4UIPROC = void (GL_APIENTRYP)(Enum type, Uint coords);
-using PFNTEXCOORDP4UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* coords);
 using PFNTEXIMAGE1DPROC = void (GL_APIENTRYP)(Enum target, Int level, Int internalformat, Sizei width, Int border, Enum format, Enum type, const void* pixels);
 using PFNTEXIMAGE2DPROC = void (GL_APIENTRYP)(Enum target, Int level, Int internalformat, Sizei width, Sizei height, Int border, Enum format, Enum type, const void* pixels);
 using PFNTEXIMAGE2DMULTISAMPLEPROC = void (GL_APIENTRYP)(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations);
@@ -2173,12 +2079,6 @@ using PFNVERTEXATTRIBP4UIPROC = void (GL_APIENTRYP)(Uint index, Enum type, Boole
 using PFNVERTEXATTRIBP4UIVPROC = void (GL_APIENTRYP)(Uint index, Enum type, Boolean normalized, const Uint* value);
 using PFNVERTEXATTRIBPOINTERPROC = void (GL_APIENTRYP)(Uint index, Int size, Enum type, Boolean normalized, Sizei stride, const void* pointer);
 using PFNVERTEXBINDINGDIVISORPROC = void (GL_APIENTRYP)(Uint bindingindex, Uint divisor);
-using PFNVERTEXP2UIPROC = void (GL_APIENTRYP)(Enum type, Uint value);
-using PFNVERTEXP2UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* value);
-using PFNVERTEXP3UIPROC = void (GL_APIENTRYP)(Enum type, Uint value);
-using PFNVERTEXP3UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* value);
-using PFNVERTEXP4UIPROC = void (GL_APIENTRYP)(Enum type, Uint value);
-using PFNVERTEXP4UIVPROC = void (GL_APIENTRYP)(Enum type, const Uint* value);
 using PFNVIEWPORTPROC = void (GL_APIENTRYP)(Int x, Int y, Sizei width, Sizei height);
 using PFNVIEWPORTARRAYVPROC = void (GL_APIENTRYP)(Uint first, Sizei count, const Float* v);
 using PFNVIEWPORTINDEXEDFPROC = void (GL_APIENTRYP)(Uint index, Float x, Float y, Float w, Float h);
@@ -2188,10 +2088,6 @@ using PFNWAITSYNCPROC = void (GL_APIENTRYP)(Sync sync, Bitfield flags, Uint64 ti
 } // namespace detail
 } // namespace gl
 
-
-// =============================================================================
-// OpenGL Function Pointers (Internal)
-// =============================================================================
 
 namespace gl::detail {
 
@@ -2264,10 +2160,6 @@ inline PFNCLIENTWAITSYNCPROC ptrClientWaitSync = nullptr;
 inline PFNCLIPCONTROLPROC ptrClipControl = nullptr;
 inline PFNCOLORMASKPROC ptrColorMask = nullptr;
 inline PFNCOLORMASKIPROC ptrColorMaski = nullptr;
-inline PFNCOLORP3UIPROC ptrColorP3ui = nullptr;
-inline PFNCOLORP3UIVPROC ptrColorP3uiv = nullptr;
-inline PFNCOLORP4UIPROC ptrColorP4ui = nullptr;
-inline PFNCOLORP4UIVPROC ptrColorP4uiv = nullptr;
 inline PFNCOMPILESHADERPROC ptrCompileShader = nullptr;
 inline PFNCOMPRESSEDTEXIMAGE1DPROC ptrCompressedTexImage1D = nullptr;
 inline PFNCOMPRESSEDTEXIMAGE2DPROC ptrCompressedTexImage2D = nullptr;
@@ -2429,7 +2321,6 @@ inline PFNGETNAMEDFRAMEBUFFERPARAMETERIVPROC ptrGetNamedFramebufferParameteriv =
 inline PFNGETNAMEDRENDERBUFFERPARAMETERIVPROC ptrGetNamedRenderbufferParameteriv = nullptr;
 inline PFNGETOBJECTLABELPROC ptrGetObjectLabel = nullptr;
 inline PFNGETOBJECTPTRLABELPROC ptrGetObjectPtrLabel = nullptr;
-inline PFNGETPOINTERVPROC ptrGetPointerv = nullptr;
 inline PFNGETPROGRAMBINARYPROC ptrGetProgramBinary = nullptr;
 inline PFNGETPROGRAMINFOLOGPROC ptrGetProgramInfoLog = nullptr;
 inline PFNGETPROGRAMINTERFACEIVPROC ptrGetProgramInterfaceiv = nullptr;
@@ -2503,19 +2394,7 @@ inline PFNGETVERTEXATTRIBPOINTERVPROC ptrGetVertexAttribPointerv = nullptr;
 inline PFNGETVERTEXATTRIBDVPROC ptrGetVertexAttribdv = nullptr;
 inline PFNGETVERTEXATTRIBFVPROC ptrGetVertexAttribfv = nullptr;
 inline PFNGETVERTEXATTRIBIVPROC ptrGetVertexAttribiv = nullptr;
-inline PFNGETNCOLORTABLEPROC ptrGetnColorTable = nullptr;
 inline PFNGETNCOMPRESSEDTEXIMAGEPROC ptrGetnCompressedTexImage = nullptr;
-inline PFNGETNCONVOLUTIONFILTERPROC ptrGetnConvolutionFilter = nullptr;
-inline PFNGETNHISTOGRAMPROC ptrGetnHistogram = nullptr;
-inline PFNGETNMAPDVPROC ptrGetnMapdv = nullptr;
-inline PFNGETNMAPFVPROC ptrGetnMapfv = nullptr;
-inline PFNGETNMAPIVPROC ptrGetnMapiv = nullptr;
-inline PFNGETNMINMAXPROC ptrGetnMinmax = nullptr;
-inline PFNGETNPIXELMAPFVPROC ptrGetnPixelMapfv = nullptr;
-inline PFNGETNPIXELMAPUIVPROC ptrGetnPixelMapuiv = nullptr;
-inline PFNGETNPIXELMAPUSVPROC ptrGetnPixelMapusv = nullptr;
-inline PFNGETNPOLYGONSTIPPLEPROC ptrGetnPolygonStipple = nullptr;
-inline PFNGETNSEPARABLEFILTERPROC ptrGetnSeparableFilter = nullptr;
 inline PFNGETNTEXIMAGEPROC ptrGetnTexImage = nullptr;
 inline PFNGETNUNIFORMDVPROC ptrGetnUniformdv = nullptr;
 inline PFNGETNUNIFORMFVPROC ptrGetnUniformfv = nullptr;
@@ -2561,14 +2440,6 @@ inline PFNMULTIDRAWELEMENTSPROC ptrMultiDrawElements = nullptr;
 inline PFNMULTIDRAWELEMENTSBASEVERTEXPROC ptrMultiDrawElementsBaseVertex = nullptr;
 inline PFNMULTIDRAWELEMENTSINDIRECTPROC ptrMultiDrawElementsIndirect = nullptr;
 inline PFNMULTIDRAWELEMENTSINDIRECTCOUNTPROC ptrMultiDrawElementsIndirectCount = nullptr;
-inline PFNMULTITEXCOORDP1UIPROC ptrMultiTexCoordP1ui = nullptr;
-inline PFNMULTITEXCOORDP1UIVPROC ptrMultiTexCoordP1uiv = nullptr;
-inline PFNMULTITEXCOORDP2UIPROC ptrMultiTexCoordP2ui = nullptr;
-inline PFNMULTITEXCOORDP2UIVPROC ptrMultiTexCoordP2uiv = nullptr;
-inline PFNMULTITEXCOORDP3UIPROC ptrMultiTexCoordP3ui = nullptr;
-inline PFNMULTITEXCOORDP3UIVPROC ptrMultiTexCoordP3uiv = nullptr;
-inline PFNMULTITEXCOORDP4UIPROC ptrMultiTexCoordP4ui = nullptr;
-inline PFNMULTITEXCOORDP4UIVPROC ptrMultiTexCoordP4uiv = nullptr;
 inline PFNNAMEDBUFFERDATAPROC ptrNamedBufferData = nullptr;
 inline PFNNAMEDBUFFERSTORAGEPROC ptrNamedBufferStorage = nullptr;
 inline PFNNAMEDBUFFERSUBDATAPROC ptrNamedBufferSubData = nullptr;
@@ -2581,8 +2452,6 @@ inline PFNNAMEDFRAMEBUFFERTEXTUREPROC ptrNamedFramebufferTexture = nullptr;
 inline PFNNAMEDFRAMEBUFFERTEXTURELAYERPROC ptrNamedFramebufferTextureLayer = nullptr;
 inline PFNNAMEDRENDERBUFFERSTORAGEPROC ptrNamedRenderbufferStorage = nullptr;
 inline PFNNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC ptrNamedRenderbufferStorageMultisample = nullptr;
-inline PFNNORMALP3UIPROC ptrNormalP3ui = nullptr;
-inline PFNNORMALP3UIVPROC ptrNormalP3uiv = nullptr;
 inline PFNOBJECTLABELPROC ptrObjectLabel = nullptr;
 inline PFNOBJECTPTRLABELPROC ptrObjectPtrLabel = nullptr;
 inline PFNPATCHPARAMETERFVPROC ptrPatchParameterfv = nullptr;
@@ -2674,8 +2543,6 @@ inline PFNSCISSORPROC ptrScissor = nullptr;
 inline PFNSCISSORARRAYVPROC ptrScissorArrayv = nullptr;
 inline PFNSCISSORINDEXEDPROC ptrScissorIndexed = nullptr;
 inline PFNSCISSORINDEXEDVPROC ptrScissorIndexedv = nullptr;
-inline PFNSECONDARYCOLORP3UIPROC ptrSecondaryColorP3ui = nullptr;
-inline PFNSECONDARYCOLORP3UIVPROC ptrSecondaryColorP3uiv = nullptr;
 inline PFNSHADERBINARYPROC ptrShaderBinary = nullptr;
 inline PFNSHADERSOURCEPROC ptrShaderSource = nullptr;
 inline PFNSHADERSTORAGEBLOCKBINDINGPROC ptrShaderStorageBlockBinding = nullptr;
@@ -2688,14 +2555,6 @@ inline PFNSTENCILOPPROC ptrStencilOp = nullptr;
 inline PFNSTENCILOPSEPARATEPROC ptrStencilOpSeparate = nullptr;
 inline PFNTEXBUFFERPROC ptrTexBuffer = nullptr;
 inline PFNTEXBUFFERRANGEPROC ptrTexBufferRange = nullptr;
-inline PFNTEXCOORDP1UIPROC ptrTexCoordP1ui = nullptr;
-inline PFNTEXCOORDP1UIVPROC ptrTexCoordP1uiv = nullptr;
-inline PFNTEXCOORDP2UIPROC ptrTexCoordP2ui = nullptr;
-inline PFNTEXCOORDP2UIVPROC ptrTexCoordP2uiv = nullptr;
-inline PFNTEXCOORDP3UIPROC ptrTexCoordP3ui = nullptr;
-inline PFNTEXCOORDP3UIVPROC ptrTexCoordP3uiv = nullptr;
-inline PFNTEXCOORDP4UIPROC ptrTexCoordP4ui = nullptr;
-inline PFNTEXCOORDP4UIVPROC ptrTexCoordP4uiv = nullptr;
 inline PFNTEXIMAGE1DPROC ptrTexImage1D = nullptr;
 inline PFNTEXIMAGE2DPROC ptrTexImage2D = nullptr;
 inline PFNTEXIMAGE2DMULTISAMPLEPROC ptrTexImage2DMultisample = nullptr;
@@ -2883,12 +2742,6 @@ inline PFNVERTEXATTRIBP4UIPROC ptrVertexAttribP4ui = nullptr;
 inline PFNVERTEXATTRIBP4UIVPROC ptrVertexAttribP4uiv = nullptr;
 inline PFNVERTEXATTRIBPOINTERPROC ptrVertexAttribPointer = nullptr;
 inline PFNVERTEXBINDINGDIVISORPROC ptrVertexBindingDivisor = nullptr;
-inline PFNVERTEXP2UIPROC ptrVertexP2ui = nullptr;
-inline PFNVERTEXP2UIVPROC ptrVertexP2uiv = nullptr;
-inline PFNVERTEXP3UIPROC ptrVertexP3ui = nullptr;
-inline PFNVERTEXP3UIVPROC ptrVertexP3uiv = nullptr;
-inline PFNVERTEXP4UIPROC ptrVertexP4ui = nullptr;
-inline PFNVERTEXP4UIVPROC ptrVertexP4uiv = nullptr;
 inline PFNVIEWPORTPROC ptrViewport = nullptr;
 inline PFNVIEWPORTARRAYVPROC ptrViewportArrayv = nullptr;
 inline PFNVIEWPORTINDEXEDFPROC ptrViewportIndexedf = nullptr;
@@ -2898,2826 +2751,674 @@ inline PFNWAITSYNCPROC ptrWaitSync = nullptr;
 } // namespace gl::detail
 
 
-// =============================================================================
-// OpenGL Functions (Exported)
-// =============================================================================
-
 export namespace gl {
 
-inline void ActiveShaderProgram(Uint pipeline, Uint program) {
-    detail::ptrActiveShaderProgram(pipeline, program);
-}
-
-inline void ActiveTexture(Enum texture) {
-    detail::ptrActiveTexture(texture);
-}
-
-inline void AttachShader(Uint program, Uint shader) {
-    detail::ptrAttachShader(program, shader);
-}
-
-inline void BeginConditionalRender(Uint id, Enum mode) {
-    detail::ptrBeginConditionalRender(id, mode);
-}
-
-inline void BeginQuery(Enum target, Uint id) {
-    detail::ptrBeginQuery(target, id);
-}
-
-inline void BeginQueryIndexed(Enum target, Uint index, Uint id) {
-    detail::ptrBeginQueryIndexed(target, index, id);
-}
-
-inline void BeginTransformFeedback(Enum primitiveMode) {
-    detail::ptrBeginTransformFeedback(primitiveMode);
-}
-
-inline void BindAttribLocation(Uint program, Uint index, const Char* name) {
-    detail::ptrBindAttribLocation(program, index, name);
-}
-
-inline void BindBuffer(Enum target, Uint buffer) {
-    detail::ptrBindBuffer(target, buffer);
-}
-
-inline void BindBufferBase(Enum target, Uint index, Uint buffer) {
-    detail::ptrBindBufferBase(target, index, buffer);
-}
-
-inline void BindBufferRange(Enum target, Uint index, Uint buffer, Intptr offset, Sizeiptr size) {
-    detail::ptrBindBufferRange(target, index, buffer, offset, size);
-}
-
-inline void BindBuffersBase(Enum target, Uint first, Sizei count, const Uint* buffers) {
-    detail::ptrBindBuffersBase(target, first, count, buffers);
-}
-
-inline void BindBuffersRange(Enum target, Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizeiptr* sizes) {
-    detail::ptrBindBuffersRange(target, first, count, buffers, offsets, sizes);
-}
-
-inline void BindFragDataLocation(Uint program, Uint color, const Char* name) {
-    detail::ptrBindFragDataLocation(program, color, name);
-}
-
-inline void BindFragDataLocationIndexed(Uint program, Uint colorNumber, Uint index, const Char* name) {
-    detail::ptrBindFragDataLocationIndexed(program, colorNumber, index, name);
-}
-
-inline void BindFramebuffer(Enum target, Uint framebuffer) {
-    detail::ptrBindFramebuffer(target, framebuffer);
-}
-
-inline void BindImageTexture(Uint unit, Uint texture, Int level, Boolean layered, Int layer, Enum access, Enum format) {
-    detail::ptrBindImageTexture(unit, texture, level, layered, layer, access, format);
-}
-
-inline void BindImageTextures(Uint first, Sizei count, const Uint* textures) {
-    detail::ptrBindImageTextures(first, count, textures);
-}
-
-inline void BindProgramPipeline(Uint pipeline) {
-    detail::ptrBindProgramPipeline(pipeline);
-}
-
-inline void BindRenderbuffer(Enum target, Uint renderbuffer) {
-    detail::ptrBindRenderbuffer(target, renderbuffer);
-}
-
-inline void BindSampler(Uint unit, Uint sampler) {
-    detail::ptrBindSampler(unit, sampler);
-}
-
-inline void BindSamplers(Uint first, Sizei count, const Uint* samplers) {
-    detail::ptrBindSamplers(first, count, samplers);
-}
-
-inline void BindTexture(Enum target, Uint texture) {
-    detail::ptrBindTexture(target, texture);
-}
-
-inline void BindTextureUnit(Uint unit, Uint texture) {
-    detail::ptrBindTextureUnit(unit, texture);
-}
-
-inline void BindTextures(Uint first, Sizei count, const Uint* textures) {
-    detail::ptrBindTextures(first, count, textures);
-}
-
-inline void BindTransformFeedback(Enum target, Uint id) {
-    detail::ptrBindTransformFeedback(target, id);
-}
-
-inline void BindVertexArray(Uint array) {
-    detail::ptrBindVertexArray(array);
-}
-
-inline void BindVertexBuffer(Uint bindingindex, Uint buffer, Intptr offset, Sizei stride) {
-    detail::ptrBindVertexBuffer(bindingindex, buffer, offset, stride);
-}
-
-inline void BindVertexBuffers(Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizei* strides) {
-    detail::ptrBindVertexBuffers(first, count, buffers, offsets, strides);
-}
-
-inline void BlendColor(Float red, Float green, Float blue, Float alpha) {
-    detail::ptrBlendColor(red, green, blue, alpha);
-}
-
-inline void BlendEquation(Enum mode) {
-    detail::ptrBlendEquation(mode);
-}
-
-inline void BlendEquationSeparate(Enum modeRGB, Enum modeAlpha) {
-    detail::ptrBlendEquationSeparate(modeRGB, modeAlpha);
-}
-
-inline void BlendEquationSeparatei(Uint buf, Enum modeRGB, Enum modeAlpha) {
-    detail::ptrBlendEquationSeparatei(buf, modeRGB, modeAlpha);
-}
-
-inline void BlendEquationi(Uint buf, Enum mode) {
-    detail::ptrBlendEquationi(buf, mode);
-}
-
-inline void BlendFunc(Enum sfactor, Enum dfactor) {
-    detail::ptrBlendFunc(sfactor, dfactor);
-}
-
-inline void BlendFuncSeparate(Enum sfactorRGB, Enum dfactorRGB, Enum sfactorAlpha, Enum dfactorAlpha) {
-    detail::ptrBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
-}
-
-inline void BlendFuncSeparatei(Uint buf, Enum srcRGB, Enum dstRGB, Enum srcAlpha, Enum dstAlpha) {
-    detail::ptrBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha);
-}
-
-inline void BlendFunci(Uint buf, Enum src, Enum dst) {
-    detail::ptrBlendFunci(buf, src, dst);
-}
-
-inline void BlitFramebuffer(Int srcX0, Int srcY0, Int srcX1, Int srcY1, Int dstX0, Int dstY0, Int dstX1, Int dstY1, Bitfield mask, Enum filter) {
-    detail::ptrBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
-}
-
-inline void BlitNamedFramebuffer(Uint readFramebuffer, Uint drawFramebuffer, Int srcX0, Int srcY0, Int srcX1, Int srcY1, Int dstX0, Int dstY0, Int dstX1, Int dstY1, Bitfield mask, Enum filter) {
-    detail::ptrBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter);
-}
-
-inline void BufferData(Enum target, Sizeiptr size, const void* data, Enum usage) {
-    detail::ptrBufferData(target, size, data, usage);
-}
-
-inline void BufferStorage(Enum target, Sizeiptr size, const void* data, Bitfield flags) {
-    detail::ptrBufferStorage(target, size, data, flags);
-}
-
-inline void BufferSubData(Enum target, Intptr offset, Sizeiptr size, const void* data) {
-    detail::ptrBufferSubData(target, offset, size, data);
-}
-
-inline Enum CheckFramebufferStatus(Enum target) {
-    return detail::ptrCheckFramebufferStatus(target);
-}
-
-inline Enum CheckNamedFramebufferStatus(Uint framebuffer, Enum target) {
-    return detail::ptrCheckNamedFramebufferStatus(framebuffer, target);
-}
-
-inline void ClampColor(Enum target, Enum clamp) {
-    detail::ptrClampColor(target, clamp);
-}
-
-inline void Clear(Bitfield mask) {
-    detail::ptrClear(mask);
-}
-
-inline void ClearBufferData(Enum target, Enum internalformat, Enum format, Enum type, const void* data) {
-    detail::ptrClearBufferData(target, internalformat, format, type, data);
-}
-
-inline void ClearBufferSubData(Enum target, Enum internalformat, Intptr offset, Sizeiptr size, Enum format, Enum type, const void* data) {
-    detail::ptrClearBufferSubData(target, internalformat, offset, size, format, type, data);
-}
-
-inline void ClearBufferfi(Enum buffer, Int drawbuffer, Float depth, Int stencil) {
-    detail::ptrClearBufferfi(buffer, drawbuffer, depth, stencil);
-}
-
-inline void ClearBufferfv(Enum buffer, Int drawbuffer, const Float* value) {
-    detail::ptrClearBufferfv(buffer, drawbuffer, value);
-}
-
-inline void ClearBufferiv(Enum buffer, Int drawbuffer, const Int* value) {
-    detail::ptrClearBufferiv(buffer, drawbuffer, value);
-}
-
-inline void ClearBufferuiv(Enum buffer, Int drawbuffer, const Uint* value) {
-    detail::ptrClearBufferuiv(buffer, drawbuffer, value);
-}
-
-inline void ClearColor(Float red, Float green, Float blue, Float alpha) {
-    detail::ptrClearColor(red, green, blue, alpha);
-}
-
-inline void ClearDepth(Double depth) {
-    detail::ptrClearDepth(depth);
-}
-
-inline void ClearDepthf(Float d) {
-    detail::ptrClearDepthf(d);
-}
-
-inline void ClearNamedBufferData(Uint buffer, Enum internalformat, Enum format, Enum type, const void* data) {
-    detail::ptrClearNamedBufferData(buffer, internalformat, format, type, data);
-}
-
-inline void ClearNamedBufferSubData(Uint buffer, Enum internalformat, Intptr offset, Sizeiptr size, Enum format, Enum type, const void* data) {
-    detail::ptrClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data);
-}
-
-inline void ClearNamedFramebufferfi(Uint framebuffer, Enum buffer, Int drawbuffer, Float depth, Int stencil) {
-    detail::ptrClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil);
-}
-
-inline void ClearNamedFramebufferfv(Uint framebuffer, Enum buffer, Int drawbuffer, const Float* value) {
-    detail::ptrClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value);
-}
-
-inline void ClearNamedFramebufferiv(Uint framebuffer, Enum buffer, Int drawbuffer, const Int* value) {
-    detail::ptrClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value);
-}
-
-inline void ClearNamedFramebufferuiv(Uint framebuffer, Enum buffer, Int drawbuffer, const Uint* value) {
-    detail::ptrClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value);
-}
-
-inline void ClearStencil(Int s) {
-    detail::ptrClearStencil(s);
-}
-
-inline void ClearTexImage(Uint texture, Int level, Enum format, Enum type, const void* data) {
-    detail::ptrClearTexImage(texture, level, format, type, data);
-}
-
-inline void ClearTexSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* data) {
-    detail::ptrClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data);
-}
-
-inline Enum ClientWaitSync(Sync sync, Bitfield flags, Uint64 timeout) {
-    return detail::ptrClientWaitSync(sync, flags, timeout);
-}
-
-inline void ClipControl(Enum origin, Enum depth) {
-    detail::ptrClipControl(origin, depth);
-}
-
-inline void ColorMask(Boolean red, Boolean green, Boolean blue, Boolean alpha) {
-    detail::ptrColorMask(red, green, blue, alpha);
-}
-
-inline void ColorMaski(Uint index, Boolean r, Boolean g, Boolean b, Boolean a) {
-    detail::ptrColorMaski(index, r, g, b, a);
-}
-
-inline void ColorP3ui(Enum type, Uint color) {
-    detail::ptrColorP3ui(type, color);
-}
-
-inline void ColorP3uiv(Enum type, const Uint* color) {
-    detail::ptrColorP3uiv(type, color);
-}
-
-inline void ColorP4ui(Enum type, Uint color) {
-    detail::ptrColorP4ui(type, color);
-}
-
-inline void ColorP4uiv(Enum type, const Uint* color) {
-    detail::ptrColorP4uiv(type, color);
-}
-
-inline void CompileShader(Uint shader) {
-    detail::ptrCompileShader(shader);
-}
-
-inline void CompressedTexImage1D(Enum target, Int level, Enum internalformat, Sizei width, Int border, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data);
-}
-
-inline void CompressedTexImage2D(Enum target, Int level, Enum internalformat, Sizei width, Sizei height, Int border, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data);
-}
-
-inline void CompressedTexImage3D(Enum target, Int level, Enum internalformat, Sizei width, Sizei height, Sizei depth, Int border, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data);
-}
-
-inline void CompressedTexSubImage1D(Enum target, Int level, Int xoffset, Sizei width, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data);
-}
-
-inline void CompressedTexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
-}
-
-inline void CompressedTexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
-}
-
-inline void CompressedTextureSubImage1D(Uint texture, Int level, Int xoffset, Sizei width, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data);
-}
-
-inline void CompressedTextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data);
-}
-
-inline void CompressedTextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Sizei imageSize, const void* data) {
-    detail::ptrCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data);
-}
-
-inline void CopyBufferSubData(Enum readTarget, Enum writeTarget, Intptr readOffset, Intptr writeOffset, Sizeiptr size) {
-    detail::ptrCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size);
-}
-
-inline void CopyImageSubData(Uint srcName, Enum srcTarget, Int srcLevel, Int srcX, Int srcY, Int srcZ, Uint dstName, Enum dstTarget, Int dstLevel, Int dstX, Int dstY, Int dstZ, Sizei srcWidth, Sizei srcHeight, Sizei srcDepth) {
-    detail::ptrCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth);
-}
-
-inline void CopyNamedBufferSubData(Uint readBuffer, Uint writeBuffer, Intptr readOffset, Intptr writeOffset, Sizeiptr size) {
-    detail::ptrCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size);
-}
-
-inline void CopyTexImage1D(Enum target, Int level, Enum internalformat, Int x, Int y, Sizei width, Int border) {
-    detail::ptrCopyTexImage1D(target, level, internalformat, x, y, width, border);
-}
-
-inline void CopyTexImage2D(Enum target, Int level, Enum internalformat, Int x, Int y, Sizei width, Sizei height, Int border) {
-    detail::ptrCopyTexImage2D(target, level, internalformat, x, y, width, height, border);
-}
-
-inline void CopyTexSubImage1D(Enum target, Int level, Int xoffset, Int x, Int y, Sizei width) {
-    detail::ptrCopyTexSubImage1D(target, level, xoffset, x, y, width);
-}
-
-inline void CopyTexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height);
-}
-
-inline void CopyTexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height);
-}
-
-inline void CopyTextureSubImage1D(Uint texture, Int level, Int xoffset, Int x, Int y, Sizei width) {
-    detail::ptrCopyTextureSubImage1D(texture, level, xoffset, x, y, width);
-}
-
-inline void CopyTextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height);
-}
-
-inline void CopyTextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height);
-}
-
-inline void CreateBuffers(Sizei n, Uint* buffers) {
-    detail::ptrCreateBuffers(n, buffers);
-}
-
-inline void CreateFramebuffers(Sizei n, Uint* framebuffers) {
-    detail::ptrCreateFramebuffers(n, framebuffers);
-}
-
-inline Uint CreateProgram() {
-    return detail::ptrCreateProgram();
-}
-
-inline void CreateProgramPipelines(Sizei n, Uint* pipelines) {
-    detail::ptrCreateProgramPipelines(n, pipelines);
-}
-
-inline void CreateQueries(Enum target, Sizei n, Uint* ids) {
-    detail::ptrCreateQueries(target, n, ids);
-}
-
-inline void CreateRenderbuffers(Sizei n, Uint* renderbuffers) {
-    detail::ptrCreateRenderbuffers(n, renderbuffers);
-}
-
-inline void CreateSamplers(Sizei n, Uint* samplers) {
-    detail::ptrCreateSamplers(n, samplers);
-}
-
-inline Uint CreateShader(Enum type) {
-    return detail::ptrCreateShader(type);
-}
-
-inline Uint CreateShaderProgramv(Enum type, Sizei count, const Char** strings) {
-    return detail::ptrCreateShaderProgramv(type, count, strings);
-}
-
-inline void CreateTextures(Enum target, Sizei n, Uint* textures) {
-    detail::ptrCreateTextures(target, n, textures);
-}
-
-inline void CreateTransformFeedbacks(Sizei n, Uint* ids) {
-    detail::ptrCreateTransformFeedbacks(n, ids);
-}
-
-inline void CreateVertexArrays(Sizei n, Uint* arrays) {
-    detail::ptrCreateVertexArrays(n, arrays);
-}
-
-inline void CullFace(Enum mode) {
-    detail::ptrCullFace(mode);
-}
-
-inline void DebugMessageCallback(DebugProc callback, const void* userParam) {
-    detail::ptrDebugMessageCallback(callback, userParam);
-}
-
-inline void DebugMessageControl(Enum source, Enum type, Enum severity, Sizei count, const Uint* ids, Boolean enabled) {
-    detail::ptrDebugMessageControl(source, type, severity, count, ids, enabled);
-}
-
-inline void DebugMessageInsert(Enum source, Enum type, Uint id, Enum severity, Sizei length, const Char* buf) {
-    detail::ptrDebugMessageInsert(source, type, id, severity, length, buf);
-}
-
-inline void DeleteBuffers(Sizei n, const Uint* buffers) {
-    detail::ptrDeleteBuffers(n, buffers);
-}
-
-inline void DeleteFramebuffers(Sizei n, const Uint* framebuffers) {
-    detail::ptrDeleteFramebuffers(n, framebuffers);
-}
-
-inline void DeleteProgram(Uint program) {
-    detail::ptrDeleteProgram(program);
-}
-
-inline void DeleteProgramPipelines(Sizei n, const Uint* pipelines) {
-    detail::ptrDeleteProgramPipelines(n, pipelines);
-}
-
-inline void DeleteQueries(Sizei n, const Uint* ids) {
-    detail::ptrDeleteQueries(n, ids);
-}
-
-inline void DeleteRenderbuffers(Sizei n, const Uint* renderbuffers) {
-    detail::ptrDeleteRenderbuffers(n, renderbuffers);
-}
-
-inline void DeleteSamplers(Sizei count, const Uint* samplers) {
-    detail::ptrDeleteSamplers(count, samplers);
-}
-
-inline void DeleteShader(Uint shader) {
-    detail::ptrDeleteShader(shader);
-}
-
-inline void DeleteSync(Sync sync) {
-    detail::ptrDeleteSync(sync);
-}
-
-inline void DeleteTextures(Sizei n, const Uint* textures) {
-    detail::ptrDeleteTextures(n, textures);
-}
-
-inline void DeleteTransformFeedbacks(Sizei n, const Uint* ids) {
-    detail::ptrDeleteTransformFeedbacks(n, ids);
-}
-
-inline void DeleteVertexArrays(Sizei n, const Uint* arrays) {
-    detail::ptrDeleteVertexArrays(n, arrays);
-}
-
-inline void DepthFunc(Enum func) {
-    detail::ptrDepthFunc(func);
-}
-
-inline void DepthMask(Boolean flag) {
-    detail::ptrDepthMask(flag);
-}
-
-inline void DepthRange(Double n, Double f) {
-    detail::ptrDepthRange(n, f);
-}
-
-inline void DepthRangeArrayv(Uint first, Sizei count, const Double* v) {
-    detail::ptrDepthRangeArrayv(first, count, v);
-}
-
-inline void DepthRangeIndexed(Uint index, Double n, Double f) {
-    detail::ptrDepthRangeIndexed(index, n, f);
-}
-
-inline void DepthRangef(Float n, Float f) {
-    detail::ptrDepthRangef(n, f);
-}
-
-inline void DetachShader(Uint program, Uint shader) {
-    detail::ptrDetachShader(program, shader);
-}
-
-inline void Disable(Enum cap) {
-    detail::ptrDisable(cap);
-}
-
-inline void DisableVertexArrayAttrib(Uint vaobj, Uint index) {
-    detail::ptrDisableVertexArrayAttrib(vaobj, index);
-}
-
-inline void DisableVertexAttribArray(Uint index) {
-    detail::ptrDisableVertexAttribArray(index);
-}
-
-inline void Disablei(Enum target, Uint index) {
-    detail::ptrDisablei(target, index);
-}
-
-inline void DispatchCompute(Uint num_groups_x, Uint num_groups_y, Uint num_groups_z) {
-    detail::ptrDispatchCompute(num_groups_x, num_groups_y, num_groups_z);
-}
-
-inline void DispatchComputeIndirect(Intptr indirect) {
-    detail::ptrDispatchComputeIndirect(indirect);
-}
-
-inline void DrawArrays(Enum mode, Int first, Sizei count) {
-    detail::ptrDrawArrays(mode, first, count);
-}
-
-inline void DrawArraysIndirect(Enum mode, const void* indirect) {
-    detail::ptrDrawArraysIndirect(mode, indirect);
-}
-
-inline void DrawArraysInstanced(Enum mode, Int first, Sizei count, Sizei instancecount) {
-    detail::ptrDrawArraysInstanced(mode, first, count, instancecount);
-}
-
-inline void DrawArraysInstancedBaseInstance(Enum mode, Int first, Sizei count, Sizei instancecount, Uint baseinstance) {
-    detail::ptrDrawArraysInstancedBaseInstance(mode, first, count, instancecount, baseinstance);
-}
-
-inline void DrawBuffer(Enum buf) {
-    detail::ptrDrawBuffer(buf);
-}
-
-inline void DrawBuffers(Sizei n, const Enum* bufs) {
-    detail::ptrDrawBuffers(n, bufs);
-}
-
-inline void DrawElements(Enum mode, Sizei count, Enum type, const void* indices) {
-    detail::ptrDrawElements(mode, count, type, indices);
-}
-
-inline void DrawElementsBaseVertex(Enum mode, Sizei count, Enum type, const void* indices, Int basevertex) {
-    detail::ptrDrawElementsBaseVertex(mode, count, type, indices, basevertex);
-}
-
-inline void DrawElementsIndirect(Enum mode, Enum type, const void* indirect) {
-    detail::ptrDrawElementsIndirect(mode, type, indirect);
-}
-
-inline void DrawElementsInstanced(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount) {
-    detail::ptrDrawElementsInstanced(mode, count, type, indices, instancecount);
-}
-
-inline void DrawElementsInstancedBaseInstance(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Uint baseinstance) {
-    detail::ptrDrawElementsInstancedBaseInstance(mode, count, type, indices, instancecount, baseinstance);
-}
-
-inline void DrawElementsInstancedBaseVertex(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Int basevertex) {
-    detail::ptrDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex);
-}
-
-inline void DrawElementsInstancedBaseVertexBaseInstance(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Int basevertex, Uint baseinstance) {
-    detail::ptrDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, instancecount, basevertex, baseinstance);
-}
-
-inline void DrawRangeElements(Enum mode, Uint start, Uint end, Sizei count, Enum type, const void* indices) {
-    detail::ptrDrawRangeElements(mode, start, end, count, type, indices);
-}
-
-inline void DrawRangeElementsBaseVertex(Enum mode, Uint start, Uint end, Sizei count, Enum type, const void* indices, Int basevertex) {
-    detail::ptrDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex);
-}
-
-inline void DrawTransformFeedback(Enum mode, Uint id) {
-    detail::ptrDrawTransformFeedback(mode, id);
-}
-
-inline void DrawTransformFeedbackInstanced(Enum mode, Uint id, Sizei instancecount) {
-    detail::ptrDrawTransformFeedbackInstanced(mode, id, instancecount);
-}
-
-inline void DrawTransformFeedbackStream(Enum mode, Uint id, Uint stream) {
-    detail::ptrDrawTransformFeedbackStream(mode, id, stream);
-}
-
-inline void DrawTransformFeedbackStreamInstanced(Enum mode, Uint id, Uint stream, Sizei instancecount) {
-    detail::ptrDrawTransformFeedbackStreamInstanced(mode, id, stream, instancecount);
-}
-
-inline void Enable(Enum cap) {
-    detail::ptrEnable(cap);
-}
-
-inline void EnableVertexArrayAttrib(Uint vaobj, Uint index) {
-    detail::ptrEnableVertexArrayAttrib(vaobj, index);
-}
-
-inline void EnableVertexAttribArray(Uint index) {
-    detail::ptrEnableVertexAttribArray(index);
-}
-
-inline void Enablei(Enum target, Uint index) {
-    detail::ptrEnablei(target, index);
-}
-
-inline void EndConditionalRender() {
-    detail::ptrEndConditionalRender();
-}
-
-inline void EndQuery(Enum target) {
-    detail::ptrEndQuery(target);
-}
-
-inline void EndQueryIndexed(Enum target, Uint index) {
-    detail::ptrEndQueryIndexed(target, index);
-}
-
-inline void EndTransformFeedback() {
-    detail::ptrEndTransformFeedback();
-}
-
-inline Sync FenceSync(Enum condition, Bitfield flags) {
-    return detail::ptrFenceSync(condition, flags);
-}
-
-inline void Finish() {
-    detail::ptrFinish();
-}
-
-inline void Flush() {
-    detail::ptrFlush();
-}
-
-inline void FlushMappedBufferRange(Enum target, Intptr offset, Sizeiptr length) {
-    detail::ptrFlushMappedBufferRange(target, offset, length);
-}
-
-inline void FlushMappedNamedBufferRange(Uint buffer, Intptr offset, Sizeiptr length) {
-    detail::ptrFlushMappedNamedBufferRange(buffer, offset, length);
-}
-
-inline void FramebufferParameteri(Enum target, Enum pname, Int param) {
-    detail::ptrFramebufferParameteri(target, pname, param);
-}
-
-inline void FramebufferRenderbuffer(Enum target, Enum attachment, Enum renderbuffertarget, Uint renderbuffer) {
-    detail::ptrFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer);
-}
-
-inline void FramebufferTexture(Enum target, Enum attachment, Uint texture, Int level) {
-    detail::ptrFramebufferTexture(target, attachment, texture, level);
-}
-
-inline void FramebufferTexture1D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level) {
-    detail::ptrFramebufferTexture1D(target, attachment, textarget, texture, level);
-}
-
-inline void FramebufferTexture2D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level) {
-    detail::ptrFramebufferTexture2D(target, attachment, textarget, texture, level);
-}
-
-inline void FramebufferTexture3D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level, Int zoffset) {
-    detail::ptrFramebufferTexture3D(target, attachment, textarget, texture, level, zoffset);
-}
-
-inline void FramebufferTextureLayer(Enum target, Enum attachment, Uint texture, Int level, Int layer) {
-    detail::ptrFramebufferTextureLayer(target, attachment, texture, level, layer);
-}
-
-inline void FrontFace(Enum mode) {
-    detail::ptrFrontFace(mode);
-}
-
-inline void GenBuffers(Sizei n, Uint* buffers) {
-    detail::ptrGenBuffers(n, buffers);
-}
-
-inline void GenFramebuffers(Sizei n, Uint* framebuffers) {
-    detail::ptrGenFramebuffers(n, framebuffers);
-}
-
-inline void GenProgramPipelines(Sizei n, Uint* pipelines) {
-    detail::ptrGenProgramPipelines(n, pipelines);
-}
-
-inline void GenQueries(Sizei n, Uint* ids) {
-    detail::ptrGenQueries(n, ids);
-}
-
-inline void GenRenderbuffers(Sizei n, Uint* renderbuffers) {
-    detail::ptrGenRenderbuffers(n, renderbuffers);
-}
-
-inline void GenSamplers(Sizei count, Uint* samplers) {
-    detail::ptrGenSamplers(count, samplers);
-}
-
-inline void GenTextures(Sizei n, Uint* textures) {
-    detail::ptrGenTextures(n, textures);
-}
-
-inline void GenTransformFeedbacks(Sizei n, Uint* ids) {
-    detail::ptrGenTransformFeedbacks(n, ids);
-}
-
-inline void GenVertexArrays(Sizei n, Uint* arrays) {
-    detail::ptrGenVertexArrays(n, arrays);
-}
-
-inline void GenerateMipmap(Enum target) {
-    detail::ptrGenerateMipmap(target);
-}
-
-inline void GenerateTextureMipmap(Uint texture) {
-    detail::ptrGenerateTextureMipmap(texture);
-}
-
-inline void GetActiveAtomicCounterBufferiv(Uint program, Uint bufferIndex, Enum pname, Int* params) {
-    detail::ptrGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params);
-}
-
-inline void GetActiveAttrib(Uint program, Uint index, Sizei bufSize, Sizei* length, Int* size, Enum* type, Char* name) {
-    detail::ptrGetActiveAttrib(program, index, bufSize, length, size, type, name);
-}
-
-inline void GetActiveSubroutineName(Uint program, Enum shadertype, Uint index, Sizei bufSize, Sizei* length, Char* name) {
-    detail::ptrGetActiveSubroutineName(program, shadertype, index, bufSize, length, name);
-}
-
-inline void GetActiveSubroutineUniformName(Uint program, Enum shadertype, Uint index, Sizei bufSize, Sizei* length, Char* name) {
-    detail::ptrGetActiveSubroutineUniformName(program, shadertype, index, bufSize, length, name);
-}
-
-inline void GetActiveSubroutineUniformiv(Uint program, Enum shadertype, Uint index, Enum pname, Int* values) {
-    detail::ptrGetActiveSubroutineUniformiv(program, shadertype, index, pname, values);
-}
-
-inline void GetActiveUniform(Uint program, Uint index, Sizei bufSize, Sizei* length, Int* size, Enum* type, Char* name) {
-    detail::ptrGetActiveUniform(program, index, bufSize, length, size, type, name);
-}
-
-inline void GetActiveUniformBlockName(Uint program, Uint uniformBlockIndex, Sizei bufSize, Sizei* length, Char* uniformBlockName) {
-    detail::ptrGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName);
-}
-
-inline void GetActiveUniformBlockiv(Uint program, Uint uniformBlockIndex, Enum pname, Int* params) {
-    detail::ptrGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params);
-}
-
-inline void GetActiveUniformName(Uint program, Uint uniformIndex, Sizei bufSize, Sizei* length, Char* uniformName) {
-    detail::ptrGetActiveUniformName(program, uniformIndex, bufSize, length, uniformName);
-}
-
-inline void GetActiveUniformsiv(Uint program, Sizei uniformCount, const Uint* uniformIndices, Enum pname, Int* params) {
-    detail::ptrGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params);
-}
-
-inline void GetAttachedShaders(Uint program, Sizei maxCount, Sizei* count, Uint* shaders) {
-    detail::ptrGetAttachedShaders(program, maxCount, count, shaders);
-}
-
-inline Int GetAttribLocation(Uint program, const Char* name) {
-    return detail::ptrGetAttribLocation(program, name);
-}
-
-inline void GetBooleani_v(Enum target, Uint index, Boolean* data) {
-    detail::ptrGetBooleani_v(target, index, data);
-}
-
-inline void GetBooleanv(Enum pname, Boolean* data) {
-    detail::ptrGetBooleanv(pname, data);
-}
-
-inline void GetBufferParameteri64v(Enum target, Enum pname, Int64* params) {
-    detail::ptrGetBufferParameteri64v(target, pname, params);
-}
-
-inline void GetBufferParameteriv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetBufferParameteriv(target, pname, params);
-}
-
-inline void GetBufferPointerv(Enum target, Enum pname, void** params) {
-    detail::ptrGetBufferPointerv(target, pname, params);
-}
-
-inline void GetBufferSubData(Enum target, Intptr offset, Sizeiptr size, void* data) {
-    detail::ptrGetBufferSubData(target, offset, size, data);
-}
-
-inline void GetCompressedTexImage(Enum target, Int level, void* img) {
-    detail::ptrGetCompressedTexImage(target, level, img);
-}
-
-inline void GetCompressedTextureImage(Uint texture, Int level, Sizei bufSize, void* pixels) {
-    detail::ptrGetCompressedTextureImage(texture, level, bufSize, pixels);
-}
-
-inline void GetCompressedTextureSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Sizei bufSize, void* pixels) {
-    detail::ptrGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels);
-}
-
-inline Uint GetDebugMessageLog(Uint count, Sizei bufSize, Enum* sources, Enum* types, Uint* ids, Enum* severities, Sizei* lengths, Char* messageLog) {
-    return detail::ptrGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog);
-}
-
-inline void GetDoublei_v(Enum target, Uint index, Double* data) {
-    detail::ptrGetDoublei_v(target, index, data);
-}
-
-inline void GetDoublev(Enum pname, Double* data) {
-    detail::ptrGetDoublev(pname, data);
-}
-
-inline Enum GetError() {
-    return detail::ptrGetError();
-}
-
-inline void GetFloati_v(Enum target, Uint index, Float* data) {
-    detail::ptrGetFloati_v(target, index, data);
-}
-
-inline void GetFloatv(Enum pname, Float* data) {
-    detail::ptrGetFloatv(pname, data);
-}
-
-inline Int GetFragDataIndex(Uint program, const Char* name) {
-    return detail::ptrGetFragDataIndex(program, name);
-}
-
-inline Int GetFragDataLocation(Uint program, const Char* name) {
-    return detail::ptrGetFragDataLocation(program, name);
-}
-
-inline void GetFramebufferAttachmentParameteriv(Enum target, Enum attachment, Enum pname, Int* params) {
-    detail::ptrGetFramebufferAttachmentParameteriv(target, attachment, pname, params);
-}
-
-inline void GetFramebufferParameteriv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetFramebufferParameteriv(target, pname, params);
-}
-
-inline Enum GetGraphicsResetStatus() {
-    return detail::ptrGetGraphicsResetStatus();
-}
-
-inline void GetInteger64i_v(Enum target, Uint index, Int64* data) {
-    detail::ptrGetInteger64i_v(target, index, data);
-}
-
-inline void GetInteger64v(Enum pname, Int64* data) {
-    detail::ptrGetInteger64v(pname, data);
-}
-
-inline void GetIntegeri_v(Enum target, Uint index, Int* data) {
-    detail::ptrGetIntegeri_v(target, index, data);
-}
-
-inline void GetIntegerv(Enum pname, Int* data) {
-    detail::ptrGetIntegerv(pname, data);
-}
-
-inline void GetInternalformati64v(Enum target, Enum internalformat, Enum pname, Sizei count, Int64* params) {
-    detail::ptrGetInternalformati64v(target, internalformat, pname, count, params);
-}
-
-inline void GetInternalformativ(Enum target, Enum internalformat, Enum pname, Sizei count, Int* params) {
-    detail::ptrGetInternalformativ(target, internalformat, pname, count, params);
-}
-
-inline void GetMultisamplefv(Enum pname, Uint index, Float* val) {
-    detail::ptrGetMultisamplefv(pname, index, val);
-}
-
-inline void GetNamedBufferParameteri64v(Uint buffer, Enum pname, Int64* params) {
-    detail::ptrGetNamedBufferParameteri64v(buffer, pname, params);
-}
-
-inline void GetNamedBufferParameteriv(Uint buffer, Enum pname, Int* params) {
-    detail::ptrGetNamedBufferParameteriv(buffer, pname, params);
-}
-
-inline void GetNamedBufferPointerv(Uint buffer, Enum pname, void** params) {
-    detail::ptrGetNamedBufferPointerv(buffer, pname, params);
-}
-
-inline void GetNamedBufferSubData(Uint buffer, Intptr offset, Sizeiptr size, void* data) {
-    detail::ptrGetNamedBufferSubData(buffer, offset, size, data);
-}
-
-inline void GetNamedFramebufferAttachmentParameteriv(Uint framebuffer, Enum attachment, Enum pname, Int* params) {
-    detail::ptrGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params);
-}
-
-inline void GetNamedFramebufferParameteriv(Uint framebuffer, Enum pname, Int* param) {
-    detail::ptrGetNamedFramebufferParameteriv(framebuffer, pname, param);
-}
-
-inline void GetNamedRenderbufferParameteriv(Uint renderbuffer, Enum pname, Int* params) {
-    detail::ptrGetNamedRenderbufferParameteriv(renderbuffer, pname, params);
-}
-
-inline void GetObjectLabel(Enum identifier, Uint name, Sizei bufSize, Sizei* length, Char* label) {
-    detail::ptrGetObjectLabel(identifier, name, bufSize, length, label);
-}
-
-inline void GetObjectPtrLabel(const void* ptr, Sizei bufSize, Sizei* length, Char* label) {
-    detail::ptrGetObjectPtrLabel(ptr, bufSize, length, label);
-}
-
-inline void GetPointerv(Enum pname, void** params) {
-    detail::ptrGetPointerv(pname, params);
-}
-
-inline void GetProgramBinary(Uint program, Sizei bufSize, Sizei* length, Enum* binaryFormat, void* binary) {
-    detail::ptrGetProgramBinary(program, bufSize, length, binaryFormat, binary);
-}
-
-inline void GetProgramInfoLog(Uint program, Sizei bufSize, Sizei* length, Char* infoLog) {
-    detail::ptrGetProgramInfoLog(program, bufSize, length, infoLog);
-}
-
-inline void GetProgramInterfaceiv(Uint program, Enum programInterface, Enum pname, Int* params) {
-    detail::ptrGetProgramInterfaceiv(program, programInterface, pname, params);
-}
-
-inline void GetProgramPipelineInfoLog(Uint pipeline, Sizei bufSize, Sizei* length, Char* infoLog) {
-    detail::ptrGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog);
-}
-
-inline void GetProgramPipelineiv(Uint pipeline, Enum pname, Int* params) {
-    detail::ptrGetProgramPipelineiv(pipeline, pname, params);
-}
-
-inline Uint GetProgramResourceIndex(Uint program, Enum programInterface, const Char* name) {
-    return detail::ptrGetProgramResourceIndex(program, programInterface, name);
-}
-
-inline Int GetProgramResourceLocation(Uint program, Enum programInterface, const Char* name) {
-    return detail::ptrGetProgramResourceLocation(program, programInterface, name);
-}
-
-inline Int GetProgramResourceLocationIndex(Uint program, Enum programInterface, const Char* name) {
-    return detail::ptrGetProgramResourceLocationIndex(program, programInterface, name);
-}
-
-inline void GetProgramResourceName(Uint program, Enum programInterface, Uint index, Sizei bufSize, Sizei* length, Char* name) {
-    detail::ptrGetProgramResourceName(program, programInterface, index, bufSize, length, name);
-}
-
-inline void GetProgramResourceiv(Uint program, Enum programInterface, Uint index, Sizei propCount, const Enum* props, Sizei count, Sizei* length, Int* params) {
-    detail::ptrGetProgramResourceiv(program, programInterface, index, propCount, props, count, length, params);
-}
-
-inline void GetProgramStageiv(Uint program, Enum shadertype, Enum pname, Int* values) {
-    detail::ptrGetProgramStageiv(program, shadertype, pname, values);
-}
-
-inline void GetProgramiv(Uint program, Enum pname, Int* params) {
-    detail::ptrGetProgramiv(program, pname, params);
-}
-
-inline void GetQueryBufferObjecti64v(Uint id, Uint buffer, Enum pname, Intptr offset) {
-    detail::ptrGetQueryBufferObjecti64v(id, buffer, pname, offset);
-}
-
-inline void GetQueryBufferObjectiv(Uint id, Uint buffer, Enum pname, Intptr offset) {
-    detail::ptrGetQueryBufferObjectiv(id, buffer, pname, offset);
-}
-
-inline void GetQueryBufferObjectui64v(Uint id, Uint buffer, Enum pname, Intptr offset) {
-    detail::ptrGetQueryBufferObjectui64v(id, buffer, pname, offset);
-}
-
-inline void GetQueryBufferObjectuiv(Uint id, Uint buffer, Enum pname, Intptr offset) {
-    detail::ptrGetQueryBufferObjectuiv(id, buffer, pname, offset);
-}
-
-inline void GetQueryIndexediv(Enum target, Uint index, Enum pname, Int* params) {
-    detail::ptrGetQueryIndexediv(target, index, pname, params);
-}
-
-inline void GetQueryObjecti64v(Uint id, Enum pname, Int64* params) {
-    detail::ptrGetQueryObjecti64v(id, pname, params);
-}
-
-inline void GetQueryObjectiv(Uint id, Enum pname, Int* params) {
-    detail::ptrGetQueryObjectiv(id, pname, params);
-}
-
-inline void GetQueryObjectui64v(Uint id, Enum pname, Uint64* params) {
-    detail::ptrGetQueryObjectui64v(id, pname, params);
-}
-
-inline void GetQueryObjectuiv(Uint id, Enum pname, Uint* params) {
-    detail::ptrGetQueryObjectuiv(id, pname, params);
-}
-
-inline void GetQueryiv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetQueryiv(target, pname, params);
-}
-
-inline void GetRenderbufferParameteriv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetRenderbufferParameteriv(target, pname, params);
-}
-
-inline void GetSamplerParameterIiv(Uint sampler, Enum pname, Int* params) {
-    detail::ptrGetSamplerParameterIiv(sampler, pname, params);
-}
-
-inline void GetSamplerParameterIuiv(Uint sampler, Enum pname, Uint* params) {
-    detail::ptrGetSamplerParameterIuiv(sampler, pname, params);
-}
-
-inline void GetSamplerParameterfv(Uint sampler, Enum pname, Float* params) {
-    detail::ptrGetSamplerParameterfv(sampler, pname, params);
-}
-
-inline void GetSamplerParameteriv(Uint sampler, Enum pname, Int* params) {
-    detail::ptrGetSamplerParameteriv(sampler, pname, params);
-}
-
-inline void GetShaderInfoLog(Uint shader, Sizei bufSize, Sizei* length, Char* infoLog) {
-    detail::ptrGetShaderInfoLog(shader, bufSize, length, infoLog);
-}
-
-inline void GetShaderPrecisionFormat(Enum shadertype, Enum precisiontype, Int* range, Int* precision) {
-    detail::ptrGetShaderPrecisionFormat(shadertype, precisiontype, range, precision);
-}
-
-inline void GetShaderSource(Uint shader, Sizei bufSize, Sizei* length, Char* source) {
-    detail::ptrGetShaderSource(shader, bufSize, length, source);
-}
-
-inline void GetShaderiv(Uint shader, Enum pname, Int* params) {
-    detail::ptrGetShaderiv(shader, pname, params);
-}
-
-inline const Ubyte* GetString(Enum name) {
-    return detail::ptrGetString(name);
-}
-
-inline const Ubyte* GetStringi(Enum name, Uint index) {
-    return detail::ptrGetStringi(name, index);
-}
-
-inline Uint GetSubroutineIndex(Uint program, Enum shadertype, const Char* name) {
-    return detail::ptrGetSubroutineIndex(program, shadertype, name);
-}
-
-inline Int GetSubroutineUniformLocation(Uint program, Enum shadertype, const Char* name) {
-    return detail::ptrGetSubroutineUniformLocation(program, shadertype, name);
-}
-
-inline void GetSynciv(Sync sync, Enum pname, Sizei count, Sizei* length, Int* values) {
-    detail::ptrGetSynciv(sync, pname, count, length, values);
-}
-
-inline void GetTexImage(Enum target, Int level, Enum format, Enum type, void* pixels) {
-    detail::ptrGetTexImage(target, level, format, type, pixels);
-}
-
-inline void GetTexLevelParameterfv(Enum target, Int level, Enum pname, Float* params) {
-    detail::ptrGetTexLevelParameterfv(target, level, pname, params);
-}
-
-inline void GetTexLevelParameteriv(Enum target, Int level, Enum pname, Int* params) {
-    detail::ptrGetTexLevelParameteriv(target, level, pname, params);
-}
-
-inline void GetTexParameterIiv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetTexParameterIiv(target, pname, params);
-}
-
-inline void GetTexParameterIuiv(Enum target, Enum pname, Uint* params) {
-    detail::ptrGetTexParameterIuiv(target, pname, params);
-}
-
-inline void GetTexParameterfv(Enum target, Enum pname, Float* params) {
-    detail::ptrGetTexParameterfv(target, pname, params);
-}
-
-inline void GetTexParameteriv(Enum target, Enum pname, Int* params) {
-    detail::ptrGetTexParameteriv(target, pname, params);
-}
-
-inline void GetTextureImage(Uint texture, Int level, Enum format, Enum type, Sizei bufSize, void* pixels) {
-    detail::ptrGetTextureImage(texture, level, format, type, bufSize, pixels);
-}
-
-inline void GetTextureLevelParameterfv(Uint texture, Int level, Enum pname, Float* params) {
-    detail::ptrGetTextureLevelParameterfv(texture, level, pname, params);
-}
-
-inline void GetTextureLevelParameteriv(Uint texture, Int level, Enum pname, Int* params) {
-    detail::ptrGetTextureLevelParameteriv(texture, level, pname, params);
-}
-
-inline void GetTextureParameterIiv(Uint texture, Enum pname, Int* params) {
-    detail::ptrGetTextureParameterIiv(texture, pname, params);
-}
-
-inline void GetTextureParameterIuiv(Uint texture, Enum pname, Uint* params) {
-    detail::ptrGetTextureParameterIuiv(texture, pname, params);
-}
-
-inline void GetTextureParameterfv(Uint texture, Enum pname, Float* params) {
-    detail::ptrGetTextureParameterfv(texture, pname, params);
-}
-
-inline void GetTextureParameteriv(Uint texture, Enum pname, Int* params) {
-    detail::ptrGetTextureParameteriv(texture, pname, params);
-}
-
-inline void GetTextureSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, Sizei bufSize, void* pixels) {
-    detail::ptrGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels);
-}
-
-inline void GetTransformFeedbackVarying(Uint program, Uint index, Sizei bufSize, Sizei* length, Sizei* size, Enum* type, Char* name) {
-    detail::ptrGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name);
-}
-
-inline void GetTransformFeedbacki64_v(Uint xfb, Enum pname, Uint index, Int64* param) {
-    detail::ptrGetTransformFeedbacki64_v(xfb, pname, index, param);
-}
-
-inline void GetTransformFeedbacki_v(Uint xfb, Enum pname, Uint index, Int* param) {
-    detail::ptrGetTransformFeedbacki_v(xfb, pname, index, param);
-}
-
-inline void GetTransformFeedbackiv(Uint xfb, Enum pname, Int* param) {
-    detail::ptrGetTransformFeedbackiv(xfb, pname, param);
-}
-
-inline Uint GetUniformBlockIndex(Uint program, const Char* uniformBlockName) {
-    return detail::ptrGetUniformBlockIndex(program, uniformBlockName);
-}
-
-inline void GetUniformIndices(Uint program, Sizei uniformCount, const Char** uniformNames, Uint* uniformIndices) {
-    detail::ptrGetUniformIndices(program, uniformCount, uniformNames, uniformIndices);
-}
-
-inline Int GetUniformLocation(Uint program, const Char* name) {
-    return detail::ptrGetUniformLocation(program, name);
-}
-
-inline void GetUniformSubroutineuiv(Enum shadertype, Int location, Uint* params) {
-    detail::ptrGetUniformSubroutineuiv(shadertype, location, params);
-}
-
-inline void GetUniformdv(Uint program, Int location, Double* params) {
-    detail::ptrGetUniformdv(program, location, params);
-}
-
-inline void GetUniformfv(Uint program, Int location, Float* params) {
-    detail::ptrGetUniformfv(program, location, params);
-}
-
-inline void GetUniformiv(Uint program, Int location, Int* params) {
-    detail::ptrGetUniformiv(program, location, params);
-}
-
-inline void GetUniformuiv(Uint program, Int location, Uint* params) {
-    detail::ptrGetUniformuiv(program, location, params);
-}
-
-inline void GetVertexArrayIndexed64iv(Uint vaobj, Uint index, Enum pname, Int64* param) {
-    detail::ptrGetVertexArrayIndexed64iv(vaobj, index, pname, param);
-}
-
-inline void GetVertexArrayIndexediv(Uint vaobj, Uint index, Enum pname, Int* param) {
-    detail::ptrGetVertexArrayIndexediv(vaobj, index, pname, param);
-}
-
-inline void GetVertexArrayiv(Uint vaobj, Enum pname, Int* param) {
-    detail::ptrGetVertexArrayiv(vaobj, pname, param);
-}
-
-inline void GetVertexAttribIiv(Uint index, Enum pname, Int* params) {
-    detail::ptrGetVertexAttribIiv(index, pname, params);
-}
-
-inline void GetVertexAttribIuiv(Uint index, Enum pname, Uint* params) {
-    detail::ptrGetVertexAttribIuiv(index, pname, params);
-}
-
-inline void GetVertexAttribLdv(Uint index, Enum pname, Double* params) {
-    detail::ptrGetVertexAttribLdv(index, pname, params);
-}
-
-inline void GetVertexAttribPointerv(Uint index, Enum pname, void** pointer) {
-    detail::ptrGetVertexAttribPointerv(index, pname, pointer);
-}
-
-inline void GetVertexAttribdv(Uint index, Enum pname, Double* params) {
-    detail::ptrGetVertexAttribdv(index, pname, params);
-}
-
-inline void GetVertexAttribfv(Uint index, Enum pname, Float* params) {
-    detail::ptrGetVertexAttribfv(index, pname, params);
-}
-
-inline void GetVertexAttribiv(Uint index, Enum pname, Int* params) {
-    detail::ptrGetVertexAttribiv(index, pname, params);
-}
-
-inline void GetnColorTable(Enum target, Enum format, Enum type, Sizei bufSize, void* table) {
-    detail::ptrGetnColorTable(target, format, type, bufSize, table);
-}
-
-inline void GetnCompressedTexImage(Enum target, Int lod, Sizei bufSize, void* pixels) {
-    detail::ptrGetnCompressedTexImage(target, lod, bufSize, pixels);
-}
-
-inline void GetnConvolutionFilter(Enum target, Enum format, Enum type, Sizei bufSize, void* image) {
-    detail::ptrGetnConvolutionFilter(target, format, type, bufSize, image);
-}
-
-inline void GetnHistogram(Enum target, Boolean reset, Enum format, Enum type, Sizei bufSize, void* values) {
-    detail::ptrGetnHistogram(target, reset, format, type, bufSize, values);
-}
-
-inline void GetnMapdv(Enum target, Enum query, Sizei bufSize, Double* v) {
-    detail::ptrGetnMapdv(target, query, bufSize, v);
-}
-
-inline void GetnMapfv(Enum target, Enum query, Sizei bufSize, Float* v) {
-    detail::ptrGetnMapfv(target, query, bufSize, v);
-}
-
-inline void GetnMapiv(Enum target, Enum query, Sizei bufSize, Int* v) {
-    detail::ptrGetnMapiv(target, query, bufSize, v);
-}
-
-inline void GetnMinmax(Enum target, Boolean reset, Enum format, Enum type, Sizei bufSize, void* values) {
-    detail::ptrGetnMinmax(target, reset, format, type, bufSize, values);
-}
-
-inline void GetnPixelMapfv(Enum map, Sizei bufSize, Float* values) {
-    detail::ptrGetnPixelMapfv(map, bufSize, values);
-}
-
-inline void GetnPixelMapuiv(Enum map, Sizei bufSize, Uint* values) {
-    detail::ptrGetnPixelMapuiv(map, bufSize, values);
-}
-
-inline void GetnPixelMapusv(Enum map, Sizei bufSize, Ushort* values) {
-    detail::ptrGetnPixelMapusv(map, bufSize, values);
-}
-
-inline void GetnPolygonStipple(Sizei bufSize, Ubyte* pattern) {
-    detail::ptrGetnPolygonStipple(bufSize, pattern);
-}
-
-inline void GetnSeparableFilter(Enum target, Enum format, Enum type, Sizei rowBufSize, void* row, Sizei columnBufSize, void* column, void* span) {
-    detail::ptrGetnSeparableFilter(target, format, type, rowBufSize, row, columnBufSize, column, span);
-}
-
-inline void GetnTexImage(Enum target, Int level, Enum format, Enum type, Sizei bufSize, void* pixels) {
-    detail::ptrGetnTexImage(target, level, format, type, bufSize, pixels);
-}
-
-inline void GetnUniformdv(Uint program, Int location, Sizei bufSize, Double* params) {
-    detail::ptrGetnUniformdv(program, location, bufSize, params);
-}
-
-inline void GetnUniformfv(Uint program, Int location, Sizei bufSize, Float* params) {
-    detail::ptrGetnUniformfv(program, location, bufSize, params);
-}
-
-inline void GetnUniformiv(Uint program, Int location, Sizei bufSize, Int* params) {
-    detail::ptrGetnUniformiv(program, location, bufSize, params);
-}
-
-inline void GetnUniformuiv(Uint program, Int location, Sizei bufSize, Uint* params) {
-    detail::ptrGetnUniformuiv(program, location, bufSize, params);
-}
-
-inline void Hint(Enum target, Enum mode) {
-    detail::ptrHint(target, mode);
-}
-
-inline void InvalidateBufferData(Uint buffer) {
-    detail::ptrInvalidateBufferData(buffer);
-}
-
-inline void InvalidateBufferSubData(Uint buffer, Intptr offset, Sizeiptr length) {
-    detail::ptrInvalidateBufferSubData(buffer, offset, length);
-}
-
-inline void InvalidateFramebuffer(Enum target, Sizei numAttachments, const Enum* attachments) {
-    detail::ptrInvalidateFramebuffer(target, numAttachments, attachments);
-}
-
-inline void InvalidateNamedFramebufferData(Uint framebuffer, Sizei numAttachments, const Enum* attachments) {
-    detail::ptrInvalidateNamedFramebufferData(framebuffer, numAttachments, attachments);
-}
-
-inline void InvalidateNamedFramebufferSubData(Uint framebuffer, Sizei numAttachments, const Enum* attachments, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrInvalidateNamedFramebufferSubData(framebuffer, numAttachments, attachments, x, y, width, height);
-}
-
-inline void InvalidateSubFramebuffer(Enum target, Sizei numAttachments, const Enum* attachments, Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height);
-}
-
-inline void InvalidateTexImage(Uint texture, Int level) {
-    detail::ptrInvalidateTexImage(texture, level);
-}
-
-inline void InvalidateTexSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth) {
-    detail::ptrInvalidateTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth);
-}
-
-inline Boolean IsBuffer(Uint buffer) {
-    return detail::ptrIsBuffer(buffer);
-}
-
-inline Boolean IsEnabled(Enum cap) {
-    return detail::ptrIsEnabled(cap);
-}
-
-inline Boolean IsEnabledi(Enum target, Uint index) {
-    return detail::ptrIsEnabledi(target, index);
-}
-
-inline Boolean IsFramebuffer(Uint framebuffer) {
-    return detail::ptrIsFramebuffer(framebuffer);
-}
-
-inline Boolean IsProgram(Uint program) {
-    return detail::ptrIsProgram(program);
-}
-
-inline Boolean IsProgramPipeline(Uint pipeline) {
-    return detail::ptrIsProgramPipeline(pipeline);
-}
-
-inline Boolean IsQuery(Uint id) {
-    return detail::ptrIsQuery(id);
-}
-
-inline Boolean IsRenderbuffer(Uint renderbuffer) {
-    return detail::ptrIsRenderbuffer(renderbuffer);
-}
-
-inline Boolean IsSampler(Uint sampler) {
-    return detail::ptrIsSampler(sampler);
-}
-
-inline Boolean IsShader(Uint shader) {
-    return detail::ptrIsShader(shader);
-}
-
-inline Boolean IsSync(Sync sync) {
-    return detail::ptrIsSync(sync);
-}
-
-inline Boolean IsTexture(Uint texture) {
-    return detail::ptrIsTexture(texture);
-}
-
-inline Boolean IsTransformFeedback(Uint id) {
-    return detail::ptrIsTransformFeedback(id);
-}
-
-inline Boolean IsVertexArray(Uint array) {
-    return detail::ptrIsVertexArray(array);
-}
-
-inline void LineWidth(Float width) {
-    detail::ptrLineWidth(width);
-}
-
-inline void LinkProgram(Uint program) {
-    detail::ptrLinkProgram(program);
-}
-
-inline void LogicOp(Enum opcode) {
-    detail::ptrLogicOp(opcode);
-}
-
-inline void* MapBuffer(Enum target, Enum access) {
-    return detail::ptrMapBuffer(target, access);
-}
-
-inline void* MapBufferRange(Enum target, Intptr offset, Sizeiptr length, Bitfield access) {
-    return detail::ptrMapBufferRange(target, offset, length, access);
-}
-
-inline void* MapNamedBuffer(Uint buffer, Enum access) {
-    return detail::ptrMapNamedBuffer(buffer, access);
-}
-
-inline void* MapNamedBufferRange(Uint buffer, Intptr offset, Sizeiptr length, Bitfield access) {
-    return detail::ptrMapNamedBufferRange(buffer, offset, length, access);
-}
-
-inline void MemoryBarrier(Bitfield barriers) {
-    detail::ptrMemoryBarrier(barriers);
-}
-
-inline void MemoryBarrierByRegion(Bitfield barriers) {
-    detail::ptrMemoryBarrierByRegion(barriers);
-}
-
-inline void MinSampleShading(Float value) {
-    detail::ptrMinSampleShading(value);
-}
-
-inline void MultiDrawArrays(Enum mode, const Int* first, const Sizei* count, Sizei drawcount) {
-    detail::ptrMultiDrawArrays(mode, first, count, drawcount);
-}
-
-inline void MultiDrawArraysIndirect(Enum mode, const void* indirect, Sizei drawcount, Sizei stride) {
-    detail::ptrMultiDrawArraysIndirect(mode, indirect, drawcount, stride);
-}
-
-inline void MultiDrawArraysIndirectCount(Enum mode, const void* indirect, Intptr drawcount, Sizei maxdrawcount, Sizei stride) {
-    detail::ptrMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride);
-}
-
-inline void MultiDrawElements(Enum mode, const Sizei* count, Enum type, const void** indices, Sizei drawcount) {
-    detail::ptrMultiDrawElements(mode, count, type, indices, drawcount);
-}
-
-inline void MultiDrawElementsBaseVertex(Enum mode, const Sizei* count, Enum type, const void** indices, Sizei drawcount, const Int* basevertex) {
-    detail::ptrMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex);
-}
-
-inline void MultiDrawElementsIndirect(Enum mode, Enum type, const void* indirect, Sizei drawcount, Sizei stride) {
-    detail::ptrMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride);
-}
-
-inline void MultiDrawElementsIndirectCount(Enum mode, Enum type, const void* indirect, Intptr drawcount, Sizei maxdrawcount, Sizei stride) {
-    detail::ptrMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride);
-}
-
-inline void MultiTexCoordP1ui(Enum texture, Enum type, Uint coords) {
-    detail::ptrMultiTexCoordP1ui(texture, type, coords);
-}
-
-inline void MultiTexCoordP1uiv(Enum texture, Enum type, const Uint* coords) {
-    detail::ptrMultiTexCoordP1uiv(texture, type, coords);
-}
-
-inline void MultiTexCoordP2ui(Enum texture, Enum type, Uint coords) {
-    detail::ptrMultiTexCoordP2ui(texture, type, coords);
-}
-
-inline void MultiTexCoordP2uiv(Enum texture, Enum type, const Uint* coords) {
-    detail::ptrMultiTexCoordP2uiv(texture, type, coords);
-}
-
-inline void MultiTexCoordP3ui(Enum texture, Enum type, Uint coords) {
-    detail::ptrMultiTexCoordP3ui(texture, type, coords);
-}
-
-inline void MultiTexCoordP3uiv(Enum texture, Enum type, const Uint* coords) {
-    detail::ptrMultiTexCoordP3uiv(texture, type, coords);
-}
-
-inline void MultiTexCoordP4ui(Enum texture, Enum type, Uint coords) {
-    detail::ptrMultiTexCoordP4ui(texture, type, coords);
-}
-
-inline void MultiTexCoordP4uiv(Enum texture, Enum type, const Uint* coords) {
-    detail::ptrMultiTexCoordP4uiv(texture, type, coords);
-}
-
-inline void NamedBufferData(Uint buffer, Sizeiptr size, const void* data, Enum usage) {
-    detail::ptrNamedBufferData(buffer, size, data, usage);
-}
-
-inline void NamedBufferStorage(Uint buffer, Sizeiptr size, const void* data, Bitfield flags) {
-    detail::ptrNamedBufferStorage(buffer, size, data, flags);
-}
-
-inline void NamedBufferSubData(Uint buffer, Intptr offset, Sizeiptr size, const void* data) {
-    detail::ptrNamedBufferSubData(buffer, offset, size, data);
-}
-
-inline void NamedFramebufferDrawBuffer(Uint framebuffer, Enum buf) {
-    detail::ptrNamedFramebufferDrawBuffer(framebuffer, buf);
-}
-
-inline void NamedFramebufferDrawBuffers(Uint framebuffer, Sizei n, const Enum* bufs) {
-    detail::ptrNamedFramebufferDrawBuffers(framebuffer, n, bufs);
-}
-
-inline void NamedFramebufferParameteri(Uint framebuffer, Enum pname, Int param) {
-    detail::ptrNamedFramebufferParameteri(framebuffer, pname, param);
-}
-
-inline void NamedFramebufferReadBuffer(Uint framebuffer, Enum src) {
-    detail::ptrNamedFramebufferReadBuffer(framebuffer, src);
-}
-
-inline void NamedFramebufferRenderbuffer(Uint framebuffer, Enum attachment, Enum renderbuffertarget, Uint renderbuffer) {
-    detail::ptrNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer);
-}
-
-inline void NamedFramebufferTexture(Uint framebuffer, Enum attachment, Uint texture, Int level) {
-    detail::ptrNamedFramebufferTexture(framebuffer, attachment, texture, level);
-}
-
-inline void NamedFramebufferTextureLayer(Uint framebuffer, Enum attachment, Uint texture, Int level, Int layer) {
-    detail::ptrNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer);
-}
-
-inline void NamedRenderbufferStorage(Uint renderbuffer, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrNamedRenderbufferStorage(renderbuffer, internalformat, width, height);
-}
-
-inline void NamedRenderbufferStorageMultisample(Uint renderbuffer, Sizei samples, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height);
-}
-
-inline void NormalP3ui(Enum type, Uint coords) {
-    detail::ptrNormalP3ui(type, coords);
-}
-
-inline void NormalP3uiv(Enum type, const Uint* coords) {
-    detail::ptrNormalP3uiv(type, coords);
-}
-
-inline void ObjectLabel(Enum identifier, Uint name, Sizei length, const Char* label) {
-    detail::ptrObjectLabel(identifier, name, length, label);
-}
-
-inline void ObjectPtrLabel(const void* ptr, Sizei length, const Char* label) {
-    detail::ptrObjectPtrLabel(ptr, length, label);
-}
-
-inline void PatchParameterfv(Enum pname, const Float* values) {
-    detail::ptrPatchParameterfv(pname, values);
-}
-
-inline void PatchParameteri(Enum pname, Int value) {
-    detail::ptrPatchParameteri(pname, value);
-}
-
-inline void PauseTransformFeedback() {
-    detail::ptrPauseTransformFeedback();
-}
-
-inline void PixelStoref(Enum pname, Float param) {
-    detail::ptrPixelStoref(pname, param);
-}
-
-inline void PixelStorei(Enum pname, Int param) {
-    detail::ptrPixelStorei(pname, param);
-}
-
-inline void PointParameterf(Enum pname, Float param) {
-    detail::ptrPointParameterf(pname, param);
-}
-
-inline void PointParameterfv(Enum pname, const Float* params) {
-    detail::ptrPointParameterfv(pname, params);
-}
-
-inline void PointParameteri(Enum pname, Int param) {
-    detail::ptrPointParameteri(pname, param);
-}
-
-inline void PointParameteriv(Enum pname, const Int* params) {
-    detail::ptrPointParameteriv(pname, params);
-}
-
-inline void PointSize(Float size) {
-    detail::ptrPointSize(size);
-}
-
-inline void PolygonMode(Enum face, Enum mode) {
-    detail::ptrPolygonMode(face, mode);
-}
-
-inline void PolygonOffset(Float factor, Float units) {
-    detail::ptrPolygonOffset(factor, units);
-}
-
-inline void PolygonOffsetClamp(Float factor, Float units, Float clamp) {
-    detail::ptrPolygonOffsetClamp(factor, units, clamp);
-}
-
-inline void PopDebugGroup() {
-    detail::ptrPopDebugGroup();
-}
-
-inline void PrimitiveRestartIndex(Uint index) {
-    detail::ptrPrimitiveRestartIndex(index);
-}
-
-inline void ProgramBinary(Uint program, Enum binaryFormat, const void* binary, Sizei length) {
-    detail::ptrProgramBinary(program, binaryFormat, binary, length);
-}
-
-inline void ProgramParameteri(Uint program, Enum pname, Int value) {
-    detail::ptrProgramParameteri(program, pname, value);
-}
-
-inline void ProgramUniform1d(Uint program, Int location, Double v0) {
-    detail::ptrProgramUniform1d(program, location, v0);
-}
-
-inline void ProgramUniform1dv(Uint program, Int location, Sizei count, const Double* value) {
-    detail::ptrProgramUniform1dv(program, location, count, value);
-}
-
-inline void ProgramUniform1f(Uint program, Int location, Float v0) {
-    detail::ptrProgramUniform1f(program, location, v0);
-}
-
-inline void ProgramUniform1fv(Uint program, Int location, Sizei count, const Float* value) {
-    detail::ptrProgramUniform1fv(program, location, count, value);
-}
-
-inline void ProgramUniform1i(Uint program, Int location, Int v0) {
-    detail::ptrProgramUniform1i(program, location, v0);
-}
-
-inline void ProgramUniform1iv(Uint program, Int location, Sizei count, const Int* value) {
-    detail::ptrProgramUniform1iv(program, location, count, value);
-}
-
-inline void ProgramUniform1ui(Uint program, Int location, Uint v0) {
-    detail::ptrProgramUniform1ui(program, location, v0);
-}
-
-inline void ProgramUniform1uiv(Uint program, Int location, Sizei count, const Uint* value) {
-    detail::ptrProgramUniform1uiv(program, location, count, value);
-}
-
-inline void ProgramUniform2d(Uint program, Int location, Double v0, Double v1) {
-    detail::ptrProgramUniform2d(program, location, v0, v1);
-}
-
-inline void ProgramUniform2dv(Uint program, Int location, Sizei count, const Double* value) {
-    detail::ptrProgramUniform2dv(program, location, count, value);
-}
-
-inline void ProgramUniform2f(Uint program, Int location, Float v0, Float v1) {
-    detail::ptrProgramUniform2f(program, location, v0, v1);
-}
-
-inline void ProgramUniform2fv(Uint program, Int location, Sizei count, const Float* value) {
-    detail::ptrProgramUniform2fv(program, location, count, value);
-}
-
-inline void ProgramUniform2i(Uint program, Int location, Int v0, Int v1) {
-    detail::ptrProgramUniform2i(program, location, v0, v1);
-}
-
-inline void ProgramUniform2iv(Uint program, Int location, Sizei count, const Int* value) {
-    detail::ptrProgramUniform2iv(program, location, count, value);
-}
-
-inline void ProgramUniform2ui(Uint program, Int location, Uint v0, Uint v1) {
-    detail::ptrProgramUniform2ui(program, location, v0, v1);
-}
-
-inline void ProgramUniform2uiv(Uint program, Int location, Sizei count, const Uint* value) {
-    detail::ptrProgramUniform2uiv(program, location, count, value);
-}
-
-inline void ProgramUniform3d(Uint program, Int location, Double v0, Double v1, Double v2) {
-    detail::ptrProgramUniform3d(program, location, v0, v1, v2);
-}
-
-inline void ProgramUniform3dv(Uint program, Int location, Sizei count, const Double* value) {
-    detail::ptrProgramUniform3dv(program, location, count, value);
-}
-
-inline void ProgramUniform3f(Uint program, Int location, Float v0, Float v1, Float v2) {
-    detail::ptrProgramUniform3f(program, location, v0, v1, v2);
-}
-
-inline void ProgramUniform3fv(Uint program, Int location, Sizei count, const Float* value) {
-    detail::ptrProgramUniform3fv(program, location, count, value);
-}
-
-inline void ProgramUniform3i(Uint program, Int location, Int v0, Int v1, Int v2) {
-    detail::ptrProgramUniform3i(program, location, v0, v1, v2);
-}
-
-inline void ProgramUniform3iv(Uint program, Int location, Sizei count, const Int* value) {
-    detail::ptrProgramUniform3iv(program, location, count, value);
-}
-
-inline void ProgramUniform3ui(Uint program, Int location, Uint v0, Uint v1, Uint v2) {
-    detail::ptrProgramUniform3ui(program, location, v0, v1, v2);
-}
-
-inline void ProgramUniform3uiv(Uint program, Int location, Sizei count, const Uint* value) {
-    detail::ptrProgramUniform3uiv(program, location, count, value);
-}
-
-inline void ProgramUniform4d(Uint program, Int location, Double v0, Double v1, Double v2, Double v3) {
-    detail::ptrProgramUniform4d(program, location, v0, v1, v2, v3);
-}
-
-inline void ProgramUniform4dv(Uint program, Int location, Sizei count, const Double* value) {
-    detail::ptrProgramUniform4dv(program, location, count, value);
-}
-
-inline void ProgramUniform4f(Uint program, Int location, Float v0, Float v1, Float v2, Float v3) {
-    detail::ptrProgramUniform4f(program, location, v0, v1, v2, v3);
-}
-
-inline void ProgramUniform4fv(Uint program, Int location, Sizei count, const Float* value) {
-    detail::ptrProgramUniform4fv(program, location, count, value);
-}
-
-inline void ProgramUniform4i(Uint program, Int location, Int v0, Int v1, Int v2, Int v3) {
-    detail::ptrProgramUniform4i(program, location, v0, v1, v2, v3);
-}
-
-inline void ProgramUniform4iv(Uint program, Int location, Sizei count, const Int* value) {
-    detail::ptrProgramUniform4iv(program, location, count, value);
-}
-
-inline void ProgramUniform4ui(Uint program, Int location, Uint v0, Uint v1, Uint v2, Uint v3) {
-    detail::ptrProgramUniform4ui(program, location, v0, v1, v2, v3);
-}
-
-inline void ProgramUniform4uiv(Uint program, Int location, Sizei count, const Uint* value) {
-    detail::ptrProgramUniform4uiv(program, location, count, value);
-}
-
-inline void ProgramUniformMatrix2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix2dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix2fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix2x3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix2x3dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix2x3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix2x3fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix2x4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix2x4dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix2x4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix2x4fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix3dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix3fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3x2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix3x2dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3x2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix3x2fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3x4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix3x4dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix3x4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix3x4fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix4dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix4fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4x2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix4x2dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4x2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix4x2fv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4x3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrProgramUniformMatrix4x3dv(program, location, count, transpose, value);
-}
-
-inline void ProgramUniformMatrix4x3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrProgramUniformMatrix4x3fv(program, location, count, transpose, value);
-}
-
-inline void ProvokingVertex(Enum mode) {
-    detail::ptrProvokingVertex(mode);
-}
-
-inline void PushDebugGroup(Enum source, Uint id, Sizei length, const Char* message) {
-    detail::ptrPushDebugGroup(source, id, length, message);
-}
-
-inline void QueryCounter(Uint id, Enum target) {
-    detail::ptrQueryCounter(id, target);
-}
-
-inline void ReadBuffer(Enum src) {
-    detail::ptrReadBuffer(src);
-}
-
-inline void ReadPixels(Int x, Int y, Sizei width, Sizei height, Enum format, Enum type, void* pixels) {
-    detail::ptrReadPixels(x, y, width, height, format, type, pixels);
-}
-
-inline void ReadnPixels(Int x, Int y, Sizei width, Sizei height, Enum format, Enum type, Sizei bufSize, void* data) {
-    detail::ptrReadnPixels(x, y, width, height, format, type, bufSize, data);
-}
-
-inline void ReleaseShaderCompiler() {
-    detail::ptrReleaseShaderCompiler();
-}
-
-inline void RenderbufferStorage(Enum target, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrRenderbufferStorage(target, internalformat, width, height);
-}
-
-inline void RenderbufferStorageMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrRenderbufferStorageMultisample(target, samples, internalformat, width, height);
-}
-
-inline void ResumeTransformFeedback() {
-    detail::ptrResumeTransformFeedback();
-}
-
-inline void SampleCoverage(Float value, Boolean invert) {
-    detail::ptrSampleCoverage(value, invert);
-}
-
-inline void SampleMaski(Uint maskNumber, Bitfield mask) {
-    detail::ptrSampleMaski(maskNumber, mask);
-}
-
-inline void SamplerParameterIiv(Uint sampler, Enum pname, const Int* param) {
-    detail::ptrSamplerParameterIiv(sampler, pname, param);
-}
-
-inline void SamplerParameterIuiv(Uint sampler, Enum pname, const Uint* param) {
-    detail::ptrSamplerParameterIuiv(sampler, pname, param);
-}
-
-inline void SamplerParameterf(Uint sampler, Enum pname, Float param) {
-    detail::ptrSamplerParameterf(sampler, pname, param);
-}
-
-inline void SamplerParameterfv(Uint sampler, Enum pname, const Float* param) {
-    detail::ptrSamplerParameterfv(sampler, pname, param);
-}
-
-inline void SamplerParameteri(Uint sampler, Enum pname, Int param) {
-    detail::ptrSamplerParameteri(sampler, pname, param);
-}
-
-inline void SamplerParameteriv(Uint sampler, Enum pname, const Int* param) {
-    detail::ptrSamplerParameteriv(sampler, pname, param);
-}
-
-inline void Scissor(Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrScissor(x, y, width, height);
-}
-
-inline void ScissorArrayv(Uint first, Sizei count, const Int* v) {
-    detail::ptrScissorArrayv(first, count, v);
-}
-
-inline void ScissorIndexed(Uint index, Int left, Int bottom, Sizei width, Sizei height) {
-    detail::ptrScissorIndexed(index, left, bottom, width, height);
-}
-
-inline void ScissorIndexedv(Uint index, const Int* v) {
-    detail::ptrScissorIndexedv(index, v);
-}
-
-inline void SecondaryColorP3ui(Enum type, Uint color) {
-    detail::ptrSecondaryColorP3ui(type, color);
-}
-
-inline void SecondaryColorP3uiv(Enum type, const Uint* color) {
-    detail::ptrSecondaryColorP3uiv(type, color);
-}
-
-inline void ShaderBinary(Sizei count, const Uint* shaders, Enum binaryFormat, const void* binary, Sizei length) {
-    detail::ptrShaderBinary(count, shaders, binaryFormat, binary, length);
-}
-
-inline void ShaderSource(Uint shader, Sizei count, const Char** string, const Int* length) {
-    detail::ptrShaderSource(shader, count, string, length);
-}
-
-inline void ShaderStorageBlockBinding(Uint program, Uint storageBlockIndex, Uint storageBlockBinding) {
-    detail::ptrShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
-}
-
-inline void SpecializeShader(Uint shader, const Char* pEntryPoint, Uint numSpecializationConstants, const Uint* pConstantIndex, const Uint* pConstantValue) {
-    detail::ptrSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue);
-}
-
-inline void StencilFunc(Enum func, Int ref, Uint mask) {
-    detail::ptrStencilFunc(func, ref, mask);
-}
-
-inline void StencilFuncSeparate(Enum face, Enum func, Int ref, Uint mask) {
-    detail::ptrStencilFuncSeparate(face, func, ref, mask);
-}
-
-inline void StencilMask(Uint mask) {
-    detail::ptrStencilMask(mask);
-}
-
-inline void StencilMaskSeparate(Enum face, Uint mask) {
-    detail::ptrStencilMaskSeparate(face, mask);
-}
-
-inline void StencilOp(Enum fail, Enum zfail, Enum zpass) {
-    detail::ptrStencilOp(fail, zfail, zpass);
-}
-
-inline void StencilOpSeparate(Enum face, Enum sfail, Enum dpfail, Enum dppass) {
-    detail::ptrStencilOpSeparate(face, sfail, dpfail, dppass);
-}
-
-inline void TexBuffer(Enum target, Enum internalformat, Uint buffer) {
-    detail::ptrTexBuffer(target, internalformat, buffer);
-}
-
-inline void TexBufferRange(Enum target, Enum internalformat, Uint buffer, Intptr offset, Sizeiptr size) {
-    detail::ptrTexBufferRange(target, internalformat, buffer, offset, size);
-}
-
-inline void TexCoordP1ui(Enum type, Uint coords) {
-    detail::ptrTexCoordP1ui(type, coords);
-}
-
-inline void TexCoordP1uiv(Enum type, const Uint* coords) {
-    detail::ptrTexCoordP1uiv(type, coords);
-}
-
-inline void TexCoordP2ui(Enum type, Uint coords) {
-    detail::ptrTexCoordP2ui(type, coords);
-}
-
-inline void TexCoordP2uiv(Enum type, const Uint* coords) {
-    detail::ptrTexCoordP2uiv(type, coords);
-}
-
-inline void TexCoordP3ui(Enum type, Uint coords) {
-    detail::ptrTexCoordP3ui(type, coords);
-}
-
-inline void TexCoordP3uiv(Enum type, const Uint* coords) {
-    detail::ptrTexCoordP3uiv(type, coords);
-}
-
-inline void TexCoordP4ui(Enum type, Uint coords) {
-    detail::ptrTexCoordP4ui(type, coords);
-}
-
-inline void TexCoordP4uiv(Enum type, const Uint* coords) {
-    detail::ptrTexCoordP4uiv(type, coords);
-}
-
-inline void TexImage1D(Enum target, Int level, Int internalformat, Sizei width, Int border, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexImage1D(target, level, internalformat, width, border, format, type, pixels);
-}
-
-inline void TexImage2D(Enum target, Int level, Int internalformat, Sizei width, Sizei height, Int border, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexImage2D(target, level, internalformat, width, height, border, format, type, pixels);
-}
-
-inline void TexImage2DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) {
-    detail::ptrTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
-}
-
-inline void TexImage3D(Enum target, Int level, Int internalformat, Sizei width, Sizei height, Sizei depth, Int border, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels);
-}
-
-inline void TexImage3DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) {
-    detail::ptrTexImage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
-}
-
-inline void TexParameterIiv(Enum target, Enum pname, const Int* params) {
-    detail::ptrTexParameterIiv(target, pname, params);
-}
-
-inline void TexParameterIuiv(Enum target, Enum pname, const Uint* params) {
-    detail::ptrTexParameterIuiv(target, pname, params);
-}
-
-inline void TexParameterf(Enum target, Enum pname, Float param) {
-    detail::ptrTexParameterf(target, pname, param);
-}
-
-inline void TexParameterfv(Enum target, Enum pname, const Float* params) {
-    detail::ptrTexParameterfv(target, pname, params);
-}
-
-inline void TexParameteri(Enum target, Enum pname, Int param) {
-    detail::ptrTexParameteri(target, pname, param);
-}
-
-inline void TexParameteriv(Enum target, Enum pname, const Int* params) {
-    detail::ptrTexParameteriv(target, pname, params);
-}
-
-inline void TexStorage1D(Enum target, Sizei levels, Enum internalformat, Sizei width) {
-    detail::ptrTexStorage1D(target, levels, internalformat, width);
-}
-
-inline void TexStorage2D(Enum target, Sizei levels, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrTexStorage2D(target, levels, internalformat, width, height);
-}
-
-inline void TexStorage2DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) {
-    detail::ptrTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations);
-}
-
-inline void TexStorage3D(Enum target, Sizei levels, Enum internalformat, Sizei width, Sizei height, Sizei depth) {
-    detail::ptrTexStorage3D(target, levels, internalformat, width, height, depth);
-}
-
-inline void TexStorage3DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) {
-    detail::ptrTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations);
-}
-
-inline void TexSubImage1D(Enum target, Int level, Int xoffset, Sizei width, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexSubImage1D(target, level, xoffset, width, format, type, pixels);
-}
-
-inline void TexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels);
-}
-
-inline void TexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* pixels) {
-    detail::ptrTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
-}
-
-inline void TextureBarrier() {
-    detail::ptrTextureBarrier();
-}
-
-inline void TextureBuffer(Uint texture, Enum internalformat, Uint buffer) {
-    detail::ptrTextureBuffer(texture, internalformat, buffer);
-}
-
-inline void TextureBufferRange(Uint texture, Enum internalformat, Uint buffer, Intptr offset, Sizeiptr size) {
-    detail::ptrTextureBufferRange(texture, internalformat, buffer, offset, size);
-}
-
-inline void TextureParameterIiv(Uint texture, Enum pname, const Int* params) {
-    detail::ptrTextureParameterIiv(texture, pname, params);
-}
-
-inline void TextureParameterIuiv(Uint texture, Enum pname, const Uint* params) {
-    detail::ptrTextureParameterIuiv(texture, pname, params);
-}
-
-inline void TextureParameterf(Uint texture, Enum pname, Float param) {
-    detail::ptrTextureParameterf(texture, pname, param);
-}
-
-inline void TextureParameterfv(Uint texture, Enum pname, const Float* param) {
-    detail::ptrTextureParameterfv(texture, pname, param);
-}
-
-inline void TextureParameteri(Uint texture, Enum pname, Int param) {
-    detail::ptrTextureParameteri(texture, pname, param);
-}
-
-inline void TextureParameteriv(Uint texture, Enum pname, const Int* param) {
-    detail::ptrTextureParameteriv(texture, pname, param);
-}
-
-inline void TextureStorage1D(Uint texture, Sizei levels, Enum internalformat, Sizei width) {
-    detail::ptrTextureStorage1D(texture, levels, internalformat, width);
-}
-
-inline void TextureStorage2D(Uint texture, Sizei levels, Enum internalformat, Sizei width, Sizei height) {
-    detail::ptrTextureStorage2D(texture, levels, internalformat, width, height);
-}
-
-inline void TextureStorage2DMultisample(Uint texture, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) {
-    detail::ptrTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations);
-}
-
-inline void TextureStorage3D(Uint texture, Sizei levels, Enum internalformat, Sizei width, Sizei height, Sizei depth) {
-    detail::ptrTextureStorage3D(texture, levels, internalformat, width, height, depth);
-}
-
-inline void TextureStorage3DMultisample(Uint texture, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) {
-    detail::ptrTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations);
-}
-
-inline void TextureSubImage1D(Uint texture, Int level, Int xoffset, Sizei width, Enum format, Enum type, const void* pixels) {
-    detail::ptrTextureSubImage1D(texture, level, xoffset, width, format, type, pixels);
-}
-
-inline void TextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Enum type, const void* pixels) {
-    detail::ptrTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels);
-}
-
-inline void TextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* pixels) {
-    detail::ptrTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels);
-}
-
-inline void TextureView(Uint texture, Enum target, Uint origtexture, Enum internalformat, Uint minlevel, Uint numlevels, Uint minlayer, Uint numlayers) {
-    detail::ptrTextureView(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers);
-}
-
-inline void TransformFeedbackBufferBase(Uint xfb, Uint index, Uint buffer) {
-    detail::ptrTransformFeedbackBufferBase(xfb, index, buffer);
-}
-
-inline void TransformFeedbackBufferRange(Uint xfb, Uint index, Uint buffer, Intptr offset, Sizeiptr size) {
-    detail::ptrTransformFeedbackBufferRange(xfb, index, buffer, offset, size);
-}
-
-inline void TransformFeedbackVaryings(Uint program, Sizei count, const Char** varyings, Enum bufferMode) {
-    detail::ptrTransformFeedbackVaryings(program, count, varyings, bufferMode);
-}
-
-inline void Uniform1d(Int location, Double x) {
-    detail::ptrUniform1d(location, x);
-}
-
-inline void Uniform1dv(Int location, Sizei count, const Double* value) {
-    detail::ptrUniform1dv(location, count, value);
-}
-
-inline void Uniform1f(Int location, Float v0) {
-    detail::ptrUniform1f(location, v0);
-}
-
-inline void Uniform1fv(Int location, Sizei count, const Float* value) {
-    detail::ptrUniform1fv(location, count, value);
-}
-
-inline void Uniform1i(Int location, Int v0) {
-    detail::ptrUniform1i(location, v0);
-}
-
-inline void Uniform1iv(Int location, Sizei count, const Int* value) {
-    detail::ptrUniform1iv(location, count, value);
-}
-
-inline void Uniform1ui(Int location, Uint v0) {
-    detail::ptrUniform1ui(location, v0);
-}
-
-inline void Uniform1uiv(Int location, Sizei count, const Uint* value) {
-    detail::ptrUniform1uiv(location, count, value);
-}
-
-inline void Uniform2d(Int location, Double x, Double y) {
-    detail::ptrUniform2d(location, x, y);
-}
-
-inline void Uniform2dv(Int location, Sizei count, const Double* value) {
-    detail::ptrUniform2dv(location, count, value);
-}
-
-inline void Uniform2f(Int location, Float v0, Float v1) {
-    detail::ptrUniform2f(location, v0, v1);
-}
-
-inline void Uniform2fv(Int location, Sizei count, const Float* value) {
-    detail::ptrUniform2fv(location, count, value);
-}
-
-inline void Uniform2i(Int location, Int v0, Int v1) {
-    detail::ptrUniform2i(location, v0, v1);
-}
-
-inline void Uniform2iv(Int location, Sizei count, const Int* value) {
-    detail::ptrUniform2iv(location, count, value);
-}
-
-inline void Uniform2ui(Int location, Uint v0, Uint v1) {
-    detail::ptrUniform2ui(location, v0, v1);
-}
-
-inline void Uniform2uiv(Int location, Sizei count, const Uint* value) {
-    detail::ptrUniform2uiv(location, count, value);
-}
-
-inline void Uniform3d(Int location, Double x, Double y, Double z) {
-    detail::ptrUniform3d(location, x, y, z);
-}
-
-inline void Uniform3dv(Int location, Sizei count, const Double* value) {
-    detail::ptrUniform3dv(location, count, value);
-}
-
-inline void Uniform3f(Int location, Float v0, Float v1, Float v2) {
-    detail::ptrUniform3f(location, v0, v1, v2);
-}
-
-inline void Uniform3fv(Int location, Sizei count, const Float* value) {
-    detail::ptrUniform3fv(location, count, value);
-}
-
-inline void Uniform3i(Int location, Int v0, Int v1, Int v2) {
-    detail::ptrUniform3i(location, v0, v1, v2);
-}
-
-inline void Uniform3iv(Int location, Sizei count, const Int* value) {
-    detail::ptrUniform3iv(location, count, value);
-}
-
-inline void Uniform3ui(Int location, Uint v0, Uint v1, Uint v2) {
-    detail::ptrUniform3ui(location, v0, v1, v2);
-}
-
-inline void Uniform3uiv(Int location, Sizei count, const Uint* value) {
-    detail::ptrUniform3uiv(location, count, value);
-}
-
-inline void Uniform4d(Int location, Double x, Double y, Double z, Double w) {
-    detail::ptrUniform4d(location, x, y, z, w);
-}
-
-inline void Uniform4dv(Int location, Sizei count, const Double* value) {
-    detail::ptrUniform4dv(location, count, value);
-}
-
-inline void Uniform4f(Int location, Float v0, Float v1, Float v2, Float v3) {
-    detail::ptrUniform4f(location, v0, v1, v2, v3);
-}
-
-inline void Uniform4fv(Int location, Sizei count, const Float* value) {
-    detail::ptrUniform4fv(location, count, value);
-}
-
-inline void Uniform4i(Int location, Int v0, Int v1, Int v2, Int v3) {
-    detail::ptrUniform4i(location, v0, v1, v2, v3);
-}
-
-inline void Uniform4iv(Int location, Sizei count, const Int* value) {
-    detail::ptrUniform4iv(location, count, value);
-}
-
-inline void Uniform4ui(Int location, Uint v0, Uint v1, Uint v2, Uint v3) {
-    detail::ptrUniform4ui(location, v0, v1, v2, v3);
-}
-
-inline void Uniform4uiv(Int location, Sizei count, const Uint* value) {
-    detail::ptrUniform4uiv(location, count, value);
-}
-
-inline void UniformBlockBinding(Uint program, Uint uniformBlockIndex, Uint uniformBlockBinding) {
-    detail::ptrUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding);
-}
-
-inline void UniformMatrix2dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix2dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix2fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix2fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix2x3dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix2x3dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix2x3fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix2x3fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix2x4dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix2x4dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix2x4fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix2x4fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix3dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix3fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3x2dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix3x2dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3x2fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix3x2fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3x4dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix3x4dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix3x4fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix3x4fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix4dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix4fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4x2dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix4x2dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4x2fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix4x2fv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4x3dv(Int location, Sizei count, Boolean transpose, const Double* value) {
-    detail::ptrUniformMatrix4x3dv(location, count, transpose, value);
-}
-
-inline void UniformMatrix4x3fv(Int location, Sizei count, Boolean transpose, const Float* value) {
-    detail::ptrUniformMatrix4x3fv(location, count, transpose, value);
-}
-
-inline void UniformSubroutinesuiv(Enum shadertype, Sizei count, const Uint* indices) {
-    detail::ptrUniformSubroutinesuiv(shadertype, count, indices);
-}
-
-inline Boolean UnmapBuffer(Enum target) {
-    return detail::ptrUnmapBuffer(target);
-}
-
-inline Boolean UnmapNamedBuffer(Uint buffer) {
-    return detail::ptrUnmapNamedBuffer(buffer);
-}
-
-inline void UseProgram(Uint program) {
-    detail::ptrUseProgram(program);
-}
-
-inline void UseProgramStages(Uint pipeline, Bitfield stages, Uint program) {
-    detail::ptrUseProgramStages(pipeline, stages, program);
-}
-
-inline void ValidateProgram(Uint program) {
-    detail::ptrValidateProgram(program);
-}
-
-inline void ValidateProgramPipeline(Uint pipeline) {
-    detail::ptrValidateProgramPipeline(pipeline);
-}
-
-inline void VertexArrayAttribBinding(Uint vaobj, Uint attribindex, Uint bindingindex) {
-    detail::ptrVertexArrayAttribBinding(vaobj, attribindex, bindingindex);
-}
-
-inline void VertexArrayAttribFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Boolean normalized, Uint relativeoffset) {
-    detail::ptrVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset);
-}
-
-inline void VertexArrayAttribIFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Uint relativeoffset) {
-    detail::ptrVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset);
-}
-
-inline void VertexArrayAttribLFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Uint relativeoffset) {
-    detail::ptrVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset);
-}
-
-inline void VertexArrayBindingDivisor(Uint vaobj, Uint bindingindex, Uint divisor) {
-    detail::ptrVertexArrayBindingDivisor(vaobj, bindingindex, divisor);
-}
-
-inline void VertexArrayElementBuffer(Uint vaobj, Uint buffer) {
-    detail::ptrVertexArrayElementBuffer(vaobj, buffer);
-}
-
-inline void VertexArrayVertexBuffer(Uint vaobj, Uint bindingindex, Uint buffer, Intptr offset, Sizei stride) {
-    detail::ptrVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride);
-}
-
-inline void VertexArrayVertexBuffers(Uint vaobj, Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizei* strides) {
-    detail::ptrVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides);
-}
-
-inline void VertexAttrib1d(Uint index, Double x) {
-    detail::ptrVertexAttrib1d(index, x);
-}
-
-inline void VertexAttrib1dv(Uint index, const Double* v) {
-    detail::ptrVertexAttrib1dv(index, v);
-}
-
-inline void VertexAttrib1f(Uint index, Float x) {
-    detail::ptrVertexAttrib1f(index, x);
-}
-
-inline void VertexAttrib1fv(Uint index, const Float* v) {
-    detail::ptrVertexAttrib1fv(index, v);
-}
-
-inline void VertexAttrib1s(Uint index, Short x) {
-    detail::ptrVertexAttrib1s(index, x);
-}
-
-inline void VertexAttrib1sv(Uint index, const Short* v) {
-    detail::ptrVertexAttrib1sv(index, v);
-}
-
-inline void VertexAttrib2d(Uint index, Double x, Double y) {
-    detail::ptrVertexAttrib2d(index, x, y);
-}
-
-inline void VertexAttrib2dv(Uint index, const Double* v) {
-    detail::ptrVertexAttrib2dv(index, v);
-}
-
-inline void VertexAttrib2f(Uint index, Float x, Float y) {
-    detail::ptrVertexAttrib2f(index, x, y);
-}
-
-inline void VertexAttrib2fv(Uint index, const Float* v) {
-    detail::ptrVertexAttrib2fv(index, v);
-}
-
-inline void VertexAttrib2s(Uint index, Short x, Short y) {
-    detail::ptrVertexAttrib2s(index, x, y);
-}
-
-inline void VertexAttrib2sv(Uint index, const Short* v) {
-    detail::ptrVertexAttrib2sv(index, v);
-}
-
-inline void VertexAttrib3d(Uint index, Double x, Double y, Double z) {
-    detail::ptrVertexAttrib3d(index, x, y, z);
-}
-
-inline void VertexAttrib3dv(Uint index, const Double* v) {
-    detail::ptrVertexAttrib3dv(index, v);
-}
-
-inline void VertexAttrib3f(Uint index, Float x, Float y, Float z) {
-    detail::ptrVertexAttrib3f(index, x, y, z);
-}
-
-inline void VertexAttrib3fv(Uint index, const Float* v) {
-    detail::ptrVertexAttrib3fv(index, v);
-}
-
-inline void VertexAttrib3s(Uint index, Short x, Short y, Short z) {
-    detail::ptrVertexAttrib3s(index, x, y, z);
-}
-
-inline void VertexAttrib3sv(Uint index, const Short* v) {
-    detail::ptrVertexAttrib3sv(index, v);
-}
-
-inline void VertexAttrib4Nbv(Uint index, const Byte* v) {
-    detail::ptrVertexAttrib4Nbv(index, v);
-}
-
-inline void VertexAttrib4Niv(Uint index, const Int* v) {
-    detail::ptrVertexAttrib4Niv(index, v);
-}
-
-inline void VertexAttrib4Nsv(Uint index, const Short* v) {
-    detail::ptrVertexAttrib4Nsv(index, v);
-}
-
-inline void VertexAttrib4Nub(Uint index, Ubyte x, Ubyte y, Ubyte z, Ubyte w) {
-    detail::ptrVertexAttrib4Nub(index, x, y, z, w);
-}
-
-inline void VertexAttrib4Nubv(Uint index, const Ubyte* v) {
-    detail::ptrVertexAttrib4Nubv(index, v);
-}
-
-inline void VertexAttrib4Nuiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttrib4Nuiv(index, v);
-}
-
-inline void VertexAttrib4Nusv(Uint index, const Ushort* v) {
-    detail::ptrVertexAttrib4Nusv(index, v);
-}
-
-inline void VertexAttrib4bv(Uint index, const Byte* v) {
-    detail::ptrVertexAttrib4bv(index, v);
-}
-
-inline void VertexAttrib4d(Uint index, Double x, Double y, Double z, Double w) {
-    detail::ptrVertexAttrib4d(index, x, y, z, w);
-}
-
-inline void VertexAttrib4dv(Uint index, const Double* v) {
-    detail::ptrVertexAttrib4dv(index, v);
-}
-
-inline void VertexAttrib4f(Uint index, Float x, Float y, Float z, Float w) {
-    detail::ptrVertexAttrib4f(index, x, y, z, w);
-}
-
-inline void VertexAttrib4fv(Uint index, const Float* v) {
-    detail::ptrVertexAttrib4fv(index, v);
-}
-
-inline void VertexAttrib4iv(Uint index, const Int* v) {
-    detail::ptrVertexAttrib4iv(index, v);
-}
-
-inline void VertexAttrib4s(Uint index, Short x, Short y, Short z, Short w) {
-    detail::ptrVertexAttrib4s(index, x, y, z, w);
-}
-
-inline void VertexAttrib4sv(Uint index, const Short* v) {
-    detail::ptrVertexAttrib4sv(index, v);
-}
-
-inline void VertexAttrib4ubv(Uint index, const Ubyte* v) {
-    detail::ptrVertexAttrib4ubv(index, v);
-}
-
-inline void VertexAttrib4uiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttrib4uiv(index, v);
-}
-
-inline void VertexAttrib4usv(Uint index, const Ushort* v) {
-    detail::ptrVertexAttrib4usv(index, v);
-}
-
-inline void VertexAttribBinding(Uint attribindex, Uint bindingindex) {
-    detail::ptrVertexAttribBinding(attribindex, bindingindex);
-}
-
-inline void VertexAttribDivisor(Uint index, Uint divisor) {
-    detail::ptrVertexAttribDivisor(index, divisor);
-}
-
-inline void VertexAttribFormat(Uint attribindex, Int size, Enum type, Boolean normalized, Uint relativeoffset) {
-    detail::ptrVertexAttribFormat(attribindex, size, type, normalized, relativeoffset);
-}
-
-inline void VertexAttribI1i(Uint index, Int x) {
-    detail::ptrVertexAttribI1i(index, x);
-}
-
-inline void VertexAttribI1iv(Uint index, const Int* v) {
-    detail::ptrVertexAttribI1iv(index, v);
-}
-
-inline void VertexAttribI1ui(Uint index, Uint x) {
-    detail::ptrVertexAttribI1ui(index, x);
-}
-
-inline void VertexAttribI1uiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttribI1uiv(index, v);
-}
-
-inline void VertexAttribI2i(Uint index, Int x, Int y) {
-    detail::ptrVertexAttribI2i(index, x, y);
-}
-
-inline void VertexAttribI2iv(Uint index, const Int* v) {
-    detail::ptrVertexAttribI2iv(index, v);
-}
-
-inline void VertexAttribI2ui(Uint index, Uint x, Uint y) {
-    detail::ptrVertexAttribI2ui(index, x, y);
-}
-
-inline void VertexAttribI2uiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttribI2uiv(index, v);
-}
-
-inline void VertexAttribI3i(Uint index, Int x, Int y, Int z) {
-    detail::ptrVertexAttribI3i(index, x, y, z);
-}
-
-inline void VertexAttribI3iv(Uint index, const Int* v) {
-    detail::ptrVertexAttribI3iv(index, v);
-}
-
-inline void VertexAttribI3ui(Uint index, Uint x, Uint y, Uint z) {
-    detail::ptrVertexAttribI3ui(index, x, y, z);
-}
-
-inline void VertexAttribI3uiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttribI3uiv(index, v);
-}
-
-inline void VertexAttribI4bv(Uint index, const Byte* v) {
-    detail::ptrVertexAttribI4bv(index, v);
-}
-
-inline void VertexAttribI4i(Uint index, Int x, Int y, Int z, Int w) {
-    detail::ptrVertexAttribI4i(index, x, y, z, w);
-}
-
-inline void VertexAttribI4iv(Uint index, const Int* v) {
-    detail::ptrVertexAttribI4iv(index, v);
-}
-
-inline void VertexAttribI4sv(Uint index, const Short* v) {
-    detail::ptrVertexAttribI4sv(index, v);
-}
-
-inline void VertexAttribI4ubv(Uint index, const Ubyte* v) {
-    detail::ptrVertexAttribI4ubv(index, v);
-}
-
-inline void VertexAttribI4ui(Uint index, Uint x, Uint y, Uint z, Uint w) {
-    detail::ptrVertexAttribI4ui(index, x, y, z, w);
-}
-
-inline void VertexAttribI4uiv(Uint index, const Uint* v) {
-    detail::ptrVertexAttribI4uiv(index, v);
-}
-
-inline void VertexAttribI4usv(Uint index, const Ushort* v) {
-    detail::ptrVertexAttribI4usv(index, v);
-}
-
-inline void VertexAttribIFormat(Uint attribindex, Int size, Enum type, Uint relativeoffset) {
-    detail::ptrVertexAttribIFormat(attribindex, size, type, relativeoffset);
-}
-
-inline void VertexAttribIPointer(Uint index, Int size, Enum type, Sizei stride, const void* pointer) {
-    detail::ptrVertexAttribIPointer(index, size, type, stride, pointer);
-}
-
-inline void VertexAttribL1d(Uint index, Double x) {
-    detail::ptrVertexAttribL1d(index, x);
-}
-
-inline void VertexAttribL1dv(Uint index, const Double* v) {
-    detail::ptrVertexAttribL1dv(index, v);
-}
-
-inline void VertexAttribL2d(Uint index, Double x, Double y) {
-    detail::ptrVertexAttribL2d(index, x, y);
-}
-
-inline void VertexAttribL2dv(Uint index, const Double* v) {
-    detail::ptrVertexAttribL2dv(index, v);
-}
-
-inline void VertexAttribL3d(Uint index, Double x, Double y, Double z) {
-    detail::ptrVertexAttribL3d(index, x, y, z);
-}
-
-inline void VertexAttribL3dv(Uint index, const Double* v) {
-    detail::ptrVertexAttribL3dv(index, v);
-}
-
-inline void VertexAttribL4d(Uint index, Double x, Double y, Double z, Double w) {
-    detail::ptrVertexAttribL4d(index, x, y, z, w);
-}
-
-inline void VertexAttribL4dv(Uint index, const Double* v) {
-    detail::ptrVertexAttribL4dv(index, v);
-}
-
-inline void VertexAttribLFormat(Uint attribindex, Int size, Enum type, Uint relativeoffset) {
-    detail::ptrVertexAttribLFormat(attribindex, size, type, relativeoffset);
-}
-
-inline void VertexAttribLPointer(Uint index, Int size, Enum type, Sizei stride, const void* pointer) {
-    detail::ptrVertexAttribLPointer(index, size, type, stride, pointer);
-}
-
-inline void VertexAttribP1ui(Uint index, Enum type, Boolean normalized, Uint value) {
-    detail::ptrVertexAttribP1ui(index, type, normalized, value);
-}
-
-inline void VertexAttribP1uiv(Uint index, Enum type, Boolean normalized, const Uint* value) {
-    detail::ptrVertexAttribP1uiv(index, type, normalized, value);
-}
-
-inline void VertexAttribP2ui(Uint index, Enum type, Boolean normalized, Uint value) {
-    detail::ptrVertexAttribP2ui(index, type, normalized, value);
-}
-
-inline void VertexAttribP2uiv(Uint index, Enum type, Boolean normalized, const Uint* value) {
-    detail::ptrVertexAttribP2uiv(index, type, normalized, value);
-}
-
-inline void VertexAttribP3ui(Uint index, Enum type, Boolean normalized, Uint value) {
-    detail::ptrVertexAttribP3ui(index, type, normalized, value);
-}
-
-inline void VertexAttribP3uiv(Uint index, Enum type, Boolean normalized, const Uint* value) {
-    detail::ptrVertexAttribP3uiv(index, type, normalized, value);
-}
-
-inline void VertexAttribP4ui(Uint index, Enum type, Boolean normalized, Uint value) {
-    detail::ptrVertexAttribP4ui(index, type, normalized, value);
-}
-
-inline void VertexAttribP4uiv(Uint index, Enum type, Boolean normalized, const Uint* value) {
-    detail::ptrVertexAttribP4uiv(index, type, normalized, value);
-}
-
-inline void VertexAttribPointer(Uint index, Int size, Enum type, Boolean normalized, Sizei stride, const void* pointer) {
-    detail::ptrVertexAttribPointer(index, size, type, normalized, stride, pointer);
-}
-
-inline void VertexBindingDivisor(Uint bindingindex, Uint divisor) {
-    detail::ptrVertexBindingDivisor(bindingindex, divisor);
-}
-
-inline void VertexP2ui(Enum type, Uint value) {
-    detail::ptrVertexP2ui(type, value);
-}
-
-inline void VertexP2uiv(Enum type, const Uint* value) {
-    detail::ptrVertexP2uiv(type, value);
-}
-
-inline void VertexP3ui(Enum type, Uint value) {
-    detail::ptrVertexP3ui(type, value);
-}
-
-inline void VertexP3uiv(Enum type, const Uint* value) {
-    detail::ptrVertexP3uiv(type, value);
-}
-
-inline void VertexP4ui(Enum type, Uint value) {
-    detail::ptrVertexP4ui(type, value);
-}
-
-inline void VertexP4uiv(Enum type, const Uint* value) {
-    detail::ptrVertexP4uiv(type, value);
-}
-
-inline void Viewport(Int x, Int y, Sizei width, Sizei height) {
-    detail::ptrViewport(x, y, width, height);
-}
-
-inline void ViewportArrayv(Uint first, Sizei count, const Float* v) {
-    detail::ptrViewportArrayv(first, count, v);
-}
-
-inline void ViewportIndexedf(Uint index, Float x, Float y, Float w, Float h) {
-    detail::ptrViewportIndexedf(index, x, y, w, h);
-}
-
-inline void ViewportIndexedfv(Uint index, const Float* v) {
-    detail::ptrViewportIndexedfv(index, v);
-}
-
-inline void WaitSync(Sync sync, Bitfield flags, Uint64 timeout) {
-    detail::ptrWaitSync(sync, flags, timeout);
-}
+inline void ActiveShaderProgram(Uint pipeline, Uint program) { detail::ptrActiveShaderProgram(pipeline, program); }
+inline void ActiveTexture(Enum texture) { detail::ptrActiveTexture(texture); }
+inline void AttachShader(Uint program, Uint shader) { detail::ptrAttachShader(program, shader); }
+inline void BeginConditionalRender(Uint id, Enum mode) { detail::ptrBeginConditionalRender(id, mode); }
+inline void BeginQuery(Enum target, Uint id) { detail::ptrBeginQuery(target, id); }
+inline void BeginQueryIndexed(Enum target, Uint index, Uint id) { detail::ptrBeginQueryIndexed(target, index, id); }
+inline void BeginTransformFeedback(Enum primitiveMode) { detail::ptrBeginTransformFeedback(primitiveMode); }
+inline void BindAttribLocation(Uint program, Uint index, const Char* name) { detail::ptrBindAttribLocation(program, index, name); }
+inline void BindBuffer(Enum target, Uint buffer) { detail::ptrBindBuffer(target, buffer); }
+inline void BindBufferBase(Enum target, Uint index, Uint buffer) { detail::ptrBindBufferBase(target, index, buffer); }
+inline void BindBufferRange(Enum target, Uint index, Uint buffer, Intptr offset, Sizeiptr size) { detail::ptrBindBufferRange(target, index, buffer, offset, size); }
+inline void BindBuffersBase(Enum target, Uint first, Sizei count, const Uint* buffers) { detail::ptrBindBuffersBase(target, first, count, buffers); }
+inline void BindBuffersRange(Enum target, Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizeiptr* sizes) { detail::ptrBindBuffersRange(target, first, count, buffers, offsets, sizes); }
+inline void BindFragDataLocation(Uint program, Uint color, const Char* name) { detail::ptrBindFragDataLocation(program, color, name); }
+inline void BindFragDataLocationIndexed(Uint program, Uint colorNumber, Uint index, const Char* name) { detail::ptrBindFragDataLocationIndexed(program, colorNumber, index, name); }
+inline void BindFramebuffer(Enum target, Uint framebuffer) { detail::ptrBindFramebuffer(target, framebuffer); }
+inline void BindImageTexture(Uint unit, Uint texture, Int level, Boolean layered, Int layer, Enum access, Enum format) { detail::ptrBindImageTexture(unit, texture, level, layered, layer, access, format); }
+inline void BindImageTextures(Uint first, Sizei count, const Uint* textures) { detail::ptrBindImageTextures(first, count, textures); }
+inline void BindProgramPipeline(Uint pipeline) { detail::ptrBindProgramPipeline(pipeline); }
+inline void BindRenderbuffer(Enum target, Uint renderbuffer) { detail::ptrBindRenderbuffer(target, renderbuffer); }
+inline void BindSampler(Uint unit, Uint sampler) { detail::ptrBindSampler(unit, sampler); }
+inline void BindSamplers(Uint first, Sizei count, const Uint* samplers) { detail::ptrBindSamplers(first, count, samplers); }
+inline void BindTexture(Enum target, Uint texture) { detail::ptrBindTexture(target, texture); }
+inline void BindTextureUnit(Uint unit, Uint texture) { detail::ptrBindTextureUnit(unit, texture); }
+inline void BindTextures(Uint first, Sizei count, const Uint* textures) { detail::ptrBindTextures(first, count, textures); }
+inline void BindTransformFeedback(Enum target, Uint id) { detail::ptrBindTransformFeedback(target, id); }
+inline void BindVertexArray(Uint array) { detail::ptrBindVertexArray(array); }
+inline void BindVertexBuffer(Uint bindingindex, Uint buffer, Intptr offset, Sizei stride) { detail::ptrBindVertexBuffer(bindingindex, buffer, offset, stride); }
+inline void BindVertexBuffers(Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizei* strides) { detail::ptrBindVertexBuffers(first, count, buffers, offsets, strides); }
+inline void BlendColor(Float red, Float green, Float blue, Float alpha) { detail::ptrBlendColor(red, green, blue, alpha); }
+inline void BlendEquation(Enum mode) { detail::ptrBlendEquation(mode); }
+inline void BlendEquationSeparate(Enum modeRGB, Enum modeAlpha) { detail::ptrBlendEquationSeparate(modeRGB, modeAlpha); }
+inline void BlendEquationSeparatei(Uint buf, Enum modeRGB, Enum modeAlpha) { detail::ptrBlendEquationSeparatei(buf, modeRGB, modeAlpha); }
+inline void BlendEquationi(Uint buf, Enum mode) { detail::ptrBlendEquationi(buf, mode); }
+inline void BlendFunc(Enum sfactor, Enum dfactor) { detail::ptrBlendFunc(sfactor, dfactor); }
+inline void BlendFuncSeparate(Enum sfactorRGB, Enum dfactorRGB, Enum sfactorAlpha, Enum dfactorAlpha) { detail::ptrBlendFuncSeparate(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha); }
+inline void BlendFuncSeparatei(Uint buf, Enum srcRGB, Enum dstRGB, Enum srcAlpha, Enum dstAlpha) { detail::ptrBlendFuncSeparatei(buf, srcRGB, dstRGB, srcAlpha, dstAlpha); }
+inline void BlendFunci(Uint buf, Enum src, Enum dst) { detail::ptrBlendFunci(buf, src, dst); }
+inline void BlitFramebuffer(Int srcX0, Int srcY0, Int srcX1, Int srcY1, Int dstX0, Int dstY0, Int dstX1, Int dstY1, Bitfield mask, Enum filter) { detail::ptrBlitFramebuffer(srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter); }
+inline void BlitNamedFramebuffer(Uint readFramebuffer, Uint drawFramebuffer, Int srcX0, Int srcY0, Int srcX1, Int srcY1, Int dstX0, Int dstY0, Int dstX1, Int dstY1, Bitfield mask, Enum filter) { detail::ptrBlitNamedFramebuffer(readFramebuffer, drawFramebuffer, srcX0, srcY0, srcX1, srcY1, dstX0, dstY0, dstX1, dstY1, mask, filter); }
+inline void BufferData(Enum target, Sizeiptr size, const void* data, Enum usage) { detail::ptrBufferData(target, size, data, usage); }
+inline void BufferStorage(Enum target, Sizeiptr size, const void* data, Bitfield flags) { detail::ptrBufferStorage(target, size, data, flags); }
+inline void BufferSubData(Enum target, Intptr offset, Sizeiptr size, const void* data) { detail::ptrBufferSubData(target, offset, size, data); }
+inline Enum CheckFramebufferStatus(Enum target) { return detail::ptrCheckFramebufferStatus(target); }
+inline Enum CheckNamedFramebufferStatus(Uint framebuffer, Enum target) { return detail::ptrCheckNamedFramebufferStatus(framebuffer, target); }
+inline void ClampColor(Enum target, Enum clamp) { detail::ptrClampColor(target, clamp); }
+inline void Clear(Bitfield mask) { detail::ptrClear(mask); }
+inline void ClearBufferData(Enum target, Enum internalformat, Enum format, Enum type, const void* data) { detail::ptrClearBufferData(target, internalformat, format, type, data); }
+inline void ClearBufferSubData(Enum target, Enum internalformat, Intptr offset, Sizeiptr size, Enum format, Enum type, const void* data) { detail::ptrClearBufferSubData(target, internalformat, offset, size, format, type, data); }
+inline void ClearBufferfi(Enum buffer, Int drawbuffer, Float depth, Int stencil) { detail::ptrClearBufferfi(buffer, drawbuffer, depth, stencil); }
+inline void ClearBufferfv(Enum buffer, Int drawbuffer, const Float* value) { detail::ptrClearBufferfv(buffer, drawbuffer, value); }
+inline void ClearBufferiv(Enum buffer, Int drawbuffer, const Int* value) { detail::ptrClearBufferiv(buffer, drawbuffer, value); }
+inline void ClearBufferuiv(Enum buffer, Int drawbuffer, const Uint* value) { detail::ptrClearBufferuiv(buffer, drawbuffer, value); }
+inline void ClearColor(Float red, Float green, Float blue, Float alpha) { detail::ptrClearColor(red, green, blue, alpha); }
+inline void ClearDepth(Double depth) { detail::ptrClearDepth(depth); }
+inline void ClearDepthf(Float d) { detail::ptrClearDepthf(d); }
+inline void ClearNamedBufferData(Uint buffer, Enum internalformat, Enum format, Enum type, const void* data) { detail::ptrClearNamedBufferData(buffer, internalformat, format, type, data); }
+inline void ClearNamedBufferSubData(Uint buffer, Enum internalformat, Intptr offset, Sizeiptr size, Enum format, Enum type, const void* data) { detail::ptrClearNamedBufferSubData(buffer, internalformat, offset, size, format, type, data); }
+inline void ClearNamedFramebufferfi(Uint framebuffer, Enum buffer, Int drawbuffer, Float depth, Int stencil) { detail::ptrClearNamedFramebufferfi(framebuffer, buffer, drawbuffer, depth, stencil); }
+inline void ClearNamedFramebufferfv(Uint framebuffer, Enum buffer, Int drawbuffer, const Float* value) { detail::ptrClearNamedFramebufferfv(framebuffer, buffer, drawbuffer, value); }
+inline void ClearNamedFramebufferiv(Uint framebuffer, Enum buffer, Int drawbuffer, const Int* value) { detail::ptrClearNamedFramebufferiv(framebuffer, buffer, drawbuffer, value); }
+inline void ClearNamedFramebufferuiv(Uint framebuffer, Enum buffer, Int drawbuffer, const Uint* value) { detail::ptrClearNamedFramebufferuiv(framebuffer, buffer, drawbuffer, value); }
+inline void ClearStencil(Int s) { detail::ptrClearStencil(s); }
+inline void ClearTexImage(Uint texture, Int level, Enum format, Enum type, const void* data) { detail::ptrClearTexImage(texture, level, format, type, data); }
+inline void ClearTexSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* data) { detail::ptrClearTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, data); }
+inline Enum ClientWaitSync(Sync sync, Bitfield flags, Uint64 timeout) { return detail::ptrClientWaitSync(sync, flags, timeout); }
+inline void ClipControl(Enum origin, Enum depth) { detail::ptrClipControl(origin, depth); }
+inline void ColorMask(Boolean red, Boolean green, Boolean blue, Boolean alpha) { detail::ptrColorMask(red, green, blue, alpha); }
+inline void ColorMaski(Uint index, Boolean r, Boolean g, Boolean b, Boolean a) { detail::ptrColorMaski(index, r, g, b, a); }
+inline void CompileShader(Uint shader) { detail::ptrCompileShader(shader); }
+inline void CompressedTexImage1D(Enum target, Int level, Enum internalformat, Sizei width, Int border, Sizei imageSize, const void* data) { detail::ptrCompressedTexImage1D(target, level, internalformat, width, border, imageSize, data); }
+inline void CompressedTexImage2D(Enum target, Int level, Enum internalformat, Sizei width, Sizei height, Int border, Sizei imageSize, const void* data) { detail::ptrCompressedTexImage2D(target, level, internalformat, width, height, border, imageSize, data); }
+inline void CompressedTexImage3D(Enum target, Int level, Enum internalformat, Sizei width, Sizei height, Sizei depth, Int border, Sizei imageSize, const void* data) { detail::ptrCompressedTexImage3D(target, level, internalformat, width, height, depth, border, imageSize, data); }
+inline void CompressedTexSubImage1D(Enum target, Int level, Int xoffset, Sizei width, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTexSubImage1D(target, level, xoffset, width, format, imageSize, data); }
+inline void CompressedTexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data); }
+inline void CompressedTexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data); }
+inline void CompressedTextureSubImage1D(Uint texture, Int level, Int xoffset, Sizei width, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTextureSubImage1D(texture, level, xoffset, width, format, imageSize, data); }
+inline void CompressedTextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, imageSize, data); }
+inline void CompressedTextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Sizei imageSize, const void* data) { detail::ptrCompressedTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, imageSize, data); }
+inline void CopyBufferSubData(Enum readTarget, Enum writeTarget, Intptr readOffset, Intptr writeOffset, Sizeiptr size) { detail::ptrCopyBufferSubData(readTarget, writeTarget, readOffset, writeOffset, size); }
+inline void CopyImageSubData(Uint srcName, Enum srcTarget, Int srcLevel, Int srcX, Int srcY, Int srcZ, Uint dstName, Enum dstTarget, Int dstLevel, Int dstX, Int dstY, Int dstZ, Sizei srcWidth, Sizei srcHeight, Sizei srcDepth) { detail::ptrCopyImageSubData(srcName, srcTarget, srcLevel, srcX, srcY, srcZ, dstName, dstTarget, dstLevel, dstX, dstY, dstZ, srcWidth, srcHeight, srcDepth); }
+inline void CopyNamedBufferSubData(Uint readBuffer, Uint writeBuffer, Intptr readOffset, Intptr writeOffset, Sizeiptr size) { detail::ptrCopyNamedBufferSubData(readBuffer, writeBuffer, readOffset, writeOffset, size); }
+inline void CopyTexImage1D(Enum target, Int level, Enum internalformat, Int x, Int y, Sizei width, Int border) { detail::ptrCopyTexImage1D(target, level, internalformat, x, y, width, border); }
+inline void CopyTexImage2D(Enum target, Int level, Enum internalformat, Int x, Int y, Sizei width, Sizei height, Int border) { detail::ptrCopyTexImage2D(target, level, internalformat, x, y, width, height, border); }
+inline void CopyTexSubImage1D(Enum target, Int level, Int xoffset, Int x, Int y, Sizei width) { detail::ptrCopyTexSubImage1D(target, level, xoffset, x, y, width); }
+inline void CopyTexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Int x, Int y, Sizei width, Sizei height) { detail::ptrCopyTexSubImage2D(target, level, xoffset, yoffset, x, y, width, height); }
+inline void CopyTexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Int x, Int y, Sizei width, Sizei height) { detail::ptrCopyTexSubImage3D(target, level, xoffset, yoffset, zoffset, x, y, width, height); }
+inline void CopyTextureSubImage1D(Uint texture, Int level, Int xoffset, Int x, Int y, Sizei width) { detail::ptrCopyTextureSubImage1D(texture, level, xoffset, x, y, width); }
+inline void CopyTextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Int x, Int y, Sizei width, Sizei height) { detail::ptrCopyTextureSubImage2D(texture, level, xoffset, yoffset, x, y, width, height); }
+inline void CopyTextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Int x, Int y, Sizei width, Sizei height) { detail::ptrCopyTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, x, y, width, height); }
+inline void CreateBuffers(Sizei n, Uint* buffers) { detail::ptrCreateBuffers(n, buffers); }
+inline void CreateFramebuffers(Sizei n, Uint* framebuffers) { detail::ptrCreateFramebuffers(n, framebuffers); }
+inline Uint CreateProgram() { return detail::ptrCreateProgram(); }
+inline void CreateProgramPipelines(Sizei n, Uint* pipelines) { detail::ptrCreateProgramPipelines(n, pipelines); }
+inline void CreateQueries(Enum target, Sizei n, Uint* ids) { detail::ptrCreateQueries(target, n, ids); }
+inline void CreateRenderbuffers(Sizei n, Uint* renderbuffers) { detail::ptrCreateRenderbuffers(n, renderbuffers); }
+inline void CreateSamplers(Sizei n, Uint* samplers) { detail::ptrCreateSamplers(n, samplers); }
+inline Uint CreateShader(Enum type) { return detail::ptrCreateShader(type); }
+inline Uint CreateShaderProgramv(Enum type, Sizei count, const Char** strings) { return detail::ptrCreateShaderProgramv(type, count, strings); }
+inline void CreateTextures(Enum target, Sizei n, Uint* textures) { detail::ptrCreateTextures(target, n, textures); }
+inline void CreateTransformFeedbacks(Sizei n, Uint* ids) { detail::ptrCreateTransformFeedbacks(n, ids); }
+inline void CreateVertexArrays(Sizei n, Uint* arrays) { detail::ptrCreateVertexArrays(n, arrays); }
+inline void CullFace(Enum mode) { detail::ptrCullFace(mode); }
+inline void DebugMessageCallback(DebugProc callback, const void* userParam) { detail::ptrDebugMessageCallback(callback, userParam); }
+inline void DebugMessageControl(Enum source, Enum type, Enum severity, Sizei count, const Uint* ids, Boolean enabled) { detail::ptrDebugMessageControl(source, type, severity, count, ids, enabled); }
+inline void DebugMessageInsert(Enum source, Enum type, Uint id, Enum severity, Sizei length, const Char* buf) { detail::ptrDebugMessageInsert(source, type, id, severity, length, buf); }
+inline void DeleteBuffers(Sizei n, const Uint* buffers) { detail::ptrDeleteBuffers(n, buffers); }
+inline void DeleteFramebuffers(Sizei n, const Uint* framebuffers) { detail::ptrDeleteFramebuffers(n, framebuffers); }
+inline void DeleteProgram(Uint program) { detail::ptrDeleteProgram(program); }
+inline void DeleteProgramPipelines(Sizei n, const Uint* pipelines) { detail::ptrDeleteProgramPipelines(n, pipelines); }
+inline void DeleteQueries(Sizei n, const Uint* ids) { detail::ptrDeleteQueries(n, ids); }
+inline void DeleteRenderbuffers(Sizei n, const Uint* renderbuffers) { detail::ptrDeleteRenderbuffers(n, renderbuffers); }
+inline void DeleteSamplers(Sizei count, const Uint* samplers) { detail::ptrDeleteSamplers(count, samplers); }
+inline void DeleteShader(Uint shader) { detail::ptrDeleteShader(shader); }
+inline void DeleteSync(Sync sync) { detail::ptrDeleteSync(sync); }
+inline void DeleteTextures(Sizei n, const Uint* textures) { detail::ptrDeleteTextures(n, textures); }
+inline void DeleteTransformFeedbacks(Sizei n, const Uint* ids) { detail::ptrDeleteTransformFeedbacks(n, ids); }
+inline void DeleteVertexArrays(Sizei n, const Uint* arrays) { detail::ptrDeleteVertexArrays(n, arrays); }
+inline void DepthFunc(Enum func) { detail::ptrDepthFunc(func); }
+inline void DepthMask(Boolean flag) { detail::ptrDepthMask(flag); }
+inline void DepthRange(Double n, Double f) { detail::ptrDepthRange(n, f); }
+inline void DepthRangeArrayv(Uint first, Sizei count, const Double* v) { detail::ptrDepthRangeArrayv(first, count, v); }
+inline void DepthRangeIndexed(Uint index, Double n, Double f) { detail::ptrDepthRangeIndexed(index, n, f); }
+inline void DepthRangef(Float n, Float f) { detail::ptrDepthRangef(n, f); }
+inline void DetachShader(Uint program, Uint shader) { detail::ptrDetachShader(program, shader); }
+inline void Disable(Enum cap) { detail::ptrDisable(cap); }
+inline void DisableVertexArrayAttrib(Uint vaobj, Uint index) { detail::ptrDisableVertexArrayAttrib(vaobj, index); }
+inline void DisableVertexAttribArray(Uint index) { detail::ptrDisableVertexAttribArray(index); }
+inline void Disablei(Enum target, Uint index) { detail::ptrDisablei(target, index); }
+inline void DispatchCompute(Uint num_groups_x, Uint num_groups_y, Uint num_groups_z) { detail::ptrDispatchCompute(num_groups_x, num_groups_y, num_groups_z); }
+inline void DispatchComputeIndirect(Intptr indirect) { detail::ptrDispatchComputeIndirect(indirect); }
+inline void DrawArrays(Enum mode, Int first, Sizei count) { detail::ptrDrawArrays(mode, first, count); }
+inline void DrawArraysIndirect(Enum mode, const void* indirect) { detail::ptrDrawArraysIndirect(mode, indirect); }
+inline void DrawArraysInstanced(Enum mode, Int first, Sizei count, Sizei instancecount) { detail::ptrDrawArraysInstanced(mode, first, count, instancecount); }
+inline void DrawArraysInstancedBaseInstance(Enum mode, Int first, Sizei count, Sizei instancecount, Uint baseinstance) { detail::ptrDrawArraysInstancedBaseInstance(mode, first, count, instancecount, baseinstance); }
+inline void DrawBuffer(Enum buf) { detail::ptrDrawBuffer(buf); }
+inline void DrawBuffers(Sizei n, const Enum* bufs) { detail::ptrDrawBuffers(n, bufs); }
+inline void DrawElements(Enum mode, Sizei count, Enum type, const void* indices) { detail::ptrDrawElements(mode, count, type, indices); }
+inline void DrawElementsBaseVertex(Enum mode, Sizei count, Enum type, const void* indices, Int basevertex) { detail::ptrDrawElementsBaseVertex(mode, count, type, indices, basevertex); }
+inline void DrawElementsIndirect(Enum mode, Enum type, const void* indirect) { detail::ptrDrawElementsIndirect(mode, type, indirect); }
+inline void DrawElementsInstanced(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount) { detail::ptrDrawElementsInstanced(mode, count, type, indices, instancecount); }
+inline void DrawElementsInstancedBaseInstance(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Uint baseinstance) { detail::ptrDrawElementsInstancedBaseInstance(mode, count, type, indices, instancecount, baseinstance); }
+inline void DrawElementsInstancedBaseVertex(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Int basevertex) { detail::ptrDrawElementsInstancedBaseVertex(mode, count, type, indices, instancecount, basevertex); }
+inline void DrawElementsInstancedBaseVertexBaseInstance(Enum mode, Sizei count, Enum type, const void* indices, Sizei instancecount, Int basevertex, Uint baseinstance) { detail::ptrDrawElementsInstancedBaseVertexBaseInstance(mode, count, type, indices, instancecount, basevertex, baseinstance); }
+inline void DrawRangeElements(Enum mode, Uint start, Uint end, Sizei count, Enum type, const void* indices) { detail::ptrDrawRangeElements(mode, start, end, count, type, indices); }
+inline void DrawRangeElementsBaseVertex(Enum mode, Uint start, Uint end, Sizei count, Enum type, const void* indices, Int basevertex) { detail::ptrDrawRangeElementsBaseVertex(mode, start, end, count, type, indices, basevertex); }
+inline void DrawTransformFeedback(Enum mode, Uint id) { detail::ptrDrawTransformFeedback(mode, id); }
+inline void DrawTransformFeedbackInstanced(Enum mode, Uint id, Sizei instancecount) { detail::ptrDrawTransformFeedbackInstanced(mode, id, instancecount); }
+inline void DrawTransformFeedbackStream(Enum mode, Uint id, Uint stream) { detail::ptrDrawTransformFeedbackStream(mode, id, stream); }
+inline void DrawTransformFeedbackStreamInstanced(Enum mode, Uint id, Uint stream, Sizei instancecount) { detail::ptrDrawTransformFeedbackStreamInstanced(mode, id, stream, instancecount); }
+inline void Enable(Enum cap) { detail::ptrEnable(cap); }
+inline void EnableVertexArrayAttrib(Uint vaobj, Uint index) { detail::ptrEnableVertexArrayAttrib(vaobj, index); }
+inline void EnableVertexAttribArray(Uint index) { detail::ptrEnableVertexAttribArray(index); }
+inline void Enablei(Enum target, Uint index) { detail::ptrEnablei(target, index); }
+inline void EndConditionalRender() { detail::ptrEndConditionalRender(); }
+inline void EndQuery(Enum target) { detail::ptrEndQuery(target); }
+inline void EndQueryIndexed(Enum target, Uint index) { detail::ptrEndQueryIndexed(target, index); }
+inline void EndTransformFeedback() { detail::ptrEndTransformFeedback(); }
+inline Sync FenceSync(Enum condition, Bitfield flags) { return detail::ptrFenceSync(condition, flags); }
+inline void Finish() { detail::ptrFinish(); }
+inline void Flush() { detail::ptrFlush(); }
+inline void FlushMappedBufferRange(Enum target, Intptr offset, Sizeiptr length) { detail::ptrFlushMappedBufferRange(target, offset, length); }
+inline void FlushMappedNamedBufferRange(Uint buffer, Intptr offset, Sizeiptr length) { detail::ptrFlushMappedNamedBufferRange(buffer, offset, length); }
+inline void FramebufferParameteri(Enum target, Enum pname, Int param) { detail::ptrFramebufferParameteri(target, pname, param); }
+inline void FramebufferRenderbuffer(Enum target, Enum attachment, Enum renderbuffertarget, Uint renderbuffer) { detail::ptrFramebufferRenderbuffer(target, attachment, renderbuffertarget, renderbuffer); }
+inline void FramebufferTexture(Enum target, Enum attachment, Uint texture, Int level) { detail::ptrFramebufferTexture(target, attachment, texture, level); }
+inline void FramebufferTexture1D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level) { detail::ptrFramebufferTexture1D(target, attachment, textarget, texture, level); }
+inline void FramebufferTexture2D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level) { detail::ptrFramebufferTexture2D(target, attachment, textarget, texture, level); }
+inline void FramebufferTexture3D(Enum target, Enum attachment, Enum textarget, Uint texture, Int level, Int zoffset) { detail::ptrFramebufferTexture3D(target, attachment, textarget, texture, level, zoffset); }
+inline void FramebufferTextureLayer(Enum target, Enum attachment, Uint texture, Int level, Int layer) { detail::ptrFramebufferTextureLayer(target, attachment, texture, level, layer); }
+inline void FrontFace(Enum mode) { detail::ptrFrontFace(mode); }
+inline void GenBuffers(Sizei n, Uint* buffers) { detail::ptrGenBuffers(n, buffers); }
+inline void GenFramebuffers(Sizei n, Uint* framebuffers) { detail::ptrGenFramebuffers(n, framebuffers); }
+inline void GenProgramPipelines(Sizei n, Uint* pipelines) { detail::ptrGenProgramPipelines(n, pipelines); }
+inline void GenQueries(Sizei n, Uint* ids) { detail::ptrGenQueries(n, ids); }
+inline void GenRenderbuffers(Sizei n, Uint* renderbuffers) { detail::ptrGenRenderbuffers(n, renderbuffers); }
+inline void GenSamplers(Sizei count, Uint* samplers) { detail::ptrGenSamplers(count, samplers); }
+inline void GenTextures(Sizei n, Uint* textures) { detail::ptrGenTextures(n, textures); }
+inline void GenTransformFeedbacks(Sizei n, Uint* ids) { detail::ptrGenTransformFeedbacks(n, ids); }
+inline void GenVertexArrays(Sizei n, Uint* arrays) { detail::ptrGenVertexArrays(n, arrays); }
+inline void GenerateMipmap(Enum target) { detail::ptrGenerateMipmap(target); }
+inline void GenerateTextureMipmap(Uint texture) { detail::ptrGenerateTextureMipmap(texture); }
+inline void GetActiveAtomicCounterBufferiv(Uint program, Uint bufferIndex, Enum pname, Int* params) { detail::ptrGetActiveAtomicCounterBufferiv(program, bufferIndex, pname, params); }
+inline void GetActiveAttrib(Uint program, Uint index, Sizei bufSize, Sizei* length, Int* size, Enum* type, Char* name) { detail::ptrGetActiveAttrib(program, index, bufSize, length, size, type, name); }
+inline void GetActiveSubroutineName(Uint program, Enum shadertype, Uint index, Sizei bufSize, Sizei* length, Char* name) { detail::ptrGetActiveSubroutineName(program, shadertype, index, bufSize, length, name); }
+inline void GetActiveSubroutineUniformName(Uint program, Enum shadertype, Uint index, Sizei bufSize, Sizei* length, Char* name) { detail::ptrGetActiveSubroutineUniformName(program, shadertype, index, bufSize, length, name); }
+inline void GetActiveSubroutineUniformiv(Uint program, Enum shadertype, Uint index, Enum pname, Int* values) { detail::ptrGetActiveSubroutineUniformiv(program, shadertype, index, pname, values); }
+inline void GetActiveUniform(Uint program, Uint index, Sizei bufSize, Sizei* length, Int* size, Enum* type, Char* name) { detail::ptrGetActiveUniform(program, index, bufSize, length, size, type, name); }
+inline void GetActiveUniformBlockName(Uint program, Uint uniformBlockIndex, Sizei bufSize, Sizei* length, Char* uniformBlockName) { detail::ptrGetActiveUniformBlockName(program, uniformBlockIndex, bufSize, length, uniformBlockName); }
+inline void GetActiveUniformBlockiv(Uint program, Uint uniformBlockIndex, Enum pname, Int* params) { detail::ptrGetActiveUniformBlockiv(program, uniformBlockIndex, pname, params); }
+inline void GetActiveUniformName(Uint program, Uint uniformIndex, Sizei bufSize, Sizei* length, Char* uniformName) { detail::ptrGetActiveUniformName(program, uniformIndex, bufSize, length, uniformName); }
+inline void GetActiveUniformsiv(Uint program, Sizei uniformCount, const Uint* uniformIndices, Enum pname, Int* params) { detail::ptrGetActiveUniformsiv(program, uniformCount, uniformIndices, pname, params); }
+inline void GetAttachedShaders(Uint program, Sizei maxCount, Sizei* count, Uint* shaders) { detail::ptrGetAttachedShaders(program, maxCount, count, shaders); }
+inline Int GetAttribLocation(Uint program, const Char* name) { return detail::ptrGetAttribLocation(program, name); }
+inline void GetBooleani_v(Enum target, Uint index, Boolean* data) { detail::ptrGetBooleani_v(target, index, data); }
+inline void GetBooleanv(Enum pname, Boolean* data) { detail::ptrGetBooleanv(pname, data); }
+inline void GetBufferParameteri64v(Enum target, Enum pname, Int64* params) { detail::ptrGetBufferParameteri64v(target, pname, params); }
+inline void GetBufferParameteriv(Enum target, Enum pname, Int* params) { detail::ptrGetBufferParameteriv(target, pname, params); }
+inline void GetBufferPointerv(Enum target, Enum pname, void** params) { detail::ptrGetBufferPointerv(target, pname, params); }
+inline void GetBufferSubData(Enum target, Intptr offset, Sizeiptr size, void* data) { detail::ptrGetBufferSubData(target, offset, size, data); }
+inline void GetCompressedTexImage(Enum target, Int level, void* img) { detail::ptrGetCompressedTexImage(target, level, img); }
+inline void GetCompressedTextureImage(Uint texture, Int level, Sizei bufSize, void* pixels) { detail::ptrGetCompressedTextureImage(texture, level, bufSize, pixels); }
+inline void GetCompressedTextureSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Sizei bufSize, void* pixels) { detail::ptrGetCompressedTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, bufSize, pixels); }
+inline Uint GetDebugMessageLog(Uint count, Sizei bufSize, Enum* sources, Enum* types, Uint* ids, Enum* severities, Sizei* lengths, Char* messageLog) { return detail::ptrGetDebugMessageLog(count, bufSize, sources, types, ids, severities, lengths, messageLog); }
+inline void GetDoublei_v(Enum target, Uint index, Double* data) { detail::ptrGetDoublei_v(target, index, data); }
+inline void GetDoublev(Enum pname, Double* data) { detail::ptrGetDoublev(pname, data); }
+inline Enum GetError() { return detail::ptrGetError(); }
+inline void GetFloati_v(Enum target, Uint index, Float* data) { detail::ptrGetFloati_v(target, index, data); }
+inline void GetFloatv(Enum pname, Float* data) { detail::ptrGetFloatv(pname, data); }
+inline Int GetFragDataIndex(Uint program, const Char* name) { return detail::ptrGetFragDataIndex(program, name); }
+inline Int GetFragDataLocation(Uint program, const Char* name) { return detail::ptrGetFragDataLocation(program, name); }
+inline void GetFramebufferAttachmentParameteriv(Enum target, Enum attachment, Enum pname, Int* params) { detail::ptrGetFramebufferAttachmentParameteriv(target, attachment, pname, params); }
+inline void GetFramebufferParameteriv(Enum target, Enum pname, Int* params) { detail::ptrGetFramebufferParameteriv(target, pname, params); }
+inline Enum GetGraphicsResetStatus() { return detail::ptrGetGraphicsResetStatus(); }
+inline void GetInteger64i_v(Enum target, Uint index, Int64* data) { detail::ptrGetInteger64i_v(target, index, data); }
+inline void GetInteger64v(Enum pname, Int64* data) { detail::ptrGetInteger64v(pname, data); }
+inline void GetIntegeri_v(Enum target, Uint index, Int* data) { detail::ptrGetIntegeri_v(target, index, data); }
+inline void GetIntegerv(Enum pname, Int* data) { detail::ptrGetIntegerv(pname, data); }
+inline void GetInternalformati64v(Enum target, Enum internalformat, Enum pname, Sizei count, Int64* params) { detail::ptrGetInternalformati64v(target, internalformat, pname, count, params); }
+inline void GetInternalformativ(Enum target, Enum internalformat, Enum pname, Sizei count, Int* params) { detail::ptrGetInternalformativ(target, internalformat, pname, count, params); }
+inline void GetMultisamplefv(Enum pname, Uint index, Float* val) { detail::ptrGetMultisamplefv(pname, index, val); }
+inline void GetNamedBufferParameteri64v(Uint buffer, Enum pname, Int64* params) { detail::ptrGetNamedBufferParameteri64v(buffer, pname, params); }
+inline void GetNamedBufferParameteriv(Uint buffer, Enum pname, Int* params) { detail::ptrGetNamedBufferParameteriv(buffer, pname, params); }
+inline void GetNamedBufferPointerv(Uint buffer, Enum pname, void** params) { detail::ptrGetNamedBufferPointerv(buffer, pname, params); }
+inline void GetNamedBufferSubData(Uint buffer, Intptr offset, Sizeiptr size, void* data) { detail::ptrGetNamedBufferSubData(buffer, offset, size, data); }
+inline void GetNamedFramebufferAttachmentParameteriv(Uint framebuffer, Enum attachment, Enum pname, Int* params) { detail::ptrGetNamedFramebufferAttachmentParameteriv(framebuffer, attachment, pname, params); }
+inline void GetNamedFramebufferParameteriv(Uint framebuffer, Enum pname, Int* param) { detail::ptrGetNamedFramebufferParameteriv(framebuffer, pname, param); }
+inline void GetNamedRenderbufferParameteriv(Uint renderbuffer, Enum pname, Int* params) { detail::ptrGetNamedRenderbufferParameteriv(renderbuffer, pname, params); }
+inline void GetObjectLabel(Enum identifier, Uint name, Sizei bufSize, Sizei* length, Char* label) { detail::ptrGetObjectLabel(identifier, name, bufSize, length, label); }
+inline void GetObjectPtrLabel(const void* ptr, Sizei bufSize, Sizei* length, Char* label) { detail::ptrGetObjectPtrLabel(ptr, bufSize, length, label); }
+inline void GetProgramBinary(Uint program, Sizei bufSize, Sizei* length, Enum* binaryFormat, void* binary) { detail::ptrGetProgramBinary(program, bufSize, length, binaryFormat, binary); }
+inline void GetProgramInfoLog(Uint program, Sizei bufSize, Sizei* length, Char* infoLog) { detail::ptrGetProgramInfoLog(program, bufSize, length, infoLog); }
+inline void GetProgramInterfaceiv(Uint program, Enum programInterface, Enum pname, Int* params) { detail::ptrGetProgramInterfaceiv(program, programInterface, pname, params); }
+inline void GetProgramPipelineInfoLog(Uint pipeline, Sizei bufSize, Sizei* length, Char* infoLog) { detail::ptrGetProgramPipelineInfoLog(pipeline, bufSize, length, infoLog); }
+inline void GetProgramPipelineiv(Uint pipeline, Enum pname, Int* params) { detail::ptrGetProgramPipelineiv(pipeline, pname, params); }
+inline Uint GetProgramResourceIndex(Uint program, Enum programInterface, const Char* name) { return detail::ptrGetProgramResourceIndex(program, programInterface, name); }
+inline Int GetProgramResourceLocation(Uint program, Enum programInterface, const Char* name) { return detail::ptrGetProgramResourceLocation(program, programInterface, name); }
+inline Int GetProgramResourceLocationIndex(Uint program, Enum programInterface, const Char* name) { return detail::ptrGetProgramResourceLocationIndex(program, programInterface, name); }
+inline void GetProgramResourceName(Uint program, Enum programInterface, Uint index, Sizei bufSize, Sizei* length, Char* name) { detail::ptrGetProgramResourceName(program, programInterface, index, bufSize, length, name); }
+inline void GetProgramResourceiv(Uint program, Enum programInterface, Uint index, Sizei propCount, const Enum* props, Sizei count, Sizei* length, Int* params) { detail::ptrGetProgramResourceiv(program, programInterface, index, propCount, props, count, length, params); }
+inline void GetProgramStageiv(Uint program, Enum shadertype, Enum pname, Int* values) { detail::ptrGetProgramStageiv(program, shadertype, pname, values); }
+inline void GetProgramiv(Uint program, Enum pname, Int* params) { detail::ptrGetProgramiv(program, pname, params); }
+inline void GetQueryBufferObjecti64v(Uint id, Uint buffer, Enum pname, Intptr offset) { detail::ptrGetQueryBufferObjecti64v(id, buffer, pname, offset); }
+inline void GetQueryBufferObjectiv(Uint id, Uint buffer, Enum pname, Intptr offset) { detail::ptrGetQueryBufferObjectiv(id, buffer, pname, offset); }
+inline void GetQueryBufferObjectui64v(Uint id, Uint buffer, Enum pname, Intptr offset) { detail::ptrGetQueryBufferObjectui64v(id, buffer, pname, offset); }
+inline void GetQueryBufferObjectuiv(Uint id, Uint buffer, Enum pname, Intptr offset) { detail::ptrGetQueryBufferObjectuiv(id, buffer, pname, offset); }
+inline void GetQueryIndexediv(Enum target, Uint index, Enum pname, Int* params) { detail::ptrGetQueryIndexediv(target, index, pname, params); }
+inline void GetQueryObjecti64v(Uint id, Enum pname, Int64* params) { detail::ptrGetQueryObjecti64v(id, pname, params); }
+inline void GetQueryObjectiv(Uint id, Enum pname, Int* params) { detail::ptrGetQueryObjectiv(id, pname, params); }
+inline void GetQueryObjectui64v(Uint id, Enum pname, Uint64* params) { detail::ptrGetQueryObjectui64v(id, pname, params); }
+inline void GetQueryObjectuiv(Uint id, Enum pname, Uint* params) { detail::ptrGetQueryObjectuiv(id, pname, params); }
+inline void GetQueryiv(Enum target, Enum pname, Int* params) { detail::ptrGetQueryiv(target, pname, params); }
+inline void GetRenderbufferParameteriv(Enum target, Enum pname, Int* params) { detail::ptrGetRenderbufferParameteriv(target, pname, params); }
+inline void GetSamplerParameterIiv(Uint sampler, Enum pname, Int* params) { detail::ptrGetSamplerParameterIiv(sampler, pname, params); }
+inline void GetSamplerParameterIuiv(Uint sampler, Enum pname, Uint* params) { detail::ptrGetSamplerParameterIuiv(sampler, pname, params); }
+inline void GetSamplerParameterfv(Uint sampler, Enum pname, Float* params) { detail::ptrGetSamplerParameterfv(sampler, pname, params); }
+inline void GetSamplerParameteriv(Uint sampler, Enum pname, Int* params) { detail::ptrGetSamplerParameteriv(sampler, pname, params); }
+inline void GetShaderInfoLog(Uint shader, Sizei bufSize, Sizei* length, Char* infoLog) { detail::ptrGetShaderInfoLog(shader, bufSize, length, infoLog); }
+inline void GetShaderPrecisionFormat(Enum shadertype, Enum precisiontype, Int* range, Int* precision) { detail::ptrGetShaderPrecisionFormat(shadertype, precisiontype, range, precision); }
+inline void GetShaderSource(Uint shader, Sizei bufSize, Sizei* length, Char* source) { detail::ptrGetShaderSource(shader, bufSize, length, source); }
+inline void GetShaderiv(Uint shader, Enum pname, Int* params) { detail::ptrGetShaderiv(shader, pname, params); }
+inline const Ubyte* GetString(Enum name) { return detail::ptrGetString(name); }
+inline const Ubyte* GetStringi(Enum name, Uint index) { return detail::ptrGetStringi(name, index); }
+inline Uint GetSubroutineIndex(Uint program, Enum shadertype, const Char* name) { return detail::ptrGetSubroutineIndex(program, shadertype, name); }
+inline Int GetSubroutineUniformLocation(Uint program, Enum shadertype, const Char* name) { return detail::ptrGetSubroutineUniformLocation(program, shadertype, name); }
+inline void GetSynciv(Sync sync, Enum pname, Sizei count, Sizei* length, Int* values) { detail::ptrGetSynciv(sync, pname, count, length, values); }
+inline void GetTexImage(Enum target, Int level, Enum format, Enum type, void* pixels) { detail::ptrGetTexImage(target, level, format, type, pixels); }
+inline void GetTexLevelParameterfv(Enum target, Int level, Enum pname, Float* params) { detail::ptrGetTexLevelParameterfv(target, level, pname, params); }
+inline void GetTexLevelParameteriv(Enum target, Int level, Enum pname, Int* params) { detail::ptrGetTexLevelParameteriv(target, level, pname, params); }
+inline void GetTexParameterIiv(Enum target, Enum pname, Int* params) { detail::ptrGetTexParameterIiv(target, pname, params); }
+inline void GetTexParameterIuiv(Enum target, Enum pname, Uint* params) { detail::ptrGetTexParameterIuiv(target, pname, params); }
+inline void GetTexParameterfv(Enum target, Enum pname, Float* params) { detail::ptrGetTexParameterfv(target, pname, params); }
+inline void GetTexParameteriv(Enum target, Enum pname, Int* params) { detail::ptrGetTexParameteriv(target, pname, params); }
+inline void GetTextureImage(Uint texture, Int level, Enum format, Enum type, Sizei bufSize, void* pixels) { detail::ptrGetTextureImage(texture, level, format, type, bufSize, pixels); }
+inline void GetTextureLevelParameterfv(Uint texture, Int level, Enum pname, Float* params) { detail::ptrGetTextureLevelParameterfv(texture, level, pname, params); }
+inline void GetTextureLevelParameteriv(Uint texture, Int level, Enum pname, Int* params) { detail::ptrGetTextureLevelParameteriv(texture, level, pname, params); }
+inline void GetTextureParameterIiv(Uint texture, Enum pname, Int* params) { detail::ptrGetTextureParameterIiv(texture, pname, params); }
+inline void GetTextureParameterIuiv(Uint texture, Enum pname, Uint* params) { detail::ptrGetTextureParameterIuiv(texture, pname, params); }
+inline void GetTextureParameterfv(Uint texture, Enum pname, Float* params) { detail::ptrGetTextureParameterfv(texture, pname, params); }
+inline void GetTextureParameteriv(Uint texture, Enum pname, Int* params) { detail::ptrGetTextureParameteriv(texture, pname, params); }
+inline void GetTextureSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, Sizei bufSize, void* pixels) { detail::ptrGetTextureSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, bufSize, pixels); }
+inline void GetTransformFeedbackVarying(Uint program, Uint index, Sizei bufSize, Sizei* length, Sizei* size, Enum* type, Char* name) { detail::ptrGetTransformFeedbackVarying(program, index, bufSize, length, size, type, name); }
+inline void GetTransformFeedbacki64_v(Uint xfb, Enum pname, Uint index, Int64* param) { detail::ptrGetTransformFeedbacki64_v(xfb, pname, index, param); }
+inline void GetTransformFeedbacki_v(Uint xfb, Enum pname, Uint index, Int* param) { detail::ptrGetTransformFeedbacki_v(xfb, pname, index, param); }
+inline void GetTransformFeedbackiv(Uint xfb, Enum pname, Int* param) { detail::ptrGetTransformFeedbackiv(xfb, pname, param); }
+inline Uint GetUniformBlockIndex(Uint program, const Char* uniformBlockName) { return detail::ptrGetUniformBlockIndex(program, uniformBlockName); }
+inline void GetUniformIndices(Uint program, Sizei uniformCount, const Char** uniformNames, Uint* uniformIndices) { detail::ptrGetUniformIndices(program, uniformCount, uniformNames, uniformIndices); }
+inline Int GetUniformLocation(Uint program, const Char* name) { return detail::ptrGetUniformLocation(program, name); }
+inline void GetUniformSubroutineuiv(Enum shadertype, Int location, Uint* params) { detail::ptrGetUniformSubroutineuiv(shadertype, location, params); }
+inline void GetUniformdv(Uint program, Int location, Double* params) { detail::ptrGetUniformdv(program, location, params); }
+inline void GetUniformfv(Uint program, Int location, Float* params) { detail::ptrGetUniformfv(program, location, params); }
+inline void GetUniformiv(Uint program, Int location, Int* params) { detail::ptrGetUniformiv(program, location, params); }
+inline void GetUniformuiv(Uint program, Int location, Uint* params) { detail::ptrGetUniformuiv(program, location, params); }
+inline void GetVertexArrayIndexed64iv(Uint vaobj, Uint index, Enum pname, Int64* param) { detail::ptrGetVertexArrayIndexed64iv(vaobj, index, pname, param); }
+inline void GetVertexArrayIndexediv(Uint vaobj, Uint index, Enum pname, Int* param) { detail::ptrGetVertexArrayIndexediv(vaobj, index, pname, param); }
+inline void GetVertexArrayiv(Uint vaobj, Enum pname, Int* param) { detail::ptrGetVertexArrayiv(vaobj, pname, param); }
+inline void GetVertexAttribIiv(Uint index, Enum pname, Int* params) { detail::ptrGetVertexAttribIiv(index, pname, params); }
+inline void GetVertexAttribIuiv(Uint index, Enum pname, Uint* params) { detail::ptrGetVertexAttribIuiv(index, pname, params); }
+inline void GetVertexAttribLdv(Uint index, Enum pname, Double* params) { detail::ptrGetVertexAttribLdv(index, pname, params); }
+inline void GetVertexAttribPointerv(Uint index, Enum pname, void** pointer) { detail::ptrGetVertexAttribPointerv(index, pname, pointer); }
+inline void GetVertexAttribdv(Uint index, Enum pname, Double* params) { detail::ptrGetVertexAttribdv(index, pname, params); }
+inline void GetVertexAttribfv(Uint index, Enum pname, Float* params) { detail::ptrGetVertexAttribfv(index, pname, params); }
+inline void GetVertexAttribiv(Uint index, Enum pname, Int* params) { detail::ptrGetVertexAttribiv(index, pname, params); }
+inline void GetnCompressedTexImage(Enum target, Int lod, Sizei bufSize, void* pixels) { detail::ptrGetnCompressedTexImage(target, lod, bufSize, pixels); }
+inline void GetnTexImage(Enum target, Int level, Enum format, Enum type, Sizei bufSize, void* pixels) { detail::ptrGetnTexImage(target, level, format, type, bufSize, pixels); }
+inline void GetnUniformdv(Uint program, Int location, Sizei bufSize, Double* params) { detail::ptrGetnUniformdv(program, location, bufSize, params); }
+inline void GetnUniformfv(Uint program, Int location, Sizei bufSize, Float* params) { detail::ptrGetnUniformfv(program, location, bufSize, params); }
+inline void GetnUniformiv(Uint program, Int location, Sizei bufSize, Int* params) { detail::ptrGetnUniformiv(program, location, bufSize, params); }
+inline void GetnUniformuiv(Uint program, Int location, Sizei bufSize, Uint* params) { detail::ptrGetnUniformuiv(program, location, bufSize, params); }
+inline void Hint(Enum target, Enum mode) { detail::ptrHint(target, mode); }
+inline void InvalidateBufferData(Uint buffer) { detail::ptrInvalidateBufferData(buffer); }
+inline void InvalidateBufferSubData(Uint buffer, Intptr offset, Sizeiptr length) { detail::ptrInvalidateBufferSubData(buffer, offset, length); }
+inline void InvalidateFramebuffer(Enum target, Sizei numAttachments, const Enum* attachments) { detail::ptrInvalidateFramebuffer(target, numAttachments, attachments); }
+inline void InvalidateNamedFramebufferData(Uint framebuffer, Sizei numAttachments, const Enum* attachments) { detail::ptrInvalidateNamedFramebufferData(framebuffer, numAttachments, attachments); }
+inline void InvalidateNamedFramebufferSubData(Uint framebuffer, Sizei numAttachments, const Enum* attachments, Int x, Int y, Sizei width, Sizei height) { detail::ptrInvalidateNamedFramebufferSubData(framebuffer, numAttachments, attachments, x, y, width, height); }
+inline void InvalidateSubFramebuffer(Enum target, Sizei numAttachments, const Enum* attachments, Int x, Int y, Sizei width, Sizei height) { detail::ptrInvalidateSubFramebuffer(target, numAttachments, attachments, x, y, width, height); }
+inline void InvalidateTexImage(Uint texture, Int level) { detail::ptrInvalidateTexImage(texture, level); }
+inline void InvalidateTexSubImage(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth) { detail::ptrInvalidateTexSubImage(texture, level, xoffset, yoffset, zoffset, width, height, depth); }
+inline Boolean IsBuffer(Uint buffer) { return detail::ptrIsBuffer(buffer); }
+inline Boolean IsEnabled(Enum cap) { return detail::ptrIsEnabled(cap); }
+inline Boolean IsEnabledi(Enum target, Uint index) { return detail::ptrIsEnabledi(target, index); }
+inline Boolean IsFramebuffer(Uint framebuffer) { return detail::ptrIsFramebuffer(framebuffer); }
+inline Boolean IsProgram(Uint program) { return detail::ptrIsProgram(program); }
+inline Boolean IsProgramPipeline(Uint pipeline) { return detail::ptrIsProgramPipeline(pipeline); }
+inline Boolean IsQuery(Uint id) { return detail::ptrIsQuery(id); }
+inline Boolean IsRenderbuffer(Uint renderbuffer) { return detail::ptrIsRenderbuffer(renderbuffer); }
+inline Boolean IsSampler(Uint sampler) { return detail::ptrIsSampler(sampler); }
+inline Boolean IsShader(Uint shader) { return detail::ptrIsShader(shader); }
+inline Boolean IsSync(Sync sync) { return detail::ptrIsSync(sync); }
+inline Boolean IsTexture(Uint texture) { return detail::ptrIsTexture(texture); }
+inline Boolean IsTransformFeedback(Uint id) { return detail::ptrIsTransformFeedback(id); }
+inline Boolean IsVertexArray(Uint array) { return detail::ptrIsVertexArray(array); }
+inline void LineWidth(Float width) { detail::ptrLineWidth(width); }
+inline void LinkProgram(Uint program) { detail::ptrLinkProgram(program); }
+inline void LogicOp(Enum opcode) { detail::ptrLogicOp(opcode); }
+inline void* MapBuffer(Enum target, Enum access) { return detail::ptrMapBuffer(target, access); }
+inline void* MapBufferRange(Enum target, Intptr offset, Sizeiptr length, Bitfield access) { return detail::ptrMapBufferRange(target, offset, length, access); }
+inline void* MapNamedBuffer(Uint buffer, Enum access) { return detail::ptrMapNamedBuffer(buffer, access); }
+inline void* MapNamedBufferRange(Uint buffer, Intptr offset, Sizeiptr length, Bitfield access) { return detail::ptrMapNamedBufferRange(buffer, offset, length, access); }
+inline void MemoryBarrier(Bitfield barriers) { detail::ptrMemoryBarrier(barriers); }
+inline void MemoryBarrierByRegion(Bitfield barriers) { detail::ptrMemoryBarrierByRegion(barriers); }
+inline void MinSampleShading(Float value) { detail::ptrMinSampleShading(value); }
+inline void MultiDrawArrays(Enum mode, const Int* first, const Sizei* count, Sizei drawcount) { detail::ptrMultiDrawArrays(mode, first, count, drawcount); }
+inline void MultiDrawArraysIndirect(Enum mode, const void* indirect, Sizei drawcount, Sizei stride) { detail::ptrMultiDrawArraysIndirect(mode, indirect, drawcount, stride); }
+inline void MultiDrawArraysIndirectCount(Enum mode, const void* indirect, Intptr drawcount, Sizei maxdrawcount, Sizei stride) { detail::ptrMultiDrawArraysIndirectCount(mode, indirect, drawcount, maxdrawcount, stride); }
+inline void MultiDrawElements(Enum mode, const Sizei* count, Enum type, const void** indices, Sizei drawcount) { detail::ptrMultiDrawElements(mode, count, type, indices, drawcount); }
+inline void MultiDrawElementsBaseVertex(Enum mode, const Sizei* count, Enum type, const void** indices, Sizei drawcount, const Int* basevertex) { detail::ptrMultiDrawElementsBaseVertex(mode, count, type, indices, drawcount, basevertex); }
+inline void MultiDrawElementsIndirect(Enum mode, Enum type, const void* indirect, Sizei drawcount, Sizei stride) { detail::ptrMultiDrawElementsIndirect(mode, type, indirect, drawcount, stride); }
+inline void MultiDrawElementsIndirectCount(Enum mode, Enum type, const void* indirect, Intptr drawcount, Sizei maxdrawcount, Sizei stride) { detail::ptrMultiDrawElementsIndirectCount(mode, type, indirect, drawcount, maxdrawcount, stride); }
+inline void NamedBufferData(Uint buffer, Sizeiptr size, const void* data, Enum usage) { detail::ptrNamedBufferData(buffer, size, data, usage); }
+inline void NamedBufferStorage(Uint buffer, Sizeiptr size, const void* data, Bitfield flags) { detail::ptrNamedBufferStorage(buffer, size, data, flags); }
+inline void NamedBufferSubData(Uint buffer, Intptr offset, Sizeiptr size, const void* data) { detail::ptrNamedBufferSubData(buffer, offset, size, data); }
+inline void NamedFramebufferDrawBuffer(Uint framebuffer, Enum buf) { detail::ptrNamedFramebufferDrawBuffer(framebuffer, buf); }
+inline void NamedFramebufferDrawBuffers(Uint framebuffer, Sizei n, const Enum* bufs) { detail::ptrNamedFramebufferDrawBuffers(framebuffer, n, bufs); }
+inline void NamedFramebufferParameteri(Uint framebuffer, Enum pname, Int param) { detail::ptrNamedFramebufferParameteri(framebuffer, pname, param); }
+inline void NamedFramebufferReadBuffer(Uint framebuffer, Enum src) { detail::ptrNamedFramebufferReadBuffer(framebuffer, src); }
+inline void NamedFramebufferRenderbuffer(Uint framebuffer, Enum attachment, Enum renderbuffertarget, Uint renderbuffer) { detail::ptrNamedFramebufferRenderbuffer(framebuffer, attachment, renderbuffertarget, renderbuffer); }
+inline void NamedFramebufferTexture(Uint framebuffer, Enum attachment, Uint texture, Int level) { detail::ptrNamedFramebufferTexture(framebuffer, attachment, texture, level); }
+inline void NamedFramebufferTextureLayer(Uint framebuffer, Enum attachment, Uint texture, Int level, Int layer) { detail::ptrNamedFramebufferTextureLayer(framebuffer, attachment, texture, level, layer); }
+inline void NamedRenderbufferStorage(Uint renderbuffer, Enum internalformat, Sizei width, Sizei height) { detail::ptrNamedRenderbufferStorage(renderbuffer, internalformat, width, height); }
+inline void NamedRenderbufferStorageMultisample(Uint renderbuffer, Sizei samples, Enum internalformat, Sizei width, Sizei height) { detail::ptrNamedRenderbufferStorageMultisample(renderbuffer, samples, internalformat, width, height); }
+inline void ObjectLabel(Enum identifier, Uint name, Sizei length, const Char* label) { detail::ptrObjectLabel(identifier, name, length, label); }
+inline void ObjectPtrLabel(const void* ptr, Sizei length, const Char* label) { detail::ptrObjectPtrLabel(ptr, length, label); }
+inline void PatchParameterfv(Enum pname, const Float* values) { detail::ptrPatchParameterfv(pname, values); }
+inline void PatchParameteri(Enum pname, Int value) { detail::ptrPatchParameteri(pname, value); }
+inline void PauseTransformFeedback() { detail::ptrPauseTransformFeedback(); }
+inline void PixelStoref(Enum pname, Float param) { detail::ptrPixelStoref(pname, param); }
+inline void PixelStorei(Enum pname, Int param) { detail::ptrPixelStorei(pname, param); }
+inline void PointParameterf(Enum pname, Float param) { detail::ptrPointParameterf(pname, param); }
+inline void PointParameterfv(Enum pname, const Float* params) { detail::ptrPointParameterfv(pname, params); }
+inline void PointParameteri(Enum pname, Int param) { detail::ptrPointParameteri(pname, param); }
+inline void PointParameteriv(Enum pname, const Int* params) { detail::ptrPointParameteriv(pname, params); }
+inline void PointSize(Float size) { detail::ptrPointSize(size); }
+inline void PolygonMode(Enum face, Enum mode) { detail::ptrPolygonMode(face, mode); }
+inline void PolygonOffset(Float factor, Float units) { detail::ptrPolygonOffset(factor, units); }
+inline void PolygonOffsetClamp(Float factor, Float units, Float clamp) { detail::ptrPolygonOffsetClamp(factor, units, clamp); }
+inline void PopDebugGroup() { detail::ptrPopDebugGroup(); }
+inline void PrimitiveRestartIndex(Uint index) { detail::ptrPrimitiveRestartIndex(index); }
+inline void ProgramBinary(Uint program, Enum binaryFormat, const void* binary, Sizei length) { detail::ptrProgramBinary(program, binaryFormat, binary, length); }
+inline void ProgramParameteri(Uint program, Enum pname, Int value) { detail::ptrProgramParameteri(program, pname, value); }
+inline void ProgramUniform1d(Uint program, Int location, Double v0) { detail::ptrProgramUniform1d(program, location, v0); }
+inline void ProgramUniform1dv(Uint program, Int location, Sizei count, const Double* value) { detail::ptrProgramUniform1dv(program, location, count, value); }
+inline void ProgramUniform1f(Uint program, Int location, Float v0) { detail::ptrProgramUniform1f(program, location, v0); }
+inline void ProgramUniform1fv(Uint program, Int location, Sizei count, const Float* value) { detail::ptrProgramUniform1fv(program, location, count, value); }
+inline void ProgramUniform1i(Uint program, Int location, Int v0) { detail::ptrProgramUniform1i(program, location, v0); }
+inline void ProgramUniform1iv(Uint program, Int location, Sizei count, const Int* value) { detail::ptrProgramUniform1iv(program, location, count, value); }
+inline void ProgramUniform1ui(Uint program, Int location, Uint v0) { detail::ptrProgramUniform1ui(program, location, v0); }
+inline void ProgramUniform1uiv(Uint program, Int location, Sizei count, const Uint* value) { detail::ptrProgramUniform1uiv(program, location, count, value); }
+inline void ProgramUniform2d(Uint program, Int location, Double v0, Double v1) { detail::ptrProgramUniform2d(program, location, v0, v1); }
+inline void ProgramUniform2dv(Uint program, Int location, Sizei count, const Double* value) { detail::ptrProgramUniform2dv(program, location, count, value); }
+inline void ProgramUniform2f(Uint program, Int location, Float v0, Float v1) { detail::ptrProgramUniform2f(program, location, v0, v1); }
+inline void ProgramUniform2fv(Uint program, Int location, Sizei count, const Float* value) { detail::ptrProgramUniform2fv(program, location, count, value); }
+inline void ProgramUniform2i(Uint program, Int location, Int v0, Int v1) { detail::ptrProgramUniform2i(program, location, v0, v1); }
+inline void ProgramUniform2iv(Uint program, Int location, Sizei count, const Int* value) { detail::ptrProgramUniform2iv(program, location, count, value); }
+inline void ProgramUniform2ui(Uint program, Int location, Uint v0, Uint v1) { detail::ptrProgramUniform2ui(program, location, v0, v1); }
+inline void ProgramUniform2uiv(Uint program, Int location, Sizei count, const Uint* value) { detail::ptrProgramUniform2uiv(program, location, count, value); }
+inline void ProgramUniform3d(Uint program, Int location, Double v0, Double v1, Double v2) { detail::ptrProgramUniform3d(program, location, v0, v1, v2); }
+inline void ProgramUniform3dv(Uint program, Int location, Sizei count, const Double* value) { detail::ptrProgramUniform3dv(program, location, count, value); }
+inline void ProgramUniform3f(Uint program, Int location, Float v0, Float v1, Float v2) { detail::ptrProgramUniform3f(program, location, v0, v1, v2); }
+inline void ProgramUniform3fv(Uint program, Int location, Sizei count, const Float* value) { detail::ptrProgramUniform3fv(program, location, count, value); }
+inline void ProgramUniform3i(Uint program, Int location, Int v0, Int v1, Int v2) { detail::ptrProgramUniform3i(program, location, v0, v1, v2); }
+inline void ProgramUniform3iv(Uint program, Int location, Sizei count, const Int* value) { detail::ptrProgramUniform3iv(program, location, count, value); }
+inline void ProgramUniform3ui(Uint program, Int location, Uint v0, Uint v1, Uint v2) { detail::ptrProgramUniform3ui(program, location, v0, v1, v2); }
+inline void ProgramUniform3uiv(Uint program, Int location, Sizei count, const Uint* value) { detail::ptrProgramUniform3uiv(program, location, count, value); }
+inline void ProgramUniform4d(Uint program, Int location, Double v0, Double v1, Double v2, Double v3) { detail::ptrProgramUniform4d(program, location, v0, v1, v2, v3); }
+inline void ProgramUniform4dv(Uint program, Int location, Sizei count, const Double* value) { detail::ptrProgramUniform4dv(program, location, count, value); }
+inline void ProgramUniform4f(Uint program, Int location, Float v0, Float v1, Float v2, Float v3) { detail::ptrProgramUniform4f(program, location, v0, v1, v2, v3); }
+inline void ProgramUniform4fv(Uint program, Int location, Sizei count, const Float* value) { detail::ptrProgramUniform4fv(program, location, count, value); }
+inline void ProgramUniform4i(Uint program, Int location, Int v0, Int v1, Int v2, Int v3) { detail::ptrProgramUniform4i(program, location, v0, v1, v2, v3); }
+inline void ProgramUniform4iv(Uint program, Int location, Sizei count, const Int* value) { detail::ptrProgramUniform4iv(program, location, count, value); }
+inline void ProgramUniform4ui(Uint program, Int location, Uint v0, Uint v1, Uint v2, Uint v3) { detail::ptrProgramUniform4ui(program, location, v0, v1, v2, v3); }
+inline void ProgramUniform4uiv(Uint program, Int location, Sizei count, const Uint* value) { detail::ptrProgramUniform4uiv(program, location, count, value); }
+inline void ProgramUniformMatrix2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix2dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix2fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix2x3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix2x3dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix2x3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix2x3fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix2x4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix2x4dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix2x4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix2x4fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix3dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix3fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3x2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix3x2dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3x2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix3x2fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3x4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix3x4dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix3x4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix3x4fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix4dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix4fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4x2dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix4x2dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4x2fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix4x2fv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4x3dv(Uint program, Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrProgramUniformMatrix4x3dv(program, location, count, transpose, value); }
+inline void ProgramUniformMatrix4x3fv(Uint program, Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrProgramUniformMatrix4x3fv(program, location, count, transpose, value); }
+inline void ProvokingVertex(Enum mode) { detail::ptrProvokingVertex(mode); }
+inline void PushDebugGroup(Enum source, Uint id, Sizei length, const Char* message) { detail::ptrPushDebugGroup(source, id, length, message); }
+inline void QueryCounter(Uint id, Enum target) { detail::ptrQueryCounter(id, target); }
+inline void ReadBuffer(Enum src) { detail::ptrReadBuffer(src); }
+inline void ReadPixels(Int x, Int y, Sizei width, Sizei height, Enum format, Enum type, void* pixels) { detail::ptrReadPixels(x, y, width, height, format, type, pixels); }
+inline void ReadnPixels(Int x, Int y, Sizei width, Sizei height, Enum format, Enum type, Sizei bufSize, void* data) { detail::ptrReadnPixels(x, y, width, height, format, type, bufSize, data); }
+inline void ReleaseShaderCompiler() { detail::ptrReleaseShaderCompiler(); }
+inline void RenderbufferStorage(Enum target, Enum internalformat, Sizei width, Sizei height) { detail::ptrRenderbufferStorage(target, internalformat, width, height); }
+inline void RenderbufferStorageMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height) { detail::ptrRenderbufferStorageMultisample(target, samples, internalformat, width, height); }
+inline void ResumeTransformFeedback() { detail::ptrResumeTransformFeedback(); }
+inline void SampleCoverage(Float value, Boolean invert) { detail::ptrSampleCoverage(value, invert); }
+inline void SampleMaski(Uint maskNumber, Bitfield mask) { detail::ptrSampleMaski(maskNumber, mask); }
+inline void SamplerParameterIiv(Uint sampler, Enum pname, const Int* param) { detail::ptrSamplerParameterIiv(sampler, pname, param); }
+inline void SamplerParameterIuiv(Uint sampler, Enum pname, const Uint* param) { detail::ptrSamplerParameterIuiv(sampler, pname, param); }
+inline void SamplerParameterf(Uint sampler, Enum pname, Float param) { detail::ptrSamplerParameterf(sampler, pname, param); }
+inline void SamplerParameterfv(Uint sampler, Enum pname, const Float* param) { detail::ptrSamplerParameterfv(sampler, pname, param); }
+inline void SamplerParameteri(Uint sampler, Enum pname, Int param) { detail::ptrSamplerParameteri(sampler, pname, param); }
+inline void SamplerParameteriv(Uint sampler, Enum pname, const Int* param) { detail::ptrSamplerParameteriv(sampler, pname, param); }
+inline void Scissor(Int x, Int y, Sizei width, Sizei height) { detail::ptrScissor(x, y, width, height); }
+inline void ScissorArrayv(Uint first, Sizei count, const Int* v) { detail::ptrScissorArrayv(first, count, v); }
+inline void ScissorIndexed(Uint index, Int left, Int bottom, Sizei width, Sizei height) { detail::ptrScissorIndexed(index, left, bottom, width, height); }
+inline void ScissorIndexedv(Uint index, const Int* v) { detail::ptrScissorIndexedv(index, v); }
+inline void ShaderBinary(Sizei count, const Uint* shaders, Enum binaryFormat, const void* binary, Sizei length) { detail::ptrShaderBinary(count, shaders, binaryFormat, binary, length); }
+inline void ShaderSource(Uint shader, Sizei count, const Char** string, const Int* length) { detail::ptrShaderSource(shader, count, string, length); }
+inline void ShaderStorageBlockBinding(Uint program, Uint storageBlockIndex, Uint storageBlockBinding) { detail::ptrShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding); }
+inline void SpecializeShader(Uint shader, const Char* pEntryPoint, Uint numSpecializationConstants, const Uint* pConstantIndex, const Uint* pConstantValue) { detail::ptrSpecializeShader(shader, pEntryPoint, numSpecializationConstants, pConstantIndex, pConstantValue); }
+inline void StencilFunc(Enum func, Int ref, Uint mask) { detail::ptrStencilFunc(func, ref, mask); }
+inline void StencilFuncSeparate(Enum face, Enum func, Int ref, Uint mask) { detail::ptrStencilFuncSeparate(face, func, ref, mask); }
+inline void StencilMask(Uint mask) { detail::ptrStencilMask(mask); }
+inline void StencilMaskSeparate(Enum face, Uint mask) { detail::ptrStencilMaskSeparate(face, mask); }
+inline void StencilOp(Enum fail, Enum zfail, Enum zpass) { detail::ptrStencilOp(fail, zfail, zpass); }
+inline void StencilOpSeparate(Enum face, Enum sfail, Enum dpfail, Enum dppass) { detail::ptrStencilOpSeparate(face, sfail, dpfail, dppass); }
+inline void TexBuffer(Enum target, Enum internalformat, Uint buffer) { detail::ptrTexBuffer(target, internalformat, buffer); }
+inline void TexBufferRange(Enum target, Enum internalformat, Uint buffer, Intptr offset, Sizeiptr size) { detail::ptrTexBufferRange(target, internalformat, buffer, offset, size); }
+inline void TexImage1D(Enum target, Int level, Int internalformat, Sizei width, Int border, Enum format, Enum type, const void* pixels) { detail::ptrTexImage1D(target, level, internalformat, width, border, format, type, pixels); }
+inline void TexImage2D(Enum target, Int level, Int internalformat, Sizei width, Sizei height, Int border, Enum format, Enum type, const void* pixels) { detail::ptrTexImage2D(target, level, internalformat, width, height, border, format, type, pixels); }
+inline void TexImage2DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) { detail::ptrTexImage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations); }
+inline void TexImage3D(Enum target, Int level, Int internalformat, Sizei width, Sizei height, Sizei depth, Int border, Enum format, Enum type, const void* pixels) { detail::ptrTexImage3D(target, level, internalformat, width, height, depth, border, format, type, pixels); }
+inline void TexImage3DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) { detail::ptrTexImage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations); }
+inline void TexParameterIiv(Enum target, Enum pname, const Int* params) { detail::ptrTexParameterIiv(target, pname, params); }
+inline void TexParameterIuiv(Enum target, Enum pname, const Uint* params) { detail::ptrTexParameterIuiv(target, pname, params); }
+inline void TexParameterf(Enum target, Enum pname, Float param) { detail::ptrTexParameterf(target, pname, param); }
+inline void TexParameterfv(Enum target, Enum pname, const Float* params) { detail::ptrTexParameterfv(target, pname, params); }
+inline void TexParameteri(Enum target, Enum pname, Int param) { detail::ptrTexParameteri(target, pname, param); }
+inline void TexParameteriv(Enum target, Enum pname, const Int* params) { detail::ptrTexParameteriv(target, pname, params); }
+inline void TexStorage1D(Enum target, Sizei levels, Enum internalformat, Sizei width) { detail::ptrTexStorage1D(target, levels, internalformat, width); }
+inline void TexStorage2D(Enum target, Sizei levels, Enum internalformat, Sizei width, Sizei height) { detail::ptrTexStorage2D(target, levels, internalformat, width, height); }
+inline void TexStorage2DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) { detail::ptrTexStorage2DMultisample(target, samples, internalformat, width, height, fixedsamplelocations); }
+inline void TexStorage3D(Enum target, Sizei levels, Enum internalformat, Sizei width, Sizei height, Sizei depth) { detail::ptrTexStorage3D(target, levels, internalformat, width, height, depth); }
+inline void TexStorage3DMultisample(Enum target, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) { detail::ptrTexStorage3DMultisample(target, samples, internalformat, width, height, depth, fixedsamplelocations); }
+inline void TexSubImage1D(Enum target, Int level, Int xoffset, Sizei width, Enum format, Enum type, const void* pixels) { detail::ptrTexSubImage1D(target, level, xoffset, width, format, type, pixels); }
+inline void TexSubImage2D(Enum target, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Enum type, const void* pixels) { detail::ptrTexSubImage2D(target, level, xoffset, yoffset, width, height, format, type, pixels); }
+inline void TexSubImage3D(Enum target, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* pixels) { detail::ptrTexSubImage3D(target, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels); }
+inline void TextureBarrier() { detail::ptrTextureBarrier(); }
+inline void TextureBuffer(Uint texture, Enum internalformat, Uint buffer) { detail::ptrTextureBuffer(texture, internalformat, buffer); }
+inline void TextureBufferRange(Uint texture, Enum internalformat, Uint buffer, Intptr offset, Sizeiptr size) { detail::ptrTextureBufferRange(texture, internalformat, buffer, offset, size); }
+inline void TextureParameterIiv(Uint texture, Enum pname, const Int* params) { detail::ptrTextureParameterIiv(texture, pname, params); }
+inline void TextureParameterIuiv(Uint texture, Enum pname, const Uint* params) { detail::ptrTextureParameterIuiv(texture, pname, params); }
+inline void TextureParameterf(Uint texture, Enum pname, Float param) { detail::ptrTextureParameterf(texture, pname, param); }
+inline void TextureParameterfv(Uint texture, Enum pname, const Float* param) { detail::ptrTextureParameterfv(texture, pname, param); }
+inline void TextureParameteri(Uint texture, Enum pname, Int param) { detail::ptrTextureParameteri(texture, pname, param); }
+inline void TextureParameteriv(Uint texture, Enum pname, const Int* param) { detail::ptrTextureParameteriv(texture, pname, param); }
+inline void TextureStorage1D(Uint texture, Sizei levels, Enum internalformat, Sizei width) { detail::ptrTextureStorage1D(texture, levels, internalformat, width); }
+inline void TextureStorage2D(Uint texture, Sizei levels, Enum internalformat, Sizei width, Sizei height) { detail::ptrTextureStorage2D(texture, levels, internalformat, width, height); }
+inline void TextureStorage2DMultisample(Uint texture, Sizei samples, Enum internalformat, Sizei width, Sizei height, Boolean fixedsamplelocations) { detail::ptrTextureStorage2DMultisample(texture, samples, internalformat, width, height, fixedsamplelocations); }
+inline void TextureStorage3D(Uint texture, Sizei levels, Enum internalformat, Sizei width, Sizei height, Sizei depth) { detail::ptrTextureStorage3D(texture, levels, internalformat, width, height, depth); }
+inline void TextureStorage3DMultisample(Uint texture, Sizei samples, Enum internalformat, Sizei width, Sizei height, Sizei depth, Boolean fixedsamplelocations) { detail::ptrTextureStorage3DMultisample(texture, samples, internalformat, width, height, depth, fixedsamplelocations); }
+inline void TextureSubImage1D(Uint texture, Int level, Int xoffset, Sizei width, Enum format, Enum type, const void* pixels) { detail::ptrTextureSubImage1D(texture, level, xoffset, width, format, type, pixels); }
+inline void TextureSubImage2D(Uint texture, Int level, Int xoffset, Int yoffset, Sizei width, Sizei height, Enum format, Enum type, const void* pixels) { detail::ptrTextureSubImage2D(texture, level, xoffset, yoffset, width, height, format, type, pixels); }
+inline void TextureSubImage3D(Uint texture, Int level, Int xoffset, Int yoffset, Int zoffset, Sizei width, Sizei height, Sizei depth, Enum format, Enum type, const void* pixels) { detail::ptrTextureSubImage3D(texture, level, xoffset, yoffset, zoffset, width, height, depth, format, type, pixels); }
+inline void TextureView(Uint texture, Enum target, Uint origtexture, Enum internalformat, Uint minlevel, Uint numlevels, Uint minlayer, Uint numlayers) { detail::ptrTextureView(texture, target, origtexture, internalformat, minlevel, numlevels, minlayer, numlayers); }
+inline void TransformFeedbackBufferBase(Uint xfb, Uint index, Uint buffer) { detail::ptrTransformFeedbackBufferBase(xfb, index, buffer); }
+inline void TransformFeedbackBufferRange(Uint xfb, Uint index, Uint buffer, Intptr offset, Sizeiptr size) { detail::ptrTransformFeedbackBufferRange(xfb, index, buffer, offset, size); }
+inline void TransformFeedbackVaryings(Uint program, Sizei count, const Char** varyings, Enum bufferMode) { detail::ptrTransformFeedbackVaryings(program, count, varyings, bufferMode); }
+inline void Uniform1d(Int location, Double x) { detail::ptrUniform1d(location, x); }
+inline void Uniform1dv(Int location, Sizei count, const Double* value) { detail::ptrUniform1dv(location, count, value); }
+inline void Uniform1f(Int location, Float v0) { detail::ptrUniform1f(location, v0); }
+inline void Uniform1fv(Int location, Sizei count, const Float* value) { detail::ptrUniform1fv(location, count, value); }
+inline void Uniform1i(Int location, Int v0) { detail::ptrUniform1i(location, v0); }
+inline void Uniform1iv(Int location, Sizei count, const Int* value) { detail::ptrUniform1iv(location, count, value); }
+inline void Uniform1ui(Int location, Uint v0) { detail::ptrUniform1ui(location, v0); }
+inline void Uniform1uiv(Int location, Sizei count, const Uint* value) { detail::ptrUniform1uiv(location, count, value); }
+inline void Uniform2d(Int location, Double x, Double y) { detail::ptrUniform2d(location, x, y); }
+inline void Uniform2dv(Int location, Sizei count, const Double* value) { detail::ptrUniform2dv(location, count, value); }
+inline void Uniform2f(Int location, Float v0, Float v1) { detail::ptrUniform2f(location, v0, v1); }
+inline void Uniform2fv(Int location, Sizei count, const Float* value) { detail::ptrUniform2fv(location, count, value); }
+inline void Uniform2i(Int location, Int v0, Int v1) { detail::ptrUniform2i(location, v0, v1); }
+inline void Uniform2iv(Int location, Sizei count, const Int* value) { detail::ptrUniform2iv(location, count, value); }
+inline void Uniform2ui(Int location, Uint v0, Uint v1) { detail::ptrUniform2ui(location, v0, v1); }
+inline void Uniform2uiv(Int location, Sizei count, const Uint* value) { detail::ptrUniform2uiv(location, count, value); }
+inline void Uniform3d(Int location, Double x, Double y, Double z) { detail::ptrUniform3d(location, x, y, z); }
+inline void Uniform3dv(Int location, Sizei count, const Double* value) { detail::ptrUniform3dv(location, count, value); }
+inline void Uniform3f(Int location, Float v0, Float v1, Float v2) { detail::ptrUniform3f(location, v0, v1, v2); }
+inline void Uniform3fv(Int location, Sizei count, const Float* value) { detail::ptrUniform3fv(location, count, value); }
+inline void Uniform3i(Int location, Int v0, Int v1, Int v2) { detail::ptrUniform3i(location, v0, v1, v2); }
+inline void Uniform3iv(Int location, Sizei count, const Int* value) { detail::ptrUniform3iv(location, count, value); }
+inline void Uniform3ui(Int location, Uint v0, Uint v1, Uint v2) { detail::ptrUniform3ui(location, v0, v1, v2); }
+inline void Uniform3uiv(Int location, Sizei count, const Uint* value) { detail::ptrUniform3uiv(location, count, value); }
+inline void Uniform4d(Int location, Double x, Double y, Double z, Double w) { detail::ptrUniform4d(location, x, y, z, w); }
+inline void Uniform4dv(Int location, Sizei count, const Double* value) { detail::ptrUniform4dv(location, count, value); }
+inline void Uniform4f(Int location, Float v0, Float v1, Float v2, Float v3) { detail::ptrUniform4f(location, v0, v1, v2, v3); }
+inline void Uniform4fv(Int location, Sizei count, const Float* value) { detail::ptrUniform4fv(location, count, value); }
+inline void Uniform4i(Int location, Int v0, Int v1, Int v2, Int v3) { detail::ptrUniform4i(location, v0, v1, v2, v3); }
+inline void Uniform4iv(Int location, Sizei count, const Int* value) { detail::ptrUniform4iv(location, count, value); }
+inline void Uniform4ui(Int location, Uint v0, Uint v1, Uint v2, Uint v3) { detail::ptrUniform4ui(location, v0, v1, v2, v3); }
+inline void Uniform4uiv(Int location, Sizei count, const Uint* value) { detail::ptrUniform4uiv(location, count, value); }
+inline void UniformBlockBinding(Uint program, Uint uniformBlockIndex, Uint uniformBlockBinding) { detail::ptrUniformBlockBinding(program, uniformBlockIndex, uniformBlockBinding); }
+inline void UniformMatrix2dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix2dv(location, count, transpose, value); }
+inline void UniformMatrix2fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix2fv(location, count, transpose, value); }
+inline void UniformMatrix2x3dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix2x3dv(location, count, transpose, value); }
+inline void UniformMatrix2x3fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix2x3fv(location, count, transpose, value); }
+inline void UniformMatrix2x4dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix2x4dv(location, count, transpose, value); }
+inline void UniformMatrix2x4fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix2x4fv(location, count, transpose, value); }
+inline void UniformMatrix3dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix3dv(location, count, transpose, value); }
+inline void UniformMatrix3fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix3fv(location, count, transpose, value); }
+inline void UniformMatrix3x2dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix3x2dv(location, count, transpose, value); }
+inline void UniformMatrix3x2fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix3x2fv(location, count, transpose, value); }
+inline void UniformMatrix3x4dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix3x4dv(location, count, transpose, value); }
+inline void UniformMatrix3x4fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix3x4fv(location, count, transpose, value); }
+inline void UniformMatrix4dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix4dv(location, count, transpose, value); }
+inline void UniformMatrix4fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix4fv(location, count, transpose, value); }
+inline void UniformMatrix4x2dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix4x2dv(location, count, transpose, value); }
+inline void UniformMatrix4x2fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix4x2fv(location, count, transpose, value); }
+inline void UniformMatrix4x3dv(Int location, Sizei count, Boolean transpose, const Double* value) { detail::ptrUniformMatrix4x3dv(location, count, transpose, value); }
+inline void UniformMatrix4x3fv(Int location, Sizei count, Boolean transpose, const Float* value) { detail::ptrUniformMatrix4x3fv(location, count, transpose, value); }
+inline void UniformSubroutinesuiv(Enum shadertype, Sizei count, const Uint* indices) { detail::ptrUniformSubroutinesuiv(shadertype, count, indices); }
+inline Boolean UnmapBuffer(Enum target) { return detail::ptrUnmapBuffer(target); }
+inline Boolean UnmapNamedBuffer(Uint buffer) { return detail::ptrUnmapNamedBuffer(buffer); }
+inline void UseProgram(Uint program) { detail::ptrUseProgram(program); }
+inline void UseProgramStages(Uint pipeline, Bitfield stages, Uint program) { detail::ptrUseProgramStages(pipeline, stages, program); }
+inline void ValidateProgram(Uint program) { detail::ptrValidateProgram(program); }
+inline void ValidateProgramPipeline(Uint pipeline) { detail::ptrValidateProgramPipeline(pipeline); }
+inline void VertexArrayAttribBinding(Uint vaobj, Uint attribindex, Uint bindingindex) { detail::ptrVertexArrayAttribBinding(vaobj, attribindex, bindingindex); }
+inline void VertexArrayAttribFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Boolean normalized, Uint relativeoffset) { detail::ptrVertexArrayAttribFormat(vaobj, attribindex, size, type, normalized, relativeoffset); }
+inline void VertexArrayAttribIFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Uint relativeoffset) { detail::ptrVertexArrayAttribIFormat(vaobj, attribindex, size, type, relativeoffset); }
+inline void VertexArrayAttribLFormat(Uint vaobj, Uint attribindex, Int size, Enum type, Uint relativeoffset) { detail::ptrVertexArrayAttribLFormat(vaobj, attribindex, size, type, relativeoffset); }
+inline void VertexArrayBindingDivisor(Uint vaobj, Uint bindingindex, Uint divisor) { detail::ptrVertexArrayBindingDivisor(vaobj, bindingindex, divisor); }
+inline void VertexArrayElementBuffer(Uint vaobj, Uint buffer) { detail::ptrVertexArrayElementBuffer(vaobj, buffer); }
+inline void VertexArrayVertexBuffer(Uint vaobj, Uint bindingindex, Uint buffer, Intptr offset, Sizei stride) { detail::ptrVertexArrayVertexBuffer(vaobj, bindingindex, buffer, offset, stride); }
+inline void VertexArrayVertexBuffers(Uint vaobj, Uint first, Sizei count, const Uint* buffers, const Intptr* offsets, const Sizei* strides) { detail::ptrVertexArrayVertexBuffers(vaobj, first, count, buffers, offsets, strides); }
+inline void VertexAttrib1d(Uint index, Double x) { detail::ptrVertexAttrib1d(index, x); }
+inline void VertexAttrib1dv(Uint index, const Double* v) { detail::ptrVertexAttrib1dv(index, v); }
+inline void VertexAttrib1f(Uint index, Float x) { detail::ptrVertexAttrib1f(index, x); }
+inline void VertexAttrib1fv(Uint index, const Float* v) { detail::ptrVertexAttrib1fv(index, v); }
+inline void VertexAttrib1s(Uint index, Short x) { detail::ptrVertexAttrib1s(index, x); }
+inline void VertexAttrib1sv(Uint index, const Short* v) { detail::ptrVertexAttrib1sv(index, v); }
+inline void VertexAttrib2d(Uint index, Double x, Double y) { detail::ptrVertexAttrib2d(index, x, y); }
+inline void VertexAttrib2dv(Uint index, const Double* v) { detail::ptrVertexAttrib2dv(index, v); }
+inline void VertexAttrib2f(Uint index, Float x, Float y) { detail::ptrVertexAttrib2f(index, x, y); }
+inline void VertexAttrib2fv(Uint index, const Float* v) { detail::ptrVertexAttrib2fv(index, v); }
+inline void VertexAttrib2s(Uint index, Short x, Short y) { detail::ptrVertexAttrib2s(index, x, y); }
+inline void VertexAttrib2sv(Uint index, const Short* v) { detail::ptrVertexAttrib2sv(index, v); }
+inline void VertexAttrib3d(Uint index, Double x, Double y, Double z) { detail::ptrVertexAttrib3d(index, x, y, z); }
+inline void VertexAttrib3dv(Uint index, const Double* v) { detail::ptrVertexAttrib3dv(index, v); }
+inline void VertexAttrib3f(Uint index, Float x, Float y, Float z) { detail::ptrVertexAttrib3f(index, x, y, z); }
+inline void VertexAttrib3fv(Uint index, const Float* v) { detail::ptrVertexAttrib3fv(index, v); }
+inline void VertexAttrib3s(Uint index, Short x, Short y, Short z) { detail::ptrVertexAttrib3s(index, x, y, z); }
+inline void VertexAttrib3sv(Uint index, const Short* v) { detail::ptrVertexAttrib3sv(index, v); }
+inline void VertexAttrib4Nbv(Uint index, const Byte* v) { detail::ptrVertexAttrib4Nbv(index, v); }
+inline void VertexAttrib4Niv(Uint index, const Int* v) { detail::ptrVertexAttrib4Niv(index, v); }
+inline void VertexAttrib4Nsv(Uint index, const Short* v) { detail::ptrVertexAttrib4Nsv(index, v); }
+inline void VertexAttrib4Nub(Uint index, Ubyte x, Ubyte y, Ubyte z, Ubyte w) { detail::ptrVertexAttrib4Nub(index, x, y, z, w); }
+inline void VertexAttrib4Nubv(Uint index, const Ubyte* v) { detail::ptrVertexAttrib4Nubv(index, v); }
+inline void VertexAttrib4Nuiv(Uint index, const Uint* v) { detail::ptrVertexAttrib4Nuiv(index, v); }
+inline void VertexAttrib4Nusv(Uint index, const Ushort* v) { detail::ptrVertexAttrib4Nusv(index, v); }
+inline void VertexAttrib4bv(Uint index, const Byte* v) { detail::ptrVertexAttrib4bv(index, v); }
+inline void VertexAttrib4d(Uint index, Double x, Double y, Double z, Double w) { detail::ptrVertexAttrib4d(index, x, y, z, w); }
+inline void VertexAttrib4dv(Uint index, const Double* v) { detail::ptrVertexAttrib4dv(index, v); }
+inline void VertexAttrib4f(Uint index, Float x, Float y, Float z, Float w) { detail::ptrVertexAttrib4f(index, x, y, z, w); }
+inline void VertexAttrib4fv(Uint index, const Float* v) { detail::ptrVertexAttrib4fv(index, v); }
+inline void VertexAttrib4iv(Uint index, const Int* v) { detail::ptrVertexAttrib4iv(index, v); }
+inline void VertexAttrib4s(Uint index, Short x, Short y, Short z, Short w) { detail::ptrVertexAttrib4s(index, x, y, z, w); }
+inline void VertexAttrib4sv(Uint index, const Short* v) { detail::ptrVertexAttrib4sv(index, v); }
+inline void VertexAttrib4ubv(Uint index, const Ubyte* v) { detail::ptrVertexAttrib4ubv(index, v); }
+inline void VertexAttrib4uiv(Uint index, const Uint* v) { detail::ptrVertexAttrib4uiv(index, v); }
+inline void VertexAttrib4usv(Uint index, const Ushort* v) { detail::ptrVertexAttrib4usv(index, v); }
+inline void VertexAttribBinding(Uint attribindex, Uint bindingindex) { detail::ptrVertexAttribBinding(attribindex, bindingindex); }
+inline void VertexAttribDivisor(Uint index, Uint divisor) { detail::ptrVertexAttribDivisor(index, divisor); }
+inline void VertexAttribFormat(Uint attribindex, Int size, Enum type, Boolean normalized, Uint relativeoffset) { detail::ptrVertexAttribFormat(attribindex, size, type, normalized, relativeoffset); }
+inline void VertexAttribI1i(Uint index, Int x) { detail::ptrVertexAttribI1i(index, x); }
+inline void VertexAttribI1iv(Uint index, const Int* v) { detail::ptrVertexAttribI1iv(index, v); }
+inline void VertexAttribI1ui(Uint index, Uint x) { detail::ptrVertexAttribI1ui(index, x); }
+inline void VertexAttribI1uiv(Uint index, const Uint* v) { detail::ptrVertexAttribI1uiv(index, v); }
+inline void VertexAttribI2i(Uint index, Int x, Int y) { detail::ptrVertexAttribI2i(index, x, y); }
+inline void VertexAttribI2iv(Uint index, const Int* v) { detail::ptrVertexAttribI2iv(index, v); }
+inline void VertexAttribI2ui(Uint index, Uint x, Uint y) { detail::ptrVertexAttribI2ui(index, x, y); }
+inline void VertexAttribI2uiv(Uint index, const Uint* v) { detail::ptrVertexAttribI2uiv(index, v); }
+inline void VertexAttribI3i(Uint index, Int x, Int y, Int z) { detail::ptrVertexAttribI3i(index, x, y, z); }
+inline void VertexAttribI3iv(Uint index, const Int* v) { detail::ptrVertexAttribI3iv(index, v); }
+inline void VertexAttribI3ui(Uint index, Uint x, Uint y, Uint z) { detail::ptrVertexAttribI3ui(index, x, y, z); }
+inline void VertexAttribI3uiv(Uint index, const Uint* v) { detail::ptrVertexAttribI3uiv(index, v); }
+inline void VertexAttribI4bv(Uint index, const Byte* v) { detail::ptrVertexAttribI4bv(index, v); }
+inline void VertexAttribI4i(Uint index, Int x, Int y, Int z, Int w) { detail::ptrVertexAttribI4i(index, x, y, z, w); }
+inline void VertexAttribI4iv(Uint index, const Int* v) { detail::ptrVertexAttribI4iv(index, v); }
+inline void VertexAttribI4sv(Uint index, const Short* v) { detail::ptrVertexAttribI4sv(index, v); }
+inline void VertexAttribI4ubv(Uint index, const Ubyte* v) { detail::ptrVertexAttribI4ubv(index, v); }
+inline void VertexAttribI4ui(Uint index, Uint x, Uint y, Uint z, Uint w) { detail::ptrVertexAttribI4ui(index, x, y, z, w); }
+inline void VertexAttribI4uiv(Uint index, const Uint* v) { detail::ptrVertexAttribI4uiv(index, v); }
+inline void VertexAttribI4usv(Uint index, const Ushort* v) { detail::ptrVertexAttribI4usv(index, v); }
+inline void VertexAttribIFormat(Uint attribindex, Int size, Enum type, Uint relativeoffset) { detail::ptrVertexAttribIFormat(attribindex, size, type, relativeoffset); }
+inline void VertexAttribIPointer(Uint index, Int size, Enum type, Sizei stride, const void* pointer) { detail::ptrVertexAttribIPointer(index, size, type, stride, pointer); }
+inline void VertexAttribL1d(Uint index, Double x) { detail::ptrVertexAttribL1d(index, x); }
+inline void VertexAttribL1dv(Uint index, const Double* v) { detail::ptrVertexAttribL1dv(index, v); }
+inline void VertexAttribL2d(Uint index, Double x, Double y) { detail::ptrVertexAttribL2d(index, x, y); }
+inline void VertexAttribL2dv(Uint index, const Double* v) { detail::ptrVertexAttribL2dv(index, v); }
+inline void VertexAttribL3d(Uint index, Double x, Double y, Double z) { detail::ptrVertexAttribL3d(index, x, y, z); }
+inline void VertexAttribL3dv(Uint index, const Double* v) { detail::ptrVertexAttribL3dv(index, v); }
+inline void VertexAttribL4d(Uint index, Double x, Double y, Double z, Double w) { detail::ptrVertexAttribL4d(index, x, y, z, w); }
+inline void VertexAttribL4dv(Uint index, const Double* v) { detail::ptrVertexAttribL4dv(index, v); }
+inline void VertexAttribLFormat(Uint attribindex, Int size, Enum type, Uint relativeoffset) { detail::ptrVertexAttribLFormat(attribindex, size, type, relativeoffset); }
+inline void VertexAttribLPointer(Uint index, Int size, Enum type, Sizei stride, const void* pointer) { detail::ptrVertexAttribLPointer(index, size, type, stride, pointer); }
+inline void VertexAttribP1ui(Uint index, Enum type, Boolean normalized, Uint value) { detail::ptrVertexAttribP1ui(index, type, normalized, value); }
+inline void VertexAttribP1uiv(Uint index, Enum type, Boolean normalized, const Uint* value) { detail::ptrVertexAttribP1uiv(index, type, normalized, value); }
+inline void VertexAttribP2ui(Uint index, Enum type, Boolean normalized, Uint value) { detail::ptrVertexAttribP2ui(index, type, normalized, value); }
+inline void VertexAttribP2uiv(Uint index, Enum type, Boolean normalized, const Uint* value) { detail::ptrVertexAttribP2uiv(index, type, normalized, value); }
+inline void VertexAttribP3ui(Uint index, Enum type, Boolean normalized, Uint value) { detail::ptrVertexAttribP3ui(index, type, normalized, value); }
+inline void VertexAttribP3uiv(Uint index, Enum type, Boolean normalized, const Uint* value) { detail::ptrVertexAttribP3uiv(index, type, normalized, value); }
+inline void VertexAttribP4ui(Uint index, Enum type, Boolean normalized, Uint value) { detail::ptrVertexAttribP4ui(index, type, normalized, value); }
+inline void VertexAttribP4uiv(Uint index, Enum type, Boolean normalized, const Uint* value) { detail::ptrVertexAttribP4uiv(index, type, normalized, value); }
+inline void VertexAttribPointer(Uint index, Int size, Enum type, Boolean normalized, Sizei stride, const void* pointer) { detail::ptrVertexAttribPointer(index, size, type, normalized, stride, pointer); }
+inline void VertexBindingDivisor(Uint bindingindex, Uint divisor) { detail::ptrVertexBindingDivisor(bindingindex, divisor); }
+inline void Viewport(Int x, Int y, Sizei width, Sizei height) { detail::ptrViewport(x, y, width, height); }
+inline void ViewportArrayv(Uint first, Sizei count, const Float* v) { detail::ptrViewportArrayv(first, count, v); }
+inline void ViewportIndexedf(Uint index, Float x, Float y, Float w, Float h) { detail::ptrViewportIndexedf(index, x, y, w, h); }
+inline void ViewportIndexedfv(Uint index, const Float* v) { detail::ptrViewportIndexedfv(index, v); }
+inline void WaitSync(Sync sync, Bitfield flags, Uint64 timeout) { detail::ptrWaitSync(sync, flags, timeout); }
 
 } // namespace gl
 
 
-// =============================================================================
-// OpenGL Loader
-// =============================================================================
-
 export namespace gl {
 
-// Function pointer type for loading GL functions
-// This matches the signature of wglGetProcAddress, glXGetProcAddress, etc.
-using LoadProc = void* (*)(const char* name);
+using LoadProc = void* (*)(const char*);
 
-// Load all OpenGL functions
-// Returns the number of functions that were successfully loaded
 inline int load(LoadProc loadProc) {
     int loaded = 0;
-
     detail::ptrActiveShaderProgram = reinterpret_cast<detail::PFNACTIVESHADERPROGRAMPROC>(loadProc("glActiveShaderProgram"));
     if (detail::ptrActiveShaderProgram) ++loaded;
     detail::ptrActiveTexture = reinterpret_cast<detail::PFNACTIVETEXTUREPROC>(loadProc("glActiveTexture"));
@@ -5856,14 +3557,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrColorMask) ++loaded;
     detail::ptrColorMaski = reinterpret_cast<detail::PFNCOLORMASKIPROC>(loadProc("glColorMaski"));
     if (detail::ptrColorMaski) ++loaded;
-    detail::ptrColorP3ui = reinterpret_cast<detail::PFNCOLORP3UIPROC>(loadProc("glColorP3ui"));
-    if (detail::ptrColorP3ui) ++loaded;
-    detail::ptrColorP3uiv = reinterpret_cast<detail::PFNCOLORP3UIVPROC>(loadProc("glColorP3uiv"));
-    if (detail::ptrColorP3uiv) ++loaded;
-    detail::ptrColorP4ui = reinterpret_cast<detail::PFNCOLORP4UIPROC>(loadProc("glColorP4ui"));
-    if (detail::ptrColorP4ui) ++loaded;
-    detail::ptrColorP4uiv = reinterpret_cast<detail::PFNCOLORP4UIVPROC>(loadProc("glColorP4uiv"));
-    if (detail::ptrColorP4uiv) ++loaded;
     detail::ptrCompileShader = reinterpret_cast<detail::PFNCOMPILESHADERPROC>(loadProc("glCompileShader"));
     if (detail::ptrCompileShader) ++loaded;
     detail::ptrCompressedTexImage1D = reinterpret_cast<detail::PFNCOMPRESSEDTEXIMAGE1DPROC>(loadProc("glCompressedTexImage1D"));
@@ -6186,8 +3879,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrGetObjectLabel) ++loaded;
     detail::ptrGetObjectPtrLabel = reinterpret_cast<detail::PFNGETOBJECTPTRLABELPROC>(loadProc("glGetObjectPtrLabel"));
     if (detail::ptrGetObjectPtrLabel) ++loaded;
-    detail::ptrGetPointerv = reinterpret_cast<detail::PFNGETPOINTERVPROC>(loadProc("glGetPointerv"));
-    if (detail::ptrGetPointerv) ++loaded;
     detail::ptrGetProgramBinary = reinterpret_cast<detail::PFNGETPROGRAMBINARYPROC>(loadProc("glGetProgramBinary"));
     if (detail::ptrGetProgramBinary) ++loaded;
     detail::ptrGetProgramInfoLog = reinterpret_cast<detail::PFNGETPROGRAMINFOLOGPROC>(loadProc("glGetProgramInfoLog"));
@@ -6334,32 +4025,8 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrGetVertexAttribfv) ++loaded;
     detail::ptrGetVertexAttribiv = reinterpret_cast<detail::PFNGETVERTEXATTRIBIVPROC>(loadProc("glGetVertexAttribiv"));
     if (detail::ptrGetVertexAttribiv) ++loaded;
-    detail::ptrGetnColorTable = reinterpret_cast<detail::PFNGETNCOLORTABLEPROC>(loadProc("glGetnColorTable"));
-    if (detail::ptrGetnColorTable) ++loaded;
     detail::ptrGetnCompressedTexImage = reinterpret_cast<detail::PFNGETNCOMPRESSEDTEXIMAGEPROC>(loadProc("glGetnCompressedTexImage"));
     if (detail::ptrGetnCompressedTexImage) ++loaded;
-    detail::ptrGetnConvolutionFilter = reinterpret_cast<detail::PFNGETNCONVOLUTIONFILTERPROC>(loadProc("glGetnConvolutionFilter"));
-    if (detail::ptrGetnConvolutionFilter) ++loaded;
-    detail::ptrGetnHistogram = reinterpret_cast<detail::PFNGETNHISTOGRAMPROC>(loadProc("glGetnHistogram"));
-    if (detail::ptrGetnHistogram) ++loaded;
-    detail::ptrGetnMapdv = reinterpret_cast<detail::PFNGETNMAPDVPROC>(loadProc("glGetnMapdv"));
-    if (detail::ptrGetnMapdv) ++loaded;
-    detail::ptrGetnMapfv = reinterpret_cast<detail::PFNGETNMAPFVPROC>(loadProc("glGetnMapfv"));
-    if (detail::ptrGetnMapfv) ++loaded;
-    detail::ptrGetnMapiv = reinterpret_cast<detail::PFNGETNMAPIVPROC>(loadProc("glGetnMapiv"));
-    if (detail::ptrGetnMapiv) ++loaded;
-    detail::ptrGetnMinmax = reinterpret_cast<detail::PFNGETNMINMAXPROC>(loadProc("glGetnMinmax"));
-    if (detail::ptrGetnMinmax) ++loaded;
-    detail::ptrGetnPixelMapfv = reinterpret_cast<detail::PFNGETNPIXELMAPFVPROC>(loadProc("glGetnPixelMapfv"));
-    if (detail::ptrGetnPixelMapfv) ++loaded;
-    detail::ptrGetnPixelMapuiv = reinterpret_cast<detail::PFNGETNPIXELMAPUIVPROC>(loadProc("glGetnPixelMapuiv"));
-    if (detail::ptrGetnPixelMapuiv) ++loaded;
-    detail::ptrGetnPixelMapusv = reinterpret_cast<detail::PFNGETNPIXELMAPUSVPROC>(loadProc("glGetnPixelMapusv"));
-    if (detail::ptrGetnPixelMapusv) ++loaded;
-    detail::ptrGetnPolygonStipple = reinterpret_cast<detail::PFNGETNPOLYGONSTIPPLEPROC>(loadProc("glGetnPolygonStipple"));
-    if (detail::ptrGetnPolygonStipple) ++loaded;
-    detail::ptrGetnSeparableFilter = reinterpret_cast<detail::PFNGETNSEPARABLEFILTERPROC>(loadProc("glGetnSeparableFilter"));
-    if (detail::ptrGetnSeparableFilter) ++loaded;
     detail::ptrGetnTexImage = reinterpret_cast<detail::PFNGETNTEXIMAGEPROC>(loadProc("glGetnTexImage"));
     if (detail::ptrGetnTexImage) ++loaded;
     detail::ptrGetnUniformdv = reinterpret_cast<detail::PFNGETNUNIFORMDVPROC>(loadProc("glGetnUniformdv"));
@@ -6450,22 +4117,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrMultiDrawElementsIndirect) ++loaded;
     detail::ptrMultiDrawElementsIndirectCount = reinterpret_cast<detail::PFNMULTIDRAWELEMENTSINDIRECTCOUNTPROC>(loadProc("glMultiDrawElementsIndirectCount"));
     if (detail::ptrMultiDrawElementsIndirectCount) ++loaded;
-    detail::ptrMultiTexCoordP1ui = reinterpret_cast<detail::PFNMULTITEXCOORDP1UIPROC>(loadProc("glMultiTexCoordP1ui"));
-    if (detail::ptrMultiTexCoordP1ui) ++loaded;
-    detail::ptrMultiTexCoordP1uiv = reinterpret_cast<detail::PFNMULTITEXCOORDP1UIVPROC>(loadProc("glMultiTexCoordP1uiv"));
-    if (detail::ptrMultiTexCoordP1uiv) ++loaded;
-    detail::ptrMultiTexCoordP2ui = reinterpret_cast<detail::PFNMULTITEXCOORDP2UIPROC>(loadProc("glMultiTexCoordP2ui"));
-    if (detail::ptrMultiTexCoordP2ui) ++loaded;
-    detail::ptrMultiTexCoordP2uiv = reinterpret_cast<detail::PFNMULTITEXCOORDP2UIVPROC>(loadProc("glMultiTexCoordP2uiv"));
-    if (detail::ptrMultiTexCoordP2uiv) ++loaded;
-    detail::ptrMultiTexCoordP3ui = reinterpret_cast<detail::PFNMULTITEXCOORDP3UIPROC>(loadProc("glMultiTexCoordP3ui"));
-    if (detail::ptrMultiTexCoordP3ui) ++loaded;
-    detail::ptrMultiTexCoordP3uiv = reinterpret_cast<detail::PFNMULTITEXCOORDP3UIVPROC>(loadProc("glMultiTexCoordP3uiv"));
-    if (detail::ptrMultiTexCoordP3uiv) ++loaded;
-    detail::ptrMultiTexCoordP4ui = reinterpret_cast<detail::PFNMULTITEXCOORDP4UIPROC>(loadProc("glMultiTexCoordP4ui"));
-    if (detail::ptrMultiTexCoordP4ui) ++loaded;
-    detail::ptrMultiTexCoordP4uiv = reinterpret_cast<detail::PFNMULTITEXCOORDP4UIVPROC>(loadProc("glMultiTexCoordP4uiv"));
-    if (detail::ptrMultiTexCoordP4uiv) ++loaded;
     detail::ptrNamedBufferData = reinterpret_cast<detail::PFNNAMEDBUFFERDATAPROC>(loadProc("glNamedBufferData"));
     if (detail::ptrNamedBufferData) ++loaded;
     detail::ptrNamedBufferStorage = reinterpret_cast<detail::PFNNAMEDBUFFERSTORAGEPROC>(loadProc("glNamedBufferStorage"));
@@ -6490,10 +4141,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrNamedRenderbufferStorage) ++loaded;
     detail::ptrNamedRenderbufferStorageMultisample = reinterpret_cast<detail::PFNNAMEDRENDERBUFFERSTORAGEMULTISAMPLEPROC>(loadProc("glNamedRenderbufferStorageMultisample"));
     if (detail::ptrNamedRenderbufferStorageMultisample) ++loaded;
-    detail::ptrNormalP3ui = reinterpret_cast<detail::PFNNORMALP3UIPROC>(loadProc("glNormalP3ui"));
-    if (detail::ptrNormalP3ui) ++loaded;
-    detail::ptrNormalP3uiv = reinterpret_cast<detail::PFNNORMALP3UIVPROC>(loadProc("glNormalP3uiv"));
-    if (detail::ptrNormalP3uiv) ++loaded;
     detail::ptrObjectLabel = reinterpret_cast<detail::PFNOBJECTLABELPROC>(loadProc("glObjectLabel"));
     if (detail::ptrObjectLabel) ++loaded;
     detail::ptrObjectPtrLabel = reinterpret_cast<detail::PFNOBJECTPTRLABELPROC>(loadProc("glObjectPtrLabel"));
@@ -6676,10 +4323,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrScissorIndexed) ++loaded;
     detail::ptrScissorIndexedv = reinterpret_cast<detail::PFNSCISSORINDEXEDVPROC>(loadProc("glScissorIndexedv"));
     if (detail::ptrScissorIndexedv) ++loaded;
-    detail::ptrSecondaryColorP3ui = reinterpret_cast<detail::PFNSECONDARYCOLORP3UIPROC>(loadProc("glSecondaryColorP3ui"));
-    if (detail::ptrSecondaryColorP3ui) ++loaded;
-    detail::ptrSecondaryColorP3uiv = reinterpret_cast<detail::PFNSECONDARYCOLORP3UIVPROC>(loadProc("glSecondaryColorP3uiv"));
-    if (detail::ptrSecondaryColorP3uiv) ++loaded;
     detail::ptrShaderBinary = reinterpret_cast<detail::PFNSHADERBINARYPROC>(loadProc("glShaderBinary"));
     if (detail::ptrShaderBinary) ++loaded;
     detail::ptrShaderSource = reinterpret_cast<detail::PFNSHADERSOURCEPROC>(loadProc("glShaderSource"));
@@ -6704,22 +4347,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrTexBuffer) ++loaded;
     detail::ptrTexBufferRange = reinterpret_cast<detail::PFNTEXBUFFERRANGEPROC>(loadProc("glTexBufferRange"));
     if (detail::ptrTexBufferRange) ++loaded;
-    detail::ptrTexCoordP1ui = reinterpret_cast<detail::PFNTEXCOORDP1UIPROC>(loadProc("glTexCoordP1ui"));
-    if (detail::ptrTexCoordP1ui) ++loaded;
-    detail::ptrTexCoordP1uiv = reinterpret_cast<detail::PFNTEXCOORDP1UIVPROC>(loadProc("glTexCoordP1uiv"));
-    if (detail::ptrTexCoordP1uiv) ++loaded;
-    detail::ptrTexCoordP2ui = reinterpret_cast<detail::PFNTEXCOORDP2UIPROC>(loadProc("glTexCoordP2ui"));
-    if (detail::ptrTexCoordP2ui) ++loaded;
-    detail::ptrTexCoordP2uiv = reinterpret_cast<detail::PFNTEXCOORDP2UIVPROC>(loadProc("glTexCoordP2uiv"));
-    if (detail::ptrTexCoordP2uiv) ++loaded;
-    detail::ptrTexCoordP3ui = reinterpret_cast<detail::PFNTEXCOORDP3UIPROC>(loadProc("glTexCoordP3ui"));
-    if (detail::ptrTexCoordP3ui) ++loaded;
-    detail::ptrTexCoordP3uiv = reinterpret_cast<detail::PFNTEXCOORDP3UIVPROC>(loadProc("glTexCoordP3uiv"));
-    if (detail::ptrTexCoordP3uiv) ++loaded;
-    detail::ptrTexCoordP4ui = reinterpret_cast<detail::PFNTEXCOORDP4UIPROC>(loadProc("glTexCoordP4ui"));
-    if (detail::ptrTexCoordP4ui) ++loaded;
-    detail::ptrTexCoordP4uiv = reinterpret_cast<detail::PFNTEXCOORDP4UIVPROC>(loadProc("glTexCoordP4uiv"));
-    if (detail::ptrTexCoordP4uiv) ++loaded;
     detail::ptrTexImage1D = reinterpret_cast<detail::PFNTEXIMAGE1DPROC>(loadProc("glTexImage1D"));
     if (detail::ptrTexImage1D) ++loaded;
     detail::ptrTexImage2D = reinterpret_cast<detail::PFNTEXIMAGE2DPROC>(loadProc("glTexImage2D"));
@@ -7094,18 +4721,6 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrVertexAttribPointer) ++loaded;
     detail::ptrVertexBindingDivisor = reinterpret_cast<detail::PFNVERTEXBINDINGDIVISORPROC>(loadProc("glVertexBindingDivisor"));
     if (detail::ptrVertexBindingDivisor) ++loaded;
-    detail::ptrVertexP2ui = reinterpret_cast<detail::PFNVERTEXP2UIPROC>(loadProc("glVertexP2ui"));
-    if (detail::ptrVertexP2ui) ++loaded;
-    detail::ptrVertexP2uiv = reinterpret_cast<detail::PFNVERTEXP2UIVPROC>(loadProc("glVertexP2uiv"));
-    if (detail::ptrVertexP2uiv) ++loaded;
-    detail::ptrVertexP3ui = reinterpret_cast<detail::PFNVERTEXP3UIPROC>(loadProc("glVertexP3ui"));
-    if (detail::ptrVertexP3ui) ++loaded;
-    detail::ptrVertexP3uiv = reinterpret_cast<detail::PFNVERTEXP3UIVPROC>(loadProc("glVertexP3uiv"));
-    if (detail::ptrVertexP3uiv) ++loaded;
-    detail::ptrVertexP4ui = reinterpret_cast<detail::PFNVERTEXP4UIPROC>(loadProc("glVertexP4ui"));
-    if (detail::ptrVertexP4ui) ++loaded;
-    detail::ptrVertexP4uiv = reinterpret_cast<detail::PFNVERTEXP4UIVPROC>(loadProc("glVertexP4uiv"));
-    if (detail::ptrVertexP4uiv) ++loaded;
     detail::ptrViewport = reinterpret_cast<detail::PFNVIEWPORTPROC>(loadProc("glViewport"));
     if (detail::ptrViewport) ++loaded;
     detail::ptrViewportArrayv = reinterpret_cast<detail::PFNVIEWPORTARRAYVPROC>(loadProc("glViewportArrayv"));
@@ -7116,17 +4731,13 @@ inline int load(LoadProc loadProc) {
     if (detail::ptrViewportIndexedfv) ++loaded;
     detail::ptrWaitSync = reinterpret_cast<detail::PFNWAITSYNCPROC>(loadProc("glWaitSync"));
     if (detail::ptrWaitSync) ++loaded;
-
     return loaded;
 }
 
-// Total number of functions in this GL version
-inline constexpr int FUNCTION_COUNT = 699;
+inline constexpr int FUNCTION_COUNT = 656;
 
-// Check if all functions were loaded
 inline bool isComplete() {
-    return
-        detail::ptrActiveShaderProgram != nullptr
+    return detail::ptrActiveShaderProgram != nullptr
         && detail::ptrActiveTexture != nullptr
         && detail::ptrAttachShader != nullptr
         && detail::ptrBeginConditionalRender != nullptr
@@ -7195,10 +4806,6 @@ inline bool isComplete() {
         && detail::ptrClipControl != nullptr
         && detail::ptrColorMask != nullptr
         && detail::ptrColorMaski != nullptr
-        && detail::ptrColorP3ui != nullptr
-        && detail::ptrColorP3uiv != nullptr
-        && detail::ptrColorP4ui != nullptr
-        && detail::ptrColorP4uiv != nullptr
         && detail::ptrCompileShader != nullptr
         && detail::ptrCompressedTexImage1D != nullptr
         && detail::ptrCompressedTexImage2D != nullptr
@@ -7360,7 +4967,6 @@ inline bool isComplete() {
         && detail::ptrGetNamedRenderbufferParameteriv != nullptr
         && detail::ptrGetObjectLabel != nullptr
         && detail::ptrGetObjectPtrLabel != nullptr
-        && detail::ptrGetPointerv != nullptr
         && detail::ptrGetProgramBinary != nullptr
         && detail::ptrGetProgramInfoLog != nullptr
         && detail::ptrGetProgramInterfaceiv != nullptr
@@ -7434,19 +5040,7 @@ inline bool isComplete() {
         && detail::ptrGetVertexAttribdv != nullptr
         && detail::ptrGetVertexAttribfv != nullptr
         && detail::ptrGetVertexAttribiv != nullptr
-        && detail::ptrGetnColorTable != nullptr
         && detail::ptrGetnCompressedTexImage != nullptr
-        && detail::ptrGetnConvolutionFilter != nullptr
-        && detail::ptrGetnHistogram != nullptr
-        && detail::ptrGetnMapdv != nullptr
-        && detail::ptrGetnMapfv != nullptr
-        && detail::ptrGetnMapiv != nullptr
-        && detail::ptrGetnMinmax != nullptr
-        && detail::ptrGetnPixelMapfv != nullptr
-        && detail::ptrGetnPixelMapuiv != nullptr
-        && detail::ptrGetnPixelMapusv != nullptr
-        && detail::ptrGetnPolygonStipple != nullptr
-        && detail::ptrGetnSeparableFilter != nullptr
         && detail::ptrGetnTexImage != nullptr
         && detail::ptrGetnUniformdv != nullptr
         && detail::ptrGetnUniformfv != nullptr
@@ -7492,14 +5086,6 @@ inline bool isComplete() {
         && detail::ptrMultiDrawElementsBaseVertex != nullptr
         && detail::ptrMultiDrawElementsIndirect != nullptr
         && detail::ptrMultiDrawElementsIndirectCount != nullptr
-        && detail::ptrMultiTexCoordP1ui != nullptr
-        && detail::ptrMultiTexCoordP1uiv != nullptr
-        && detail::ptrMultiTexCoordP2ui != nullptr
-        && detail::ptrMultiTexCoordP2uiv != nullptr
-        && detail::ptrMultiTexCoordP3ui != nullptr
-        && detail::ptrMultiTexCoordP3uiv != nullptr
-        && detail::ptrMultiTexCoordP4ui != nullptr
-        && detail::ptrMultiTexCoordP4uiv != nullptr
         && detail::ptrNamedBufferData != nullptr
         && detail::ptrNamedBufferStorage != nullptr
         && detail::ptrNamedBufferSubData != nullptr
@@ -7512,8 +5098,6 @@ inline bool isComplete() {
         && detail::ptrNamedFramebufferTextureLayer != nullptr
         && detail::ptrNamedRenderbufferStorage != nullptr
         && detail::ptrNamedRenderbufferStorageMultisample != nullptr
-        && detail::ptrNormalP3ui != nullptr
-        && detail::ptrNormalP3uiv != nullptr
         && detail::ptrObjectLabel != nullptr
         && detail::ptrObjectPtrLabel != nullptr
         && detail::ptrPatchParameterfv != nullptr
@@ -7605,8 +5189,6 @@ inline bool isComplete() {
         && detail::ptrScissorArrayv != nullptr
         && detail::ptrScissorIndexed != nullptr
         && detail::ptrScissorIndexedv != nullptr
-        && detail::ptrSecondaryColorP3ui != nullptr
-        && detail::ptrSecondaryColorP3uiv != nullptr
         && detail::ptrShaderBinary != nullptr
         && detail::ptrShaderSource != nullptr
         && detail::ptrShaderStorageBlockBinding != nullptr
@@ -7619,14 +5201,6 @@ inline bool isComplete() {
         && detail::ptrStencilOpSeparate != nullptr
         && detail::ptrTexBuffer != nullptr
         && detail::ptrTexBufferRange != nullptr
-        && detail::ptrTexCoordP1ui != nullptr
-        && detail::ptrTexCoordP1uiv != nullptr
-        && detail::ptrTexCoordP2ui != nullptr
-        && detail::ptrTexCoordP2uiv != nullptr
-        && detail::ptrTexCoordP3ui != nullptr
-        && detail::ptrTexCoordP3uiv != nullptr
-        && detail::ptrTexCoordP4ui != nullptr
-        && detail::ptrTexCoordP4uiv != nullptr
         && detail::ptrTexImage1D != nullptr
         && detail::ptrTexImage2D != nullptr
         && detail::ptrTexImage2DMultisample != nullptr
@@ -7814,12 +5388,6 @@ inline bool isComplete() {
         && detail::ptrVertexAttribP4uiv != nullptr
         && detail::ptrVertexAttribPointer != nullptr
         && detail::ptrVertexBindingDivisor != nullptr
-        && detail::ptrVertexP2ui != nullptr
-        && detail::ptrVertexP2uiv != nullptr
-        && detail::ptrVertexP3ui != nullptr
-        && detail::ptrVertexP3uiv != nullptr
-        && detail::ptrVertexP4ui != nullptr
-        && detail::ptrVertexP4uiv != nullptr
         && detail::ptrViewport != nullptr
         && detail::ptrViewportArrayv != nullptr
         && detail::ptrViewportIndexedf != nullptr
@@ -7829,8 +5397,3 @@ inline bool isComplete() {
 }
 
 } // namespace gl
-
-
-// =============================================================================
-// End of OpenGL 4.6 Core Profile Module
-// =============================================================================

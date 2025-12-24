@@ -3,6 +3,8 @@ project(mad VERSION 0.1.0 LANGUAGES CXX)
 
 option(MAD_BUILD_EXAMPLES "Build example programs" OFF)
 
+
+# This is intentionally as stupid as possible
 add_library(mad)
 add_library(mad::mad ALIAS mad)
 

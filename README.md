@@ -37,8 +37,8 @@ Or with FetchContent:
 ```cmake
 include(FetchContent)
 FetchContent_Declare(mad
-    GIT_REPOSITORY https://github.com/chrisi5700/mad.git
-    GIT_TAG main
+        GIT_REPOSITORY https://github.com/chrisi5700/mad.git
+        GIT_TAG main
 )
 FetchContent_MakeAvailable(mad)
 target_link_libraries(your_target PRIVATE mad::mad)
@@ -72,11 +72,8 @@ int total = gl::FUNCTION_COUNT;  // 699 for GL 4.6 core
 The module is pre-generated for OpenGL 4.6 Core. To regenerate for a different version:
 
 ```bash
-# Clone with submodule
-git clone --recursive https://github.com/chrisi5700/mad.git
-
-# Or init submodule after cloning
-git submodule update --init
+# Fetch only the xml files from OpenGL-Registry (~2MB instead of ~500MB)
+./tools/fetch-registry.sh
 
 # Regenerate
 python tools/generate.py external/OpenGL-Registry/xml/gl.xml src/gl.cppm \
