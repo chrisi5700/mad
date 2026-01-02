@@ -33,7 +33,7 @@ test_output/
 
 # Ignore generated benchmarking files
 benchmark_output/
-
+notes/
 # Ignore any logs or temporary files
 *.log
 *.tmp
